@@ -1,5 +1,5 @@
 // ============================================================
-//  SHADER — reactive WebGL background (v3)
+//  SHADER - reactive WebGL background (v4)
 //  Softer, more atmospheric. Each character imparts a tint.
 // ============================================================
 
@@ -55,7 +55,7 @@ void main() {
   vec2 p = (uv - 0.5);
   p.x *= u_res.x / u_res.y;
 
-  // base atmosphere — large slow drifting clouds tinted by accent
+  // base atmosphere - large slow drifting clouds tinted by accent
   vec2 q = p * 1.4;
   q.x += u_time * 0.018;
   q.y += sin(u_time * 0.05) * 0.1;
@@ -70,7 +70,7 @@ void main() {
   // accent gradient mixed with second accent
   vec3 grad = mix(u_acc1, u_acc2, smoothstep(0.0, 0.7, p.y + 0.5));
 
-  // pattern variations per character — subtle, not intrusive
+  // pattern variations per character - subtle, not intrusive
   float pat = 0.0;
 
   // pattern 0: clean atmospheric gradient
@@ -102,7 +102,7 @@ void main() {
   // composite
   vec3 col = grad * (focal * 0.55 + pat) * u_intensity;
 
-  // dark base — keep it lighter than v2
+  // dark base - keep it lighter than v2
   col += vec3(0.025, 0.03, 0.045);
 
   // soft chromatic vignette toward edges

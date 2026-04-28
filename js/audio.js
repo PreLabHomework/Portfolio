@@ -1,5 +1,5 @@
 // ============================================================
-//  AUDIO — synth tones + speechSynthesis TTS (v3)
+//  AUDIO - synth tones + speechSynthesis TTS (v4)
 // ============================================================
 
 let ctx = null;
@@ -17,7 +17,7 @@ function ensure() {
     if (!AC) return false;
     ctx = new AC();
     master = ctx.createGain();
-    master.gain.value = 0.12;       // softer master volume
+    master.gain.value = 0.075;       // softer master volume
     master.connect(ctx.destination);
     return true;
   } catch (e) { return false; }
@@ -31,7 +31,7 @@ export function unlock() {
 
 export function setMuted(m) {
   muted = m;
-  if (master) master.gain.value = muted ? 0 : 0.12;
+  if (master) master.gain.value = muted ? 0 : 0.075;
   if (muted && 'speechSynthesis' in window) speechSynthesis.cancel();
 }
 export function isMuted() { return muted; }
@@ -72,7 +72,7 @@ function env(g, peak, attack = 0.005, decay = 0.12) {
   g.gain.exponentialRampToValueAtTime(0.0001, now + attack + decay);
 }
 
-// ─── HOVER — softer, lower, less 8-bit ───
+// ─── HOVER - softer, lower, less 8-bit ───
 export function hover() {
   if (!ensure() || muted) return;
   const osc = ctx.createOscillator();
@@ -85,13 +85,13 @@ export function hover() {
   osc.type = 'sine';
   osc.frequency.setValueAtTime(560, ctx.currentTime);
   osc.frequency.exponentialRampToValueAtTime(420, ctx.currentTime + 0.06);
-  env(g, 0.06, 0.003, 0.07);
+  env(g, 0.02, 0.003, 0.07);
   osc.connect(filt).connect(g).connect(master);
   osc.start();
   osc.stop(ctx.currentTime + 0.1);
 }
 
-// ─── SELECT — smoother chord, no sparkle ───
+// ─── SELECT - smoother chord, no sparkle ───
 export function select() {
   if (!ensure() || muted) return;
   const freqs = [196, 294]; // G3 + D4
@@ -104,7 +104,7 @@ export function select() {
     osc.type = i === 0 ? 'triangle' : 'sine';
     osc.frequency.setValueAtTime(f, ctx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(f * 1.35, ctx.currentTime + 0.18);
-    env(g, 0.18, 0.005, 0.28);
+    env(g, 0.11, 0.005, 0.28);
     osc.connect(filt).connect(g).connect(master);
     osc.start();
     osc.stop(ctx.currentTime + 0.32);
@@ -129,7 +129,7 @@ export function whoosh() {
   filt.frequency.exponentialRampToValueAtTime(2000, ctx.currentTime + 0.4);
   filt.Q.value = 2.2;
   const g = ctx.createGain();
-  g.gain.value = 0.18;
+  g.gain.value = 0.10;
   src.connect(filt).connect(g).connect(master);
   src.start();
 }
@@ -142,13 +142,13 @@ export function back() {
   osc.type = 'triangle';
   osc.frequency.setValueAtTime(330, ctx.currentTime);
   osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.18);
-  env(g, 0.13, 0.003, 0.22);
+  env(g, 0.08, 0.003, 0.22);
   osc.connect(g).connect(master);
   osc.start();
   osc.stop(ctx.currentTime + 0.25);
 }
 
-// ─── START — opening boom + whoosh ───
+// ─── START - opening boom + whoosh ───
 export function start() {
   if (!ensure() || muted) return;
   whoosh();
@@ -159,7 +159,7 @@ export function start() {
     osc.type = 'sine';
     osc.frequency.setValueAtTime(72, ctx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(38, ctx.currentTime + 0.3);
-    env(g, 0.42, 0.008, 0.42);
+    env(g, 0.25, 0.008, 0.42);
     osc.connect(g).connect(master);
     osc.start();
     osc.stop(ctx.currentTime + 0.5);
@@ -173,7 +173,7 @@ export function tick() {
   const g = ctx.createGain();
   osc.type = 'sine';
   osc.frequency.value = 1100;
-  env(g, 0.035, 0.001, 0.025);
+  env(g, 0.02, 0.001, 0.025);
   osc.connect(g).connect(master);
   osc.start();
   osc.stop(ctx.currentTime + 0.04);
@@ -197,7 +197,7 @@ export function speak(text, opts = {}) {
   if (pickedVoice) u.voice = pickedVoice;
   u.rate   = opts.rate   ?? 1.05;
   u.pitch  = opts.pitch  ?? 0.95;
-  u.volume = opts.volume ?? 0.35;
+  u.volume = opts.volume ?? 0.22;
   u.lang   = u.voice ? u.voice.lang : 'en-US';
 
   try { speechSynthesis.speak(u); } catch (e) { /* ignore */ }

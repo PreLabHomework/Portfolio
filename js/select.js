@@ -1,12 +1,12 @@
 // ============================================================
-//  SELECT — character select state machine (v3)
+//  SELECT - character select state machine (v4)
 // ============================================================
 
 import { ROSTER } from './data.js';
 import { renderSection, postRender } from './sections.js';
 import * as audio from './audio.js';
 
-// ─── refined SVG icons — more distinct per character ───
+// ─── refined SVG icons - more distinct per character ───
 const ICONS = {
   protagonist: `<svg viewBox="0 0 32 32"><path d="M16 4 L16 4 M11 8 Q16 4 21 8 L21 12 Q21 14 19 14 L13 14 Q11 14 11 12 Z" fill="currentColor"/><circle cx="16" cy="11" r="2.5" fill="#0a0e16"/><path d="M9 28 L9 18 Q9 15 12 15 L20 15 Q23 15 23 18 L23 28" fill="currentColor"/><path d="M11 22 L21 22" stroke="#0a0e16" stroke-width="1"/></svg>`,
   scientist:    `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="16" cy="16" r="1.8" fill="currentColor"/><path d="M16 4 L16 6 M16 26 L16 28 M4 16 L6 16 M26 16 L28 16" stroke="currentColor" stroke-width="1.5"/><path d="M22 10 L25 7 M7 25 L10 22" stroke="currentColor" stroke-width="1" opacity="0.5"/></svg>`,
@@ -38,7 +38,7 @@ export function initSelect({ bg, stage }) {
   const svBack     = document.getElementById('sv-back');
   const transEl    = document.getElementById('transition');
 
-  let activeIdx = 0;
+  let activeIdx = -1;
   let selectedIdx = -1;
   let lastHover = 0;
   let openedOnce = false;
@@ -97,11 +97,12 @@ export function initSelect({ bg, stage }) {
     activeIdx = i;
     const c = ROSTER[i];
 
+    document.body.dataset.char = c.id;
     document.documentElement.style.setProperty('--acc',  c.accent);
     document.documentElement.style.setProperty('--acc2', c.accent2);
     document.documentElement.style.setProperty('--acc-glow', hexAlpha(c.accent, 0.4));
     document.documentElement.style.setProperty('--acc-dim',  hexAlpha(c.accent, 0.14));
-    // atmosphere — softer color washes for the stage background
+    // atmosphere - softer color washes for the stage background
     document.documentElement.style.setProperty('--atmos-1', hexAlpha(c.accent,  0.07));
     document.documentElement.style.setProperty('--atmos-2', hexAlpha(c.accent2, 0.06));
 
@@ -118,7 +119,7 @@ export function initSelect({ bg, stage }) {
     sbIdEl.textContent = `${c.codename}  ·  ${c.role}`;
     previewReload(c);
 
-    // TTS — character name on hover
+    // TTS - character name on hover
     if (doSpeak && c.id !== 'home') {
       audio.speak(c.title, { rate: 1.1, pitch: 0.92 });
     }
@@ -169,7 +170,7 @@ export function initSelect({ bg, stage }) {
     return 0;
   }
 
-  // ─── selectSlot — polished lens-shift transition (no white flash) ───
+  // ─── selectSlot - polished lens-shift transition (no white flash) ───
   function selectSlot(i, slotEl) {
     if (selectedIdx === i && sectionEl.classList.contains('live')) return;
     selectedIdx = i;
@@ -209,7 +210,7 @@ export function initSelect({ bg, stage }) {
         '.home-intro', '.home-bio p', '.home-fact',
         '.lab-tab', '.lab-dossier-header', '.lab-story p', '.lab-sub', '.lab-funding',
         '.cap-pitch', '.cap-stage', '.cap-app', '.cap-deadline',
-        '.proj-card',
+        '.project-tile', '.project-detail-panel',
         '.arch-paper', '.arch-cert',
         '.sk-cat',
         '.tl-item',
@@ -250,7 +251,7 @@ export function initSelect({ bg, stage }) {
     if (!sectionEl.classList.contains('live')) return;
     audio.back();
 
-    const contents = sectionEl.querySelectorAll('.sv-heading, .sv-sub, .home-intro, .home-bio p, .home-fact, .lab-tab, .lab-dossier-header, .lab-story p, .lab-sub, .lab-funding, .cap-pitch, .cap-stage, .cap-app, .cap-deadline, .proj-card, .arch-paper, .arch-cert, .sk-cat, .tl-item, .wall-tile, .geo-card, .rank-card, .team-pill, .story-item, .lifestyle-list li, .ast-hook, .ast-lore p, .ast-pillar, .ast-hero, .ast-ex, .ast-quote, #sv-play, #sv-back');
+    const contents = sectionEl.querySelectorAll('.sv-heading, .sv-sub, .home-intro, .home-bio p, .home-fact, .lab-tab, .lab-dossier-header, .lab-story p, .lab-sub, .lab-funding, .cap-pitch, .cap-stage, .cap-app, .cap-deadline, .project-tile, .project-detail-panel, .arch-paper, .arch-cert, .sk-cat, .tl-item, .wall-tile, .geo-card, .rank-card, .team-pill, .story-item, .lifestyle-list li, .ast-hook, .ast-lore p, .ast-pillar, .ast-hero, .ast-ex, .ast-quote, #sv-play, #sv-back');
 
     const tl = gsap.timeline({
       onComplete: () => {

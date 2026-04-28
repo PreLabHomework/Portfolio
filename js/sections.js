@@ -1,5 +1,5 @@
 // ============================================================
-//  SECTIONS, per-layout renderers (v3)
+//  SECTIONS, per-layout renderers (v4.6 final)
 // ============================================================
 
 import { SECTIONS } from './data.js';
@@ -20,181 +20,218 @@ export function renderSection(charId) {
     case 'personal':   return renderPersonal(s);
     case 'astakeria':  return renderAstakeria(s);
     case 'soon':       return renderSoon(s);
-    default:           return `<h2 class="sv-heading">${s.heading || ''}</h2>`;
+    default:           return `<h2 class="sv-heading">${esc(s.heading || '')}</h2>`;
   }
 }
 
-// ─── HOME ──────────────────────────────────────────────────
-function renderHome(s) {
+function esc(str = '') {
+  return String(str).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+}
+
+function extLink(url, label = 'Open', cls = 'mini-link') {
+  if (!url) return '';
+  return `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+}
+
+function recruiterStrip(items = [], title = 'Recruiter Signal') {
+  if (!items || !items.length) return '';
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
-    <div class="layout-home">
-      <div>
-        <div class="home-intro">${s.intro}</div>
-        <div class="home-bio">
-          ${s.bio.map(p => `<p>${p}</p>`).join('')}
-        </div>
-      </div>
-      <div class="home-facts">
-        ${s.quickfacts.map(f => `
-          <div class="home-fact">
-            <span class="k">${f.k}</span>
-            <span class="v">${f.v}</span>
-          </div>
-        `).join('')}
-      </div>
+    <div class="recruiter-strip" aria-label="${esc(title)}">
+      <div class="rs-title">${esc(title)}</div>
+      <div class="rs-chips">${items.map(item => `<span>${esc(item)}</span>`).join('')}</div>
     </div>
   `;
 }
 
-// ─── LABS ──────────────────────────────────────────────────
+function renderHome(s) {
+  const facts = s.quickfacts.map(f => `
+    <div class="home-fact compact">
+      <span class="k">${esc(f.k)}</span>
+      <span class="v">${esc(f.v)}</span>
+    </div>
+  `).join('');
+
+  return `
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    <div class="layout-home v4-home">
+      <section class="home-lobby-panel">
+        <div class="home-kicker">PORTFOLIO TUTORIAL</div>
+        <div class="home-intro">${esc(s.intro)}</div>
+        <div class="home-steps" aria-label="How to use this portfolio">
+          <div class="home-step"><span>01</span><strong>Hover</strong><p>Preview each character and watch the stage, color, and summary shift.</p></div>
+          <div class="home-step"><span>02</span><strong>Select</strong><p>Enter the section for labs, capstone, projects, research, skills, or personal context.</p></div>
+          <div class="home-step"><span>03</span><strong>Play</strong><p>Use the action button for the relevant resume, repo, LinkedIn, or project link.</p></div>
+        </div>
+      </section>
+      <aside class="home-profile-panel">
+        <div class="profile-name">Hamza Abu Khalaf Al Takrouri</div>
+        <div class="profile-line">${s.bio.map(esc).join(' ')}</div>
+        <div class="profile-facts">${facts}</div>
+        ${recruiterStrip(s.recruiter, 'Recruiter Snapshot')}
+      </aside>
+    </div>
+  `;
+}
+
 function renderLabs(s) {
-  const tabs = s.labs.map((lab, i) => `
-    <button class="lab-tab ${i === 0 ? 'active' : ''}" data-lab="${lab.key}" type="button">
-      <div class="lt-name">${lab.name}</div>
-      <div class="lt-focus">${lab.focus}</div>
+  const rail = s.labs.map((lab, i) => `
+    <button class="lab-tab v4 ${i === 0 ? 'active' : ''}" data-lab="${esc(lab.key)}" type="button">
+      <span class="lt-index">0${i + 1}</span>
+      <span class="lt-name">${esc(lab.name)}</span>
+      <span class="lt-focus">${esc(lab.focus)}</span>
     </button>
   `).join('');
 
-  const dossiers = s.labs.map((lab, i) => `
-    <div class="lab-dossier" data-dossier="${lab.key}" style="${i === 0 ? '' : 'display:none;'}">
-      <div class="lab-dossier-header">
-        <div class="ldh-name">${lab.name}</div>
-        <div class="ldh-focus">${lab.focus}, ${lab.pi}</div>
-        <div class="lab-status-ribbon">${lab.status}</div>
+  const dossiers = s.labs.map((lab, i) => {
+    const subs = lab.subprojects.map((sp, idx) => `
+      <div class="lab-signal-row">
+        <span class="ls-num">${String(idx + 1).padStart(2, '0')}</span>
+        <span class="ls-name">${esc(sp.n)}</span>
+        <span class="ls-desc">${esc(sp.d)} ${extLink(sp.url, 'open')}</span>
       </div>
-      <div class="lab-story">
-        ${lab.story.map(p => `<p>${p}</p>`).join('')}
-      </div>
-      <div>
-        <div class="lab-section-title">Work within the lab</div>
-        <div class="lab-subs">
-          ${lab.subprojects.map(sp => `
-            <div class="lab-sub">
-              <div class="n">${sp.n}</div>
-              <div class="d">${sp.d}</div>
-            </div>
-          `).join('')}
+    `).join('');
+    const story = lab.story.map(p => `<p>${esc(p)}</p>`).join('');
+    const links = lab.links ? `<div class="link-rail">${lab.links.map(l => extLink(l.url, l.note ? `${l.label} (${l.note})` : l.label, 'pill-link')).join('')}</div>` : '';
+    return `
+      <article class="lab-dossier v4" data-dossier="${esc(lab.key)}" style="${i === 0 ? '' : 'display:none;'}">
+        <div class="lab-dossier-header v4">
+          <div>
+            <div class="ldh-name">${esc(lab.name)}</div>
+            <div class="ldh-focus">${esc(lab.focus)} · ${esc(lab.pi)}</div>
+          </div>
+          <div class="lab-status-ribbon">${esc(lab.status)}</div>
         </div>
-      </div>
-      <div class="lab-funding">${lab.funding}</div>
-    </div>
-  `).join('');
+        <div class="lab-story v4">${story}</div>
+        ${recruiterStrip(lab.proof, 'Recruiter Signal')}
+        <div class="lab-system-map">
+          <div class="lab-section-title">Active work inside this lab</div>
+          <div class="lab-signal-list">${subs}</div>
+        </div>
+        <div class="lab-funding">${esc(lab.funding)}</div>
+        ${links}
+      </article>
+    `;
+  }).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
-    <div class="layout-labs">
-      <div class="labs-tabs">${tabs}</div>
-      <div class="labs-content">${dossiers}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    <div class="layout-labs v4-labs">
+      <nav class="labs-tabs v4" aria-label="Research lab selector">${rail}</nav>
+      <div class="labs-content v4">${dossiers}</div>
     </div>
   `;
 }
 
-// ─── CAPSTONE ──────────────────────────────────────────────
 function renderCapstone(s) {
   const stages = s.architecture.map((st, i) => `
     <div class="cap-stage">
       <div class="s-num">${String(i + 1).padStart(2, '0')}</div>
-      <div class="s-name">${st.stage}</div>
-      <div class="s-chip">${st.chip}</div>
-      <div class="s-text">${st.text}</div>
+      <div class="s-name">${esc(st.stage)}</div>
+      <div class="s-chip">${esc(st.chip)}</div>
+      <div class="s-text">${esc(st.text)}</div>
     </div>
   `).join('');
-
-  const modules = s.app.modules.map(m => `<span class="cap-module">${m}</span>`).join('');
+  const modules = s.app.modules.map(m => `<span class="cap-module">${esc(m)}</span>`).join('');
+  const links = s.links ? `<div class="link-rail cap-links">${s.links.map(l => extLink(l.url, l.label, 'pill-link')).join('')}</div>` : '';
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
-    <div class="layout-capstone">
-      <div class="cap-pitch">${s.pitch}</div>
-
-      <div>
-        <div class="cap-arch-title">Architecture</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    <div class="layout-capstone v4-capstone">
+      <div class="cap-pitch">${esc(s.pitch)}</div>
+      ${recruiterStrip(s.recruiter, 'Recruiter Signal')}
+      <div class="cap-build-window">
+        <div class="cap-arch-title">Signal to action pipeline</div>
         <div class="cap-arch">${stages}</div>
       </div>
-
-      <div>
-        <div class="cap-app-title">Companion App</div>
-        <div class="cap-app">
-          <div class="app-name">${s.app.name}</div>
-          <div class="app-status">${s.app.status}</div>
-          <div class="cap-modules">${modules}</div>
+      <div class="cap-app v4">
+        <div class="cap-app-copy">
+          <div class="cap-app-title">Companion App</div>
+          <div class="app-name">${esc(s.app.name)}</div>
+          <div class="app-status">${esc(s.app.status)}</div>
         </div>
+        <div class="cap-modules">${modules}</div>
       </div>
-
-      <div class="cap-deadline">DEADLINE: ${s.deadline}</div>
+      ${links}
+      <div class="cap-deadline">DEADLINE: ${esc(s.deadline)}</div>
     </div>
   `;
 }
 
-// ─── GALLERY ───────────────────────────────────────────────
 function renderGallery(s) {
-  const cards = s.items.map((p, i) => `
-    <div class="proj-card${i === 0 ? ' featured' : ''}">
-      <div class="proj-head">
-        <span class="proj-tag">${p.tag}</span>
-        <span class="proj-year">${p.year}</span>
-      </div>
-      <div class="proj-title">${p.title}</div>
-      <div class="proj-body">${p.body}</div>
-      <div class="proj-tech">
-        ${p.tech.map(t => `<span class="t">${t}</span>`).join('')}
-      </div>
-    </div>
+  const tiles = s.items.map((p, i) => `
+    <button class="project-tile ${i === 0 ? 'active' : ''}" data-project="${i}" type="button">
+      <span class="tile-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="tile-tag">${esc(p.tag)}</span>
+      <span class="tile-title">${esc(p.title)}</span>
+      <span class="tile-year">${esc(p.year)}</span>
+    </button>
+  `).join('');
+
+  const details = s.items.map((p, i) => `
+    <article class="project-detail-panel ${i === 0 ? 'active' : ''}" data-project-detail="${i}">
+      <div class="proj-head"><span class="proj-tag">${esc(p.tag)}</span><span class="proj-year">${esc(p.year)}</span></div>
+      <div class="proj-title">${esc(p.title)}</div>
+      <div class="proj-body">${esc(p.body)}</div>
+      ${p.proof ? `<div class="proj-proof"><span>Recruiter Readout</span>${esc(p.proof)}</div>` : ''}
+      <div class="proj-tech">${p.tech.map(t => `<span class="t">${esc(t)}</span>`).join('')}</div>
+      ${extLink(p.url, 'Open project', 'project-link')}
+    </article>
   `).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
-    <div class="layout-gallery">
-      <div class="gallery-grid">${cards}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    <div class="layout-gallery v45-gallery">
+      <div class="project-tile-grid">${tiles}</div>
+      <div class="project-stage">${details}</div>
     </div>
   `;
 }
 
-// ─── ARCHIVE ───────────────────────────────────────────────
 function renderArchive(s) {
-  const papers = s.papers.map(p => `
-    <div class="arch-paper">
-      <div class="arch-status ${p.statusTone}">${p.status}</div>
+  const papers = s.papers.map((p, i) => `
+    <div class="arch-paper v4">
+      <div class="arch-index">${String(i + 1).padStart(2, '0')}</div>
+      <div class="arch-status ${esc(p.statusTone)}">${esc(p.status)}</div>
       <div>
-        <div class="p-title">${p.title}</div>
-        <div class="p-meta">${p.venue}${p.year ? `, ${p.year}` : ''}</div>
-        <div class="p-blurb">${p.blurb}</div>
+        <div class="p-title">${esc(p.title)}</div>
+        <div class="p-meta">${esc(p.venue)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
+        <div class="p-blurb">${esc(p.blurb)}</div>
+        ${extLink(p.url, 'Open record', 'mini-link')}
       </div>
     </div>
   `).join('');
 
   const certs = s.certifications.map(c => `
-    <div class="arch-cert">
+    <div class="arch-cert v4">
       <div>
-        <div class="c-title">${c.title}</div>
-        <div class="c-detail">${c.detail}</div>
+        <div class="c-title">${esc(c.title)}</div>
+        <div class="c-detail">${esc(c.detail)}</div>
       </div>
-      <div class="c-year">${c.year}</div>
+      <div class="c-year">${esc(c.year)}</div>
     </div>
   `).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
-    <div class="layout-archive">
-      <div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    ${recruiterStrip(s.recruiter, 'Recruiter Signal')}
+    <div class="layout-archive v4-archive">
+      <section>
         <div class="arch-section-title">Papers & Patents</div>
         <div class="arch-papers">${papers}</div>
-      </div>
-      <div>
+      </section>
+      <aside>
         <div class="arch-section-title">Certifications</div>
         <div class="arch-certs">${certs}</div>
-      </div>
+      </aside>
     </div>
   `;
 }
 
-// ─── SKILLS ────────────────────────────────────────────────
 function renderSkills(s) {
   const cats = s.categories.map(cat => {
     const maxYrs = Math.max(...cat.items.map(i => i.yrs), 8);
@@ -202,167 +239,121 @@ function renderSkills(s) {
       const pct = Math.min(100, (it.yrs / maxYrs) * 100);
       return `
         <div class="sk-row">
-          <div class="n">${it.n}</div>
+          <div class="n">${esc(it.n)}</div>
           <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
-          <div class="y">${it.yrs}Y</div>
-          <div class="nt">${it.note}</div>
+          <div class="y">${esc(it.yrs)}Y</div>
+          <div class="nt">${esc(it.note)}</div>
         </div>
       `;
     }).join('');
-    return `<div class="sk-cat"><div class="sk-cat-title">${cat.name}</div>${rows}</div>`;
+    return `<div class="sk-cat"><div class="sk-cat-title">${esc(cat.name)}</div>${rows}</div>`;
   }).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
+    ${recruiterStrip(s.recruiter, 'Stack Highlights')}
     <div class="layout-skills">${cats}</div>
   `;
 }
 
-// ─── TIMELINE ──────────────────────────────────────────────
 function renderTimeline(s) {
   const items = s.events.map(e => `
     <div class="tl-item">
-      <div class="tl-date">${e.date}</div>
-      <span class="tl-tag">${e.tag}</span>
-      <span class="tl-body">${e.body}</span>
+      <div class="tl-date">${esc(e.date)}</div>
+      <span class="tl-tag">${esc(e.tag)}</span>
+      <span class="tl-body">${esc(e.body)}</span>
     </div>
   `).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
     <div class="layout-timeline">
       <div class="tl-list">${items}</div>
     </div>
   `;
 }
 
-// ─── WALL (affiliations) ───────────────────────────────────
 function renderWall(s) {
   const tiles = s.tiles.map(t => `
-    <div class="wall-tile" style="--brand:${t.brand};--brand-text:${t.text};">
-      <div class="wt-n">${t.n}</div>
-      <div class="wt-r">${t.r}</div>
+    <div class="wall-tile v4" style="--brand:${esc(t.brand)};--brand-text:${esc(t.text)};">
+      <div class="wt-logo">${esc(t.n).split(' ').map(w => w[0]).join('').slice(0, 4)}</div>
+      <div class="wt-n">${esc(t.n)}</div>
+      <div class="wt-r">${esc(t.r)}</div>
+      ${extLink(t.url, 'Open', 'mini-link wall-link')}
     </div>
   `).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
     <div class="layout-wall">
       <div class="wall-grid">${tiles}</div>
     </div>
   `;
 }
 
-// ─── PERSONAL ──────────────────────────────────────────────
 function renderPersonal(s) {
   const geo = s.geography.map(g => `
-    <div class="geo-card" style="--gc1:${g.c1};--gc2:${g.c2};">
-      <span class="geo-flag">${g.flag}</span>
-      <div class="geo-country">${g.country}</div>
-      <div class="geo-years">${g.years}</div>
-      <div class="geo-note">${g.note}</div>
+    <div class="geo-card" style="--gc1:${esc(g.c1)};--gc2:${esc(g.c2)};">
+      <span class="geo-flag">${esc(g.flag)}</span>
+      <div class="geo-country">${esc(g.country)}</div>
+      <div class="geo-years">${esc(g.years)}</div>
+      <div class="geo-note">${esc(g.note)}</div>
     </div>
   `).join('');
-
   const ranks = s.gameranks.map(r => `
-    <div class="rank-card" style="--rc:${r.c};">
-      <div class="rg">${r.g}</div>
-      <div class="rr">${r.r}</div>
+    <div class="rank-card" style="--rc:${esc(r.c)};">
+      <div class="rg">${esc(r.g)}</div>
+      <div class="rr">${esc(r.r)}</div>
     </div>
   `).join('');
-
   const teams = s.teams.map(t => `
-    <div class="team-pill" style="--tc:${t.c};">
-      <div class="ts">${t.sport}</div>
-      <div class="tt">${t.team}</div>
+    <div class="team-pill" style="--tc:${esc(t.c)};">
+      <div class="ts">${esc(t.sport)}</div>
+      <div class="tt">${esc(t.team)}</div>
     </div>
   `).join('');
-
   const stories = s.stories.map(st => `
     <div class="story-item">
-      <div class="t">${st.t}</div>
-      <div class="d">${st.d}</div>
+      <div class="t">${esc(st.t)}</div>
+      <div class="d">${esc(st.d)}</div>
     </div>
   `).join('');
-
-  const lifestyle = s.lifestyle.map(l => `<li>${l}</li>`).join('');
+  const lifestyle = s.lifestyle.map(l => `<li>${esc(l)}</li>`).join('');
 
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.sub}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.sub)}</div>
     <div class="layout-personal">
-      <div>
-        <div class="personal-section-title">Where I've lived</div>
-        <div class="geo-strip">${geo}</div>
-      </div>
-      <div>
-        <div class="personal-section-title">Game ranks</div>
-        <div class="rank-grid">${ranks}</div>
-      </div>
-      <div>
-        <div class="personal-section-title">Teams I follow</div>
-        <div class="team-row">${teams}</div>
-      </div>
-      <div>
-        <div class="personal-section-title">Stories</div>
-        <div class="stories-list">${stories}</div>
-      </div>
-      <div>
-        <div class="personal-section-title">Currently</div>
-        <ul class="lifestyle-list">${lifestyle}</ul>
-      </div>
+      <section><div class="personal-section-title">Where I've lived</div><div class="geo-strip">${geo}</div></section>
+      <section><div class="personal-section-title">Game ranks</div><div class="rank-grid">${ranks}</div></section>
+      <section><div class="personal-section-title">Teams I follow</div><div class="team-row">${teams}</div></section>
+      <section><div class="personal-section-title">Stories</div><div class="stories-list">${stories}</div></section>
+      <section><div class="personal-section-title">${esc(s.endeavorsTitle || "Currently")}</div><ul class="lifestyle-list">${lifestyle}</ul></section>
     </div>
   `;
 }
 
-// ─── ASTAKERIA ─────────────────────────────────────────────
 function renderAstakeria(s) {
-  const pillars = s.pillars.map(p => `
-    <div class="ast-pillar">
-      <div class="n">${p.n}</div>
-      <div class="d">${p.d}</div>
-    </div>
-  `).join('');
-
-  const heroes = s.heroes.map(h => `
-    <div class="ast-hero">
-      <div class="hn">${h.name}</div>
-      <div class="hr">${h.role}</div>
-      <div class="ht">${h.tagline}</div>
-    </div>
-  `).join('');
-
-  const entropy = s.entropyExample.map(e => `
-    <div class="ast-ex">
-      <div class="ext">${e.trigger}</div>
-      <div class="arrow">→</div>
-      <div class="exc">${e.consequence}</div>
-    </div>
-  `).join('');
-
+  const pillars = s.pillars.map(p => `<div class="ast-pillar"><div class="n">${esc(p.n)}</div><div class="d">${esc(p.d)}</div></div>`).join('');
+  const heroes = s.heroes.map(h => `<div class="ast-hero"><div class="hn">${esc(h.name)}</div><div class="hr">${esc(h.role)}</div><div class="ht">${esc(h.tagline)}</div></div>`).join('');
+  const entropy = s.entropyExample.map(e => `<div class="ast-ex"><div class="ext">${esc(e.trigger)}</div><div class="arrow">›</div><div class="exc">${esc(e.consequence)}</div></div>`).join('');
   return `
-    <h2 class="sv-heading">${s.heading}</h2>
-    <div class="sv-sub">${s.subtitle}</div>
+    <h2 class="sv-heading">${esc(s.heading)}</h2>
+    <div class="sv-sub">${esc(s.subtitle)}</div>
     <div class="layout-astakeria">
-      <div class="ast-hook">${s.hook}</div>
-      <div class="ast-lore">
-        ${s.lore.map(p => `<p>${p}</p>`).join('')}
-      </div>
-      <div class="ast-section-title">Pillars</div>
-      <div class="ast-pillars">${pillars}</div>
-      <div class="ast-section-title">Heroes</div>
-      <div class="ast-heroes">${heroes}</div>
-      <div class="ast-section-title">Entropy in practice</div>
-      <div class="ast-entropy">${entropy}</div>
-      <div class="ast-quote">${s.quote}</div>
+      <div class="ast-hook">${esc(s.hook)}</div>
+      <div class="ast-lore">${s.lore.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+      <div class="ast-section-title">Pillars</div><div class="ast-pillars">${pillars}</div>
+      <div class="ast-section-title">Heroes</div><div class="ast-heroes">${heroes}</div>
+      <div class="ast-section-title">Entropy in practice</div><div class="ast-entropy">${entropy}</div>
+      <div class="ast-quote">${esc(s.quote)}</div>
     </div>
   `;
 }
 
-// ─── SOON ──────────────────────────────────────────────────
 function renderSoon(s) {
   const ascii = `
         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -372,33 +363,38 @@ function renderSoon(s) {
   return `
     <div class="layout-soon">
       <pre class="soon-ascii">${ascii}</pre>
-      <div class="soon-heading">${s.heading}</div>
-      <div class="soon-body">
-        ${s.body.map(p => `<p>${p}</p>`).join('')}
-      </div>
+      <div class="soon-heading">${esc(s.heading)}</div>
+      <div class="soon-body">${s.body.map(p => `<p>${esc(p)}</p>`).join('')}</div>
     </div>
   `;
 }
 
-// ============================================================
-//  POST-RENDER, wires lab tabs (no more constellation)
-// ============================================================
-
 export function postRender(charId, el) {
   if (charId === 'labs') setupLabTabs(el);
+  if (charId === 'projects') setupProjectExplorer(el);
 }
 
 function setupLabTabs(container) {
   const tabs = container.querySelectorAll('.lab-tab');
   const dossiers = container.querySelectorAll('[data-dossier]');
-
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const key = tab.dataset.lab;
       tabs.forEach(t => t.classList.toggle('active', t === tab));
-      dossiers.forEach(d => {
-        d.style.display = d.dataset.dossier === key ? '' : 'none';
-      });
+      dossiers.forEach(d => { d.style.display = d.dataset.dossier === key ? '' : 'none'; });
+    });
+  });
+}
+
+
+function setupProjectExplorer(container) {
+  const tiles = container.querySelectorAll('.project-tile');
+  const panels = container.querySelectorAll('[data-project-detail]');
+  tiles.forEach(tile => {
+    tile.addEventListener('click', () => {
+      const key = tile.dataset.project;
+      tiles.forEach(t => t.classList.toggle('active', t === tile));
+      panels.forEach(panel => panel.classList.toggle('active', panel.dataset.projectDetail === key));
     });
   });
 }

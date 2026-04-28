@@ -1,5 +1,5 @@
 // ============================================================
-//  BOOT — opening sequence (v3)
+//  BOOT - opening sequence (v4)
 //  Cooler, more detailed. Ends in single "START" button.
 // ============================================================
 
@@ -13,15 +13,15 @@ export function setupBoot({ onStart }) {
   const fxEl = document.getElementById('boot-fx');
 
   const lines = [
-    { tag: '01', body: 'BOOT  …  initializing personal site',                   ok: true },
-    { tag: '02', body: 'AUTH  …  hamza abu khalaf al takrouri',                ok: true },
-    { tag: '03', body: 'SCAN  …  three labs, one capstone, twelve projects',  ok: true },
-    { tag: '04', body: 'LOAD  …  hero roster',                                 ok: true },
-    { tag: '05', body: 'CHECK …  publications · patent · certifications',     ok: true },
-    { tag: '06', body: 'LINK  …  github · linkedin · resume',                  ok: true },
-    { tag: '07', body: 'PORT  …  audio module attached',                       ok: true },
-    { tag: '08', body: 'NET   …  connection stable',                           ok: true },
-    { tag: '09', body: 'READY …  awaiting input',                              ok: true }
+    { tag: '01', body: 'BOOT  …  loading portfolio lobby',                       ok: true },
+    { tag: '02', body: 'AUTH  …  hamza abu khalaf al takrouri',                  ok: true },
+    { tag: '03', body: 'SCAN  …  labs, capstone, projects, research',            ok: true },
+    { tag: '04', body: 'LOAD  …  character roster and stage lighting',           ok: true },
+    { tag: '05', body: 'CHECK …  skills, timeline, affiliations, personal file', ok: true },
+    { tag: '06', body: 'LINK  …  github, linkedin, resume placeholders',         ok: true },
+    { tag: '07', body: 'AUDIO …  subtle cues and speech synthesis ready',        ok: true },
+    { tag: '08', body: 'NET   …  local session stable',                          ok: true },
+    { tag: '09', body: 'READY …  press start to enter',                          ok: true }
   ];
 
   // build line rows
@@ -33,14 +33,14 @@ export function setupBoot({ onStart }) {
     </div>
   `).join('');
 
-  // boot fx — light particle field
+  // boot fx - light particle field
   drawBootFx(fxEl);
 
   // animate corner brackets in
   gsap.fromTo('.bm-corner', { opacity: 0, scale: 0.4 },
     { opacity: 1, scale: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(2.4)', delay: 0.1 });
 
-  // animate lines in sequence — TICK on each
+  // animate lines in sequence - TICK on each
   const rows = linesEl.querySelectorAll('.bl-row');
   rows.forEach((row, i) => {
     gsap.to(row, {
@@ -133,7 +133,7 @@ function drawBootFx(canvas) {
       ctx.fill();
     });
 
-    // sweeping horizon line — sleek touch
+    // sweeping horizon line - sleek touch
     const lineY = h * 0.5 + Math.sin(t * 0.4) * 30;
     const grad = ctx.createLinearGradient(0, lineY - 1, 0, lineY + 2);
     grad.addColorStop(0, 'rgba(255, 209, 102, 0)');

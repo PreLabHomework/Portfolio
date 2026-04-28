@@ -1,0 +1,25 @@
+{
+  "name": "hamzas-house-portfolio",
+  "version": "4.7.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check:syntax": "node --check js/audio.js && node --check js/boot.js && node --check js/data.js && node --check js/main.js && node --check js/sections.js && node --check js/select.js && node --check js/shader.js && node --check js/stage.js",
+    "check:content": "node scripts/check-content.mjs",
+    "check": "npm run check:syntax && npm run check:content",
+    "lint": "eslint js/*.js scripts/*.mjs",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "latest",
+    "eslint": "latest",
+    "prettier": "latest",
+    "vite": "latest"
+  },
+  "dependencies": {
+    "three": "latest"
+  }
+}
