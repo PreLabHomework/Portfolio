@@ -4,7 +4,7 @@ A personal portfolio styled as a fighter-select screen. Each hero is a part of m
 
 Hover to preview. Select to enter. ESC to come back.
 
-> **Live at:** _link going up shortly — coming via GitHub Pages_
+> **Live at: https://prelabhomework.github.io/Portfolio/
 
 ---
 
