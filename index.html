@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0a0e16" />
+  <meta name="description" content="Hamza Abu Khalaf Al Takrouri: portfolio. Senior Computer & Electrical Engineer at Saint Louis University." />
+  <title>HAMZA'S HOUSE</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0e16'/%3E%3Cpath d='M8 8 L8 24 M8 16 L20 16 M20 8 L20 24' stroke='%23ffd166' stroke-width='3' stroke-linecap='square' fill='none'/%3E%3Crect x='24' y='22' width='4' height='4' fill='%23ef476f'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;600;700;800&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- GSAP for animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Three.js as ESM import-map so stage.js can import it cleanly -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ============================================================
+        BOOT SCREEN
+       ============================================================ -->
+  <div id="boot" role="dialog" aria-label="Boot screen">
+    <canvas id="boot-fx"></canvas>
+    <div class="boot-vignette"></div>
+
+    <div class="boot-stack">
+
+      <div class="boot-mark">
+        <span class="bm-corner tl"></span>
+        <span class="bm-corner tr"></span>
+        <span class="bm-corner bl"></span>
+        <span class="bm-corner br"></span>
+        <h1 class="boot-logo">
+          <span class="bl-lead">HAMZA'S</span>
+          <span class="bl-rest">HOUSE</span>
+        </h1>
+        <div class="boot-sub">PERSONAL · PORTFOLIO · v3</div>
+      </div>
+
+      <div id="boot-lines" class="boot-lines"></div>
+
+      <button id="boot-start" class="boot-start" type="button" aria-label="Start">
+        <span class="bs-hex">
+          <svg viewBox="0 0 300 74" preserveAspectRatio="none">
+            <polygon class="bs-hex-bg"     points="14,0 286,0 300,37 286,74 14,74 0,37" />
+            <polygon class="bs-hex-stroke" points="14,0 286,0 300,37 286,74 14,74 0,37" />
+          </svg>
+          <span class="bs-glint"></span>
+          <span class="bs-label">START</span>
+        </span>
+        <span class="bs-hint">▸ press start ◂</span>
+      </button>
+
+    </div>
+
+    <div class="boot-footer">
+      <span>SYSTEM // ONLINE</span>
+      <button id="boot-skip" class="boot-skip" type="button">SKIP</button>
+      <span>© 2026 H.A.K.</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+        APP
+       ============================================================ -->
+  <div id="app" aria-hidden="true">
+
+    <!-- TOP HUD ============================================== -->
+    <div id="hud-top">
+      <div class="hud-l">
+        <span class="hud-icn" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2 L7 2 L7 7 L2 7 Z M9 2 L14 2 L14 7 L9 7 Z M2 9 L7 9 L7 14 L2 14 Z M9 9 L14 9 L14 14 L9 14 Z"/></svg>
+        </span>
+        <span class="hud-mode">SELECT</span>
+        <span class="hud-sub">CHARACTER · LOBBY</span>
+      </div>
+      <div class="hud-c">HAMZA'S HOUSE</div>
+      <div class="hud-r">
+        <span class="hud-readout"><span class="dot"></span>ONLINE</span>
+        <span id="hud-clock" class="hud-readout">--:-- CST</span>
+        <span id="hud-fps" class="hud-readout hud-fps">-- FPS</span>
+        <button id="hud-mute" class="hud-btn" type="button" aria-label="Toggle audio">
+          <svg id="hud-mute-on" viewBox="0 0 16 16" fill="currentColor"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 5 Q13 8 11 11" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+          <svg id="hud-mute-off" viewBox="0 0 16 16" fill="currentColor" style="display:none;"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 6 L14 10 M14 6 L11 10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STAGE ================================================ -->
+    <div id="stage">
+      <canvas id="bg-canvas"></canvas>
+      <canvas id="stage-canvas"></canvas>
+
+      <!-- PREVIEW -->
+      <div id="preview" class="preview" aria-live="polite">
+        <div class="pv-inner">
+          <div id="pv-code"     class="pv-codename"></div>
+          <h2 id="pv-headline"  class="pv-headline"></h2>
+          <div id="pv-sub"      class="pv-sub"></div>
+          <div class="pv-divider"></div>
+          <p id="pv-blurb"      class="pv-blurb"></p>
+          <div id="pv-stats"    class="pv-stats"></div>
+          <div id="pv-tagline"  class="pv-tagline"></div>
+        </div>
+        <div id="pv-sidechips" class="pv-sidechips"></div>
+      </div>
+
+      <!-- SECTION VIEW (full content) -->
+      <div id="section-view" class="section-view" aria-hidden="true">
+        <button id="sv-back" class="sv-back" type="button">
+          <span aria-hidden="true">◂</span> BACK
+        </button>
+        <div id="sv-inner" class="sv-inner"></div>
+        <a id="sv-play" class="sv-play" target="_blank" rel="noopener noreferrer">
+          <span class="sp-label">PLAY</span>
+          <span class="sp-arrow" aria-hidden="true">▶</span>
+        </a>
+      </div>
+
+      <!-- transition overlay (lens-shift fade) -->
+      <div id="transition"></div>
+    </div>
+
+    <!-- SELECT BAR =========================================== -->
+    <div id="selbar">
+
+      <div class="sel-topline">
+        <div class="sel-title"><span>▸</span> CHOOSE <span>YOUR</span> HERO</div>
+        <div class="sel-hint">
+          <span class="sh-group"><span class="sh-glyph">◂ ▸</span> SCROLL</span>
+          <span class="sh-group"><span class="sh-glyph">⏎</span> SELECT</span>
+          <span class="sh-group"><span class="sh-glyph">ESC</span> BACK</span>
+        </div>
+      </div>
+
+      <div id="sel-grid" class="sel-grid" role="listbox" aria-label="Character roster"></div>
+
+      <div class="sel-bottomline">
+        <span class="sb-hex"></span>
+        <span id="sb-id" class="sb-id">·</span>
+        <span class="sb-hex"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+        ENTRY POINT
+       ============================================================ -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
