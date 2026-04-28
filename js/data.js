@@ -104,7 +104,7 @@ export const ROSTER = [
     preview: {
       headline: "AFFILIATIONS",
       sub: "INSTITUTIONS · COMPANIES · PROGRAMS",
-      blurb: "Institutions, companies, labs, programs, publications, and organizations connected to the work. Brand-colored tiles for a cleaner collaborator-wall feel.",
+      blurb: "Institutions, companies, labs, programs, publications, and organizations connected to the work. Some paid, some volunteer, all worth keeping on the wall.",
       stats: [["TOTAL", "11"], ["ACADEMIC", "MIT · SLU · CMU"], ["INDUSTRY", "CORSAIR · GSK · SAMSUNG"], ["ORG", "IEEE"]]
     },
     play_url: LINKS.linkedin, play_label: "VIEW LINKEDIN"
@@ -148,17 +148,17 @@ export const SECTIONS = {
   home: {
     layout: "home",
     heading: "HAMZA'S HOUSE",
-    sub: "Portfolio Mode: Hover A Character, Preview The Story, Select To Enter.",
+    sub: "portfolio mode. hover a character, preview, then select to enter.",
     intro: "Welcome to my portfolio. I styled it after a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story. Hover to preview, select to enter, and use Back or ESC to return to the roster.",
     bio: [
       "I'm Hamza Abu Khalaf Al Takrouri, a senior Computer and Electrical Engineer at Saint Louis University, graduating May 2026 with minors in Computer Science and Mathematics.",
       "Three labs, one capstone, zero free weekends. Send help and job offers."
     ],
     quickfacts: [
-      { k: "Based In", v: "St. Louis, Missouri" },
-      { k: "Open To", v: "Firmware, Hardware, Software" },
-      { k: "Focus", v: "Embedded Systems, Radar ML, Clinical Hardware, Mobile Apps" },
-      { k: "Links", v: "Resume, LinkedIn, GitHub Wired" }
+      { k: "based in", v: "St. Louis, Missouri" },
+      { k: "open to", v: "firmware, hardware, software" },
+      { k: "focus", v: "embedded systems, radar ML, clinical hardware, mobile apps" },
+      { k: "links", v: "resume, LinkedIn, GitHub" }
     ],
     recruiter: [
       "Graduating May 2026",
@@ -173,13 +173,13 @@ export const SECTIONS = {
   labs: {
     layout: "labs",
     heading: "RESEARCH",
-    sub: "Three Active Research Tracks At Saint Louis University, Grouped By Lab Instead Of Scattered Across The Site.",
+    sub: "three active research tracks at Saint Louis University, grouped by lab.",
     labs: [
       {
         key: "chrome",
         name: "CHROME LAB",
-        focus: "PT KIDS, Clinical Wearables, Haptic Communication",
-        pi: "Embedded Systems And Wearable Hardware",
+        focus: "PT KIDS, clinical wearables, haptic communication",
+        pi: "embedded systems and wearable hardware",
         status: "PT KIDS · OTA FIRMWARE · R SHINY · HAPTIC WATCH",
         story: [
           "CHROME develops wearable haptic interfaces for DeafBlind communication. The work connects clinical wearable hardware, Bluetooth communication, data review tooling, and pediatric form-factor design.",
@@ -201,8 +201,8 @@ export const SECTIONS = {
       {
         key: "wnis",
         name: "WNIS LAB",
-        focus: "GUARD Radar-Based Driver Authentication",
-        pi: "Machine Learning And Behavioral Authentication",
+        focus: "GUARD radar-based driver authentication",
+        pi: "machine learning and behavioral authentication",
         status: "GUARD · TI IWR6843 · INFOCOMM TARGET",
         story: [
           "GUARD is a GAN-based driver authentication system using TI IWR6843 mmWave radar. The pipeline processes spherical-grid point clouds with temporal features including velocity, variance, and frame delta, then targets continuous identity verification without storing biometrics.",
@@ -226,7 +226,7 @@ export const SECTIONS = {
         key: "biomech",
         name: "MUSCULOSKELETAL BIOMECHANICS LAB",
         focus: "QBC Hematology Diagnostic Modernization",
-        pi: "Hardware Redesign And Diagnostic Systems",
+        pi: "hardware redesign and diagnostic systems",
         status: "QBC MODERNIZATION · FIRMWARE RECOVERY · CLINICAL WORKFLOW",
         story: [
           "The QBC modernization project focuses on a 1970s hematology diagnostic system built around an Intel D8749H MCS-48 microcontroller. The work combines firmware recovery, hardware reverse-engineering, and a modern low-cost measurement workflow.",
@@ -250,7 +250,7 @@ export const SECTIONS = {
   capstone: {
     layout: "capstone",
     heading: "WEARABLE TREMOR STABILIZER",
-    sub: "Senior Design. Parkinson's Tremor Monitoring And Stabilization.",
+    sub: "senior design. Parkinson's tremor monitoring and stabilization.",
     pitch: "A wearable motion stabilization system paired with TremorMonitor, a React Native app for Parkinson's tremor monitoring. Firmware streams compact BLE packets from the ESP32-S3 Feather, while the app records live sessions, stores SQLite data, charts tremor frequency, exports CSV files, and supports medication mode with severity thresholds.",
     recruiter: [
       "React Native BLE telemetry",
@@ -282,7 +282,7 @@ export const SECTIONS = {
   projects: {
     layout: "gallery",
     heading: "PROJECTS",
-    sub: "Standalone Builds, Coursework Systems, And Shipped Prototypes.",
+    sub: "standalone builds, coursework systems, and shipped prototypes.",
     items: [
       { tag: "DATA", title: "WiFi Coverage & Handover Analyzer", year: "2024", body: "Raspberry Pi WiFi scanner and MATLAB analysis workflow processing 194K+ measurements across 952 locations, with coverage gap findings and budget recommendations for SLU IT.", proof: "Shows field data collection, packet analysis, statistical modeling, and stakeholder-ready engineering recommendations", tech: ["Raspberry Pi", "Python", "PyShark", "MATLAB"], url: LINKS.wifi },
       { tag: "FPGA", title: "FPGA Signal Monitor", year: "2024", body: "Real-time signal visualizer on Basys 3 with HDMI output using FSM-driven VHDL, video timing logic, and full hardware-to-display pipeline.", proof: "Shows digital design depth, timing discipline, FPGA architecture, and display-pipeline implementation", tech: ["VHDL", "Basys 3", "HDMI", "FSM"] },
@@ -297,7 +297,7 @@ export const SECTIONS = {
   research: {
     layout: "archive",
     heading: "PAPERS & PATENTS",
-    sub: "Publication Record, Patent Work, And Continuing Education.",
+    sub: "publication record, patent work, and continuing education.",
     recruiter: ["Radar ML Publication Track", "Clinical Hardware IP", "Haptic Wearables Paper", "Computer Forensics Publication", "MIT + CMU Continuing Education"],
     papers: [
       { status: "ACTIVE", statusTone: "warn", title: "GUARD: GAN-Based Driver Authentication via mmWave Radar", venue: "IEEE INFOCOMM", year: "Target 2027", blurb: "GAN-based driver authentication using TI IWR6843 radar, spherical-grid point clouds, temporal features, and 70% sliding-window majority voting.", url: LINKS.guard },
@@ -371,7 +371,7 @@ export const SECTIONS = {
   timeline: {
     layout: "timeline",
     heading: "TIMELINE",
-    sub: "How The Work Got Built.",
+    sub: "how the work got built.",
     events: [
       { date: "APR 2026", tag: "QBC", body: "QBC modernization updated around Nextion touchscreen, Arduino Nano, iGaging calipers, piezo feedback, and four-point clinical value conversion." },
       { date: "APR 2026", tag: "CAPSTONE", body: "TremorMonitor rehaul: BLE packet decoding, SQLite session storage, frequency charts, CSV export, medication mode, and severity thresholds." },
@@ -399,7 +399,7 @@ export const SECTIONS = {
   affiliations: {
     layout: "wall",
     heading: "AFFILIATIONS",
-    sub: "Institutions, Companies, Programs, Publications, And Organizations That Shaped The Work.",
+    sub: "institutions, companies, programs, and organizations connected to the work.",
     tiles: [
       { n: "MIT", r: "MIT.nano Lab · MIT AI & CS Seminars · MIT Sloan AI Strategy", brand: "#A31F34", text: "#fff" },
       { n: "CARNEGIE MELLON", r: "MindCraft Robotics & AI · Director's Certificate (CMU Qatar)", brand: "#C41E3A", text: "#fff" },
@@ -418,7 +418,7 @@ export const SECTIONS = {
   personal: {
     layout: "personal",
     heading: "OFF-DUTY",
-    sub: "Four Countries, Six Languages, One Extremely Defended Steam Library.",
+    sub: "four countries, six languages, one extremely defended Steam library.",
     geography: [
       { flag: "🇯🇴", country: "JORDAN", years: "2 YRS", note: "Amman. Born here.", c1: "#000", c2: "#ce1126" },
       { flag: "🇶🇦", country: "QATAR", years: "16 YRS", note: "Doha. Where I grew up.", c1: "#8d1b3d", c2: "#fff" },
@@ -450,7 +450,7 @@ export const SECTIONS = {
       { t: "RED CROSS · RED CRESCENT", d: "Red Cross Disaster Action Team member. Red Crescent charity clothes-drive volunteer." }
     ],
     endeavorsTitle: "Personal Endeavors",
-    lifestyle: ["Looking For Jobs Or Research Assistant Positions", "Working On My Next GitHub Project", "Learning Ancient Chinese Cultivation Arts", "Dukan Diet And Weightlifting", "Working On Modeling Genetics", "Playing Through Expedition 33", "Filing For OPT"]
+    lifestyle: ["looking for jobs or research assistant positions", "working on my next GitHub project", "learning ancient Chinese cultivation arts", "Dukan diet and weightlifting", "working on modeling genetics", "playing through Expedition 33", "filing for OPT"]
   },
 
   astakeria: {
