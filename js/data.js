@@ -4,7 +4,7 @@
 // ============================================================
 
 export const LINKS = {
-  resume: "https://drive.google.com/file/d/1SwmqFIcCpLUo2hbO0_iGhyaxgRQwBSgC/view?usp=drive_link",
+  resume: "https://drive.google.com/file/d/1gDsIqQ8n--Le6yuHsiU_Ep-qiuUfWjs2/view?usp=drive_link",
   linkedin: "https://www.linkedin.com/in/hakat/",
   github: "https://github.com/PreLabHomework",
   waylo: "https://github.com/PreLabHomework/waylo-app",
@@ -104,7 +104,7 @@ export const ROSTER = [
     preview: {
       headline: "AFFILIATIONS",
       sub: "INSTITUTIONS · COMPANIES · PROGRAMS",
-      blurb: "Institutions, companies, labs, programs, publications, and organizations connected to the work. Some paid, some volunteer, all worth keeping on the wall.",
+      blurb: "Institutions, companies, labs, programs, publications, and organizations connected to the work. Brand-colored tiles for a cleaner collaborator-wall feel.",
       stats: [["TOTAL", "11"], ["ACADEMIC", "MIT · SLU · CMU"], ["INDUSTRY", "CORSAIR · GSK · SAMSUNG"], ["ORG", "IEEE"]]
     },
     play_url: LINKS.linkedin, play_label: "VIEW LINKEDIN"
@@ -148,17 +148,17 @@ export const SECTIONS = {
   home: {
     layout: "home",
     heading: "HAMZA'S HOUSE",
-    sub: "portfolio mode. hover a character, preview, then select to enter.",
+    sub: "Portfolio Mode: Hover A Character, Preview The Story, Select To Enter.",
     intro: "Welcome to my portfolio. I styled it after a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story. Hover to preview, select to enter, and use Back or ESC to return to the roster.",
     bio: [
       "I'm Hamza Abu Khalaf Al Takrouri, a senior Computer and Electrical Engineer at Saint Louis University, graduating May 2026 with minors in Computer Science and Mathematics.",
       "Three labs, one capstone, zero free weekends. Send help and job offers."
     ],
     quickfacts: [
-      { k: "based in", v: "St. Louis, Missouri" },
-      { k: "open to", v: "firmware, hardware, software" },
-      { k: "focus", v: "embedded systems, radar ML, clinical hardware, mobile apps" },
-      { k: "links", v: "resume, LinkedIn, GitHub" }
+      { k: "Based In", v: "St. Louis, Missouri" },
+      { k: "Open To", v: "Firmware, Hardware, Software" },
+      { k: "Focus", v: "Embedded Systems, Radar ML, Clinical Hardware, Mobile Apps" },
+      { k: "Links", v: "Resume, LinkedIn, GitHub Wired" }
     ],
     recruiter: [
       "Graduating May 2026",
@@ -173,17 +173,17 @@ export const SECTIONS = {
   labs: {
     layout: "labs",
     heading: "RESEARCH",
-    sub: "three active research tracks at Saint Louis University, grouped by lab.",
+    sub: "Three Active Research Tracks At Saint Louis University, Grouped By Lab Instead Of Scattered Across The Site.",
     labs: [
       {
         key: "chrome",
         name: "CHROME LAB",
-        focus: "PT KIDS, clinical wearables, haptic communication",
-        pi: "embedded systems and wearable hardware",
+        focus: "PT KIDS, Clinical Wearables, Haptic Communication",
+        pi: "Embedded Systems And Wearable Hardware",
         status: "PT KIDS · OTA FIRMWARE · R SHINY · HAPTIC WATCH",
         story: [
           "CHROME develops wearable haptic interfaces for DeafBlind communication. The work connects clinical wearable hardware, Bluetooth communication, data review tooling, and pediatric form-factor design.",
-          "My current work includes PT KIDS, a Python/Tkinter desktop app for OTA firmware management of ATmega328P/RN4870 clinical wearables; a bidirectional Bluetooth stack over CH340-based hardware; an R Shiny dashboard for session review; and a SolidWorks finger clamp housing a PPG pulse sensor for a pediatric haptic feedback smartwatch."
+          "I shipped PT KIDS, a Python/Tkinter OTA firmware tool for ATmega328P/RN4870 clinical wearables that automates AVRdude flashing over Bluetooth serial. The tool eliminated the need for international firmware deployment trips by replacing in-person flashing with PyInstaller-packaged remote OTA. I also built an R Shiny clinical dashboard for session review, and a SolidWorks finger clamp housing a PPG pulse sensor for the pediatric haptic feedback smartwatch."
         ],
         subprojects: [
           { n: "PT KIDS OTA Tool", d: "Python/Tkinter application for OTA firmware management. AVRdude flashing over Bluetooth serial, auto COM detection, Windows SAPI TTS, and PyInstaller deployment.", url: LINKS.chromeFirmware },
@@ -201,22 +201,22 @@ export const SECTIONS = {
       {
         key: "wnis",
         name: "WNIS LAB",
-        focus: "GUARD radar-based driver authentication",
-        pi: "machine learning and behavioral authentication",
+        focus: "GUARD Radar-Based Driver Authentication",
+        pi: "Machine Learning And Behavioral Authentication",
         status: "GUARD · TI IWR6843 · INFOCOMM TARGET",
         story: [
-          "GUARD is a GAN-based driver authentication system using TI IWR6843 mmWave radar. The pipeline processes spherical-grid point clouds with temporal features including velocity, variance, and frame delta, then targets continuous identity verification without storing biometrics.",
-          "The system uses a two-phase architecture: GAN-based behavioral registration followed by real-time sliding-window majority voting with a 70% threshold. I work on the pipeline across preprocessing, training, evaluation, and algorithm design.",
-          "The literature review covers 292 papers across mmWave sensing, behavioral authentication, and federated learning. The GitHub pipeline is functional end-to-end and the target venue is IEEE INFOCOMM 2027."
+          "GUARD is a GAN-based continuous driver authentication system using TI IWR6843 mmWave radar. The pipeline processes spherical-grid point clouds with temporal features including velocity, variance, and frame delta per voxel, then performs continuous identity verification without storing biometrics.",
+          "The system uses a two-phase architecture: GAN-based behavioral registration that learns a head+arms-to-torso mapping, followed by a real-time ACA trust-pool module for continuous identity verification. Authentication is dual: it uses both reconstruction error and discriminator score thresholds.",
+          "The full pipeline is validated end-to-end across preprocessing, GAN training, and evaluation on a 5-driver, 25-session dataset. Literature review covers behavioral authentication and mmWave sensing. Target venue is IEEE Infocomm 2027."
         ],
         subprojects: [
-          { n: "GUARD Pipeline", d: "Spherical-grid point cloud preprocessing on TI IWR6843 radar data with velocity, variance, and frame-delta temporal features.", url: LINKS.guard },
-          { n: "Two-Phase Auth", d: "GAN-based registration followed by real-time sliding-window majority voting at a 70% threshold." },
-          { n: "Systematic Review", d: "292-paper review across mmWave sensing, behavioral authentication, and federated learning." },
-          { n: "End-to-End Repo", d: "Preprocessing, training, and evaluation pipeline confirmed functional across GitHub.", url: LINKS.guard }
+          { n: "GUARD Pipeline", d: "Spherical-grid point cloud preprocessing on TI IWR6843 radar data with velocity, variance, and frame-delta temporal features per voxel.", url: LINKS.guard },
+          { n: "Two-Phase Auth", d: "Behavioral registration via GAN (head+arms → torso mapping) plus real-time ACA trust-pool module for continuous identity verification." },
+          { n: "Dual Threshold", d: "Authentication via reconstruction error and discriminator score thresholds, evaluated on a 5-driver, 25-session dataset." },
+          { n: "End-to-End Repo", d: "Preprocessing, training, and evaluation pipeline confirmed functional end-to-end on GitHub.", url: LINKS.guard }
         ],
-        proof: ["TI IWR6843 Radar", "GAN Registration", "Spherical-Grid Point Clouds", "70% Majority-Vote Authentication", "292-Paper Review"],
-        funding: "Targeting IEEE INFOCOMM 2027. Official lab website linked separately. My research-site builds are separate and not published yet.",
+        proof: ["TI IWR6843 Radar", "GAN Behavioral Registration", "ACA Trust-Pool Module", "5-Driver / 25-Session Dataset", "Dual-Threshold Authentication"],
+        funding: "Targeting IEEE Infocomm 2027. Official lab website linked separately. My research-site builds are separate and not published yet.",
         links: [
           { label: "GUARD Repo", url: LINKS.guard },
           { label: "Official WNIS Lab Website", url: LINKS.wnisWebsite, note: "official site" }
@@ -226,19 +226,19 @@ export const SECTIONS = {
         key: "biomech",
         name: "MUSCULOSKELETAL BIOMECHANICS LAB",
         focus: "QBC Hematology Diagnostic Modernization",
-        pi: "hardware redesign and diagnostic systems",
+        pi: "Hardware Redesign And Diagnostic Systems",
         status: "QBC MODERNIZATION · FIRMWARE RECOVERY · CLINICAL WORKFLOW",
         story: [
-          "The QBC modernization project focuses on a 1970s hematology diagnostic system built around an Intel D8749H MCS-48 microcontroller. The work combines firmware recovery, hardware reverse-engineering, and a modern low-cost measurement workflow.",
-          "The updated system uses a Nextion 5-inch touchscreen, Arduino Nano, iGaging calipers with 0.01 mm precision, and a piezo buzzer. The workflow captures four vial measurements and converts them into clinical values through the updated interface."
+          "The QBC modernization project focuses on a 1970s hematology diagnostic system built around an Intel D8749H MCS-48 microcontroller. The work combines firmware recovery, hardware reverse-engineering, and a low-cost measurement workflow designed for low-resource and harsh field environments.",
+          "The rebuilt system uses a Nextion 5-inch touchscreen, Arduino Nano, and a 24-bit CLK/DATA digital caliper. The redesign drops device cost from approximately $10k to under $300 while preserving clinical measurement accuracy."
         ],
         subprojects: [
           { n: "Firmware Recovery", d: "Extracted firmware from the Intel D8749H MCS-48 microcontroller using a TL866II programmer." },
           { n: "Modern Interface", d: "Nextion 5-inch touchscreen and Arduino Nano interface for a guided measurement workflow." },
-          { n: "Digital Measurement", d: "iGaging calipers at 0.01 mm precision, four-point vial workflow, piezo feedback, and clinical value conversion." },
-          { n: "Research Site Builds", d: "Responsive SLU research lab websites with team profiles and research carousels. The sites I built are separate from the official lab links and are not public yet." }
+          { n: "Digital Measurement", d: "24-bit CLK/DATA digital caliper, four-point vial workflow, and clinical value conversion." },
+          { n: "Cost Reduction", d: "Full hardware redesign drops device cost from ~$10k to under $300 for low-resource clinical deployment." }
         ],
-        proof: ["D8749H Firmware Recovery", "Nextion + Arduino Interface", "0.01mm iGaging Workflow", "Clinical Value Conversion"],
+        proof: ["D8749H Firmware Recovery", "Nextion + Arduino Interface", "24-bit CLK/DATA Caliper", "$10k → <$300 Cost Reduction"],
         funding: "Official lab website linked separately. My research-site builds are separate and not published yet.",
         links: [
           { label: "Official Biomechanics Lab Website", url: LINKS.biomechWebsite, note: "official site" }
@@ -250,7 +250,7 @@ export const SECTIONS = {
   capstone: {
     layout: "capstone",
     heading: "WEARABLE TREMOR STABILIZER",
-    sub: "senior design. Parkinson's tremor monitoring and stabilization.",
+    sub: "Senior Design. Parkinson's Tremor Monitoring And Stabilization.",
     pitch: "A wearable motion stabilization system paired with TremorMonitor, a React Native app for Parkinson's tremor monitoring. Firmware streams compact BLE packets from the ESP32-S3 Feather, while the app records live sessions, stores SQLite data, charts tremor frequency, exports CSV files, and supports medication mode with severity thresholds.",
     recruiter: [
       "React Native BLE telemetry",
@@ -282,14 +282,14 @@ export const SECTIONS = {
   projects: {
     layout: "gallery",
     heading: "PROJECTS",
-    sub: "standalone builds, coursework systems, and shipped prototypes.",
+    sub: "Standalone Builds, Coursework Systems, And Shipped Prototypes.",
     items: [
-      { tag: "DATA", title: "WiFi Coverage & Handover Analyzer", year: "2024", body: "Raspberry Pi WiFi scanner and MATLAB analysis workflow processing 194K+ measurements across 952 locations, with coverage gap findings and budget recommendations for SLU IT.", proof: "Shows field data collection, packet analysis, statistical modeling, and stakeholder-ready engineering recommendations", tech: ["Raspberry Pi", "Python", "PyShark", "MATLAB"], url: LINKS.wifi },
+      { tag: "DATA", title: "WiFi Coverage & Handover Analyzer", year: "2024", body: "Exposed that 73% of Ritter Hall basement locations failed minimum WiFi standards by processing 194K+ measurements from a custom Raspberry Pi scanner. Delivered a MATLAB-modeled report with infrastructure recommendations to SLU IT stakeholders.", proof: "Shows field data collection, packet analysis, statistical modeling, and stakeholder-ready engineering recommendations", tech: ["Raspberry Pi", "Python", "PyShark", "MATLAB"], url: LINKS.wifi },
       { tag: "FPGA", title: "FPGA Signal Monitor", year: "2024", body: "Real-time signal visualizer on Basys 3 with HDMI output using FSM-driven VHDL, video timing logic, and full hardware-to-display pipeline.", proof: "Shows digital design depth, timing discipline, FPGA architecture, and display-pipeline implementation", tech: ["VHDL", "Basys 3", "HDMI", "FSM"] },
       { tag: "MOBILE", title: "Waylo", year: "2026", body: "React Native travel companion app built with Expo and Firebase. This covers the mobile security/full-stack app direction, so it is listed once instead of split into duplicate projects.", proof: "Shows product thinking, mobile stack ownership, Firebase-backed architecture, and iterative shipping", tech: ["React Native", "Expo", "Firebase"], url: LINKS.waylo },
       { tag: "FIRMWARE", title: "UART Transmitter", year: "2024", body: "Basys 3 UART transmitter project focused on serial timing, shift-register control, and reliable hardware signal generation.", proof: "Shows HDL debugging, serial protocols, clocking, and hardware signal generation", tech: ["VHDL", "Basys 3", "UART"], url: LINKS.uart },
       { tag: "NLP", title: "Natural Language To Code Translator", year: "2022-2023", body: "Parser-driven tool translating natural language input into Java, C++, and Python syntax with structured cross-language code generation.", proof: "Shows NLP parsing logic, multi-language code generation, and early compiler-style thinking", tech: ["Python", "Java", "C++", "NLP"], url: LINKS.nlToCode },
-      { tag: "AI", title: "Arabic Speech-To-Text AI System", year: "2023", body: "NLP-driven Arabic dialect transcription model from the Samsung AI Workshop, with feature extraction tuned for accent-variant speech.", proof: "Shows supervised learning, language-aware feature extraction, and multilingual AI context", tech: ["NLP", "Python", "Supervised Learning"] },
+      { tag: "AI", title: "Arabic Speech-To-Text AI System", year: "2023", body: "Whisper + LLM pipeline for cross-dialect Arabic video transcription. Heuristic detection across 7 dialect families (Egyptian, Iraqi, Levantine, Gulf, Maghrebi, Sudanese, Yemeni), outputting clean MSA subtitle SRT files. Built during the Samsung AI Workshop.", proof: "Shows multilingual NLP, dialect-aware processing, and end-to-end transcription system design", tech: ["Whisper", "LLM", "Python", "NLP"] },
       { tag: "WEB", title: "SLU Research Lab Websites", year: "2025", body: "Responsive research websites built for SLU labs with team profiles, research carousels, and maintainable page structures. The sites I built are not public yet.", proof: "Shows client-style delivery, responsive design, maintainable content structures, and research communication", tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"] },
       { tag: "AUDIO", title: "Browser Music Synth", year: "2026", body: "Browser-based audio experiment using Web Audio concepts for generated tones, interaction feedback, and playful sound design.", proof: "Shows creative front-end systems, browser APIs, and interaction design beyond static pages", tech: ["JavaScript", "Web Audio", "UI"] }
     ]
@@ -297,7 +297,7 @@ export const SECTIONS = {
   research: {
     layout: "archive",
     heading: "PAPERS & PATENTS",
-    sub: "publication record, patent work, and continuing education.",
+    sub: "Publication Record, Patent Work, And Continuing Education.",
     recruiter: ["Radar ML Publication Track", "Clinical Hardware IP", "Haptic Wearables Paper", "Computer Forensics Publication", "MIT + CMU Continuing Education"],
     papers: [
       { status: "ACTIVE", statusTone: "warn", title: "GUARD: GAN-Based Driver Authentication via mmWave Radar", venue: "IEEE INFOCOMM", year: "Target 2027", blurb: "GAN-based driver authentication using TI IWR6843 radar, spherical-grid point clouds, temporal features, and 70% sliding-window majority voting.", url: LINKS.guard },
@@ -371,14 +371,15 @@ export const SECTIONS = {
   timeline: {
     layout: "timeline",
     heading: "TIMELINE",
-    sub: "how the work got built.",
+    sub: "How The Work Got Built.",
     events: [
-      { date: "APR 2026", tag: "QBC", body: "QBC modernization updated around Nextion touchscreen, Arduino Nano, iGaging calipers, piezo feedback, and four-point clinical value conversion." },
+      { date: "APR 2026", tag: "AWARD", body: "SLU Launch Inventor Award ($2,500) for CountKit, a low-cost malaria and sickle cell disease diagnostic device." },
+      { date: "APR 2026", tag: "QBC", body: "QBC modernization rebuilt around Nextion touchscreen, Arduino Nano, and 24-bit CLK/DATA caliper. Cost dropped from ~$10k to under $300 for low-resource clinical deployment." },
       { date: "APR 2026", tag: "CAPSTONE", body: "TremorMonitor rehaul: BLE packet decoding, SQLite session storage, frequency charts, CSV export, medication mode, and severity thresholds." },
-      { date: "APR 2026", tag: "GUARD", body: "GUARD pipeline functional end to end: spherical-grid point cloud preprocessing, GAN training, evaluation, and 70% sliding-window majority voting." },
+      { date: "APR 2026", tag: "GUARD", body: "GUARD pipeline validated end to end on a 5-driver, 25-session dataset: spherical-grid point cloud preprocessing, GAN behavioral registration (head+arms → torso), and ACA trust-pool authentication." },
       { date: "2025", tag: "CHROME", body: "PT KIDS OTA firmware tool, R Shiny dashboard, Bluetooth stack, and SolidWorks PPG finger clamp for pediatric haptic smartwatch work." },
-      { date: "SUMMER 2025", tag: "INTERN", body: "Doha Bank Data Governance & Engineering Intern. Automated data validation workflows and contributed to enterprise data architecture." },
-      { date: "WINTER 2025", tag: "MIT.NANO", body: "MIT.nano volunteer lab technician under NDA. Exposure to nanofabrication workflows, hardware integration, calibration, and rapid prototyping." },
+      { date: "SUMMER 2025", tag: "INTERN", body: "Doha Bank Data Governance & Engineering Intern. Cross-departmental rotation across 9+ banking divisions including databases, Linux systems, server infrastructure, cloud storage, IT operations, and data engineering." },
+      { date: "WINTER 2025", tag: "MIT.NANO", body: "MIT.nano volunteer lab technician under NDA. Silicon and semiconductor fabrication, cleanroom workflows, microprocessor-driven instrument control, and 3D printing for prototyping." },
       { date: "2025", tag: "WEB", body: "SLU research lab websites built with responsive layouts, team profiles, and research carousels. My built sites are not public yet." },
       { date: "2024", tag: "NETWORK", body: "WiFi Coverage & Handover Analyzer: 194,000+ measurements across 952 survey locations with MATLAB-modeled findings." },
       { date: "SPRING 2024", tag: "FPGA", body: "FPGA Signal Monitor with HDMI output on Basys 3 using FSM-driven VHDL." },
@@ -399,7 +400,7 @@ export const SECTIONS = {
   affiliations: {
     layout: "wall",
     heading: "AFFILIATIONS",
-    sub: "institutions, companies, programs, and organizations connected to the work.",
+    sub: "Institutions, Companies, Programs, Publications, And Organizations That Shaped The Work.",
     tiles: [
       { n: "MIT", r: "MIT.nano Lab · MIT AI & CS Seminars · MIT Sloan AI Strategy", brand: "#A31F34", text: "#fff" },
       { n: "CARNEGIE MELLON", r: "MindCraft Robotics & AI · Director's Certificate (CMU Qatar)", brand: "#C41E3A", text: "#fff" },
@@ -418,7 +419,7 @@ export const SECTIONS = {
   personal: {
     layout: "personal",
     heading: "OFF-DUTY",
-    sub: "four countries, six languages, one extremely defended Steam library.",
+    sub: "Four Countries, Six Languages, One Extremely Defended Steam Library.",
     geography: [
       { flag: "🇯🇴", country: "JORDAN", years: "2 YRS", note: "Amman. Born here.", c1: "#000", c2: "#ce1126" },
       { flag: "🇶🇦", country: "QATAR", years: "16 YRS", note: "Doha. Where I grew up.", c1: "#8d1b3d", c2: "#fff" },
@@ -450,7 +451,7 @@ export const SECTIONS = {
       { t: "RED CROSS · RED CRESCENT", d: "Red Cross Disaster Action Team member. Red Crescent charity clothes-drive volunteer." }
     ],
     endeavorsTitle: "Personal Endeavors",
-    lifestyle: ["looking for jobs or research assistant positions", "working on my next GitHub project", "learning ancient Chinese cultivation arts", "Dukan diet and weightlifting", "working on modeling genetics", "playing through Expedition 33", "filing for OPT"]
+    lifestyle: ["Looking For Jobs Or Research Assistant Positions", "Working On My Next GitHub Project", "Learning Ancient Chinese Cultivation Arts", "Dukan Diet And Weightlifting", "Working On Modeling Genetics", "Playing Through Expedition 33", "Filing For OPT"]
   },
 
   astakeria: {
