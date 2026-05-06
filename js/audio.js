@@ -4,7 +4,7 @@
 
 let ctx = null;
 let master = null;
-let muted = false;
+let muted = true;
 let lastSpoken = '';
 let lastSpokenAt = 0;
 let pickedVoice = null;

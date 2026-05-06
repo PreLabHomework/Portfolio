@@ -89,6 +89,10 @@
       </div>
       <div class="hud-c">HAMZA'S HOUSE</div>
       <div class="hud-r">
+        <a class="hud-home-toggle" href="index.html" aria-label="Back to start screen">
+          <span class="hcv-arrow">▸</span>
+          <span class="hcv-label">HOME</span>
+        </a>
         <a class="hud-cv-toggle" href="cv.html" aria-label="Switch to professional mode">
           <span class="hcv-arrow">▸</span>
           <span class="hcv-label">PRO MODE</span>
@@ -96,9 +100,9 @@
         <span class="hud-readout"><span class="dot"></span>ONLINE</span>
         <span id="hud-clock" class="hud-readout">--:-- CST</span>
         <span id="hud-fps" class="hud-readout hud-fps">-- FPS</span>
-        <button id="hud-mute" class="hud-btn" type="button" aria-label="Toggle audio">
-          <svg id="hud-mute-on" viewBox="0 0 16 16" fill="currentColor"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 5 Q13 8 11 11" stroke="currentColor" stroke-width="1" fill="none"/></svg>
-          <svg id="hud-mute-off" viewBox="0 0 16 16" fill="currentColor" style="display:none;"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 6 L14 10 M14 6 L11 10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+        <button id="hud-mute" class="hud-btn" type="button" aria-label="Toggle audio" data-start-muted="true">
+          <svg id="hud-mute-on" viewBox="0 0 16 16" fill="currentColor" style="display:none;"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 5 Q13 8 11 11" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+          <svg id="hud-mute-off" viewBox="0 0 16 16" fill="currentColor"><path d="M3 6 L3 10 L6 10 L9 13 L9 3 L6 6 Z"/><path d="M11 6 L14 10 M14 6 L11 10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
         </button>
       </div>
     </div>

@@ -191,8 +191,15 @@ export function initSelect({ bg, stage }) {
         audio.whoosh();
         svInner.innerHTML = renderSection(c.id);
         postRender(c.id, svInner);
-        svPlay.href = c.play_url;
+        svPlay.href = c.play_url || '#';
         svPlay.querySelector('.sp-label').textContent = c.play_label || 'PLAY';
+        if (!c.play_url) {
+          svPlay.classList.add('resume-disabled');
+          svPlay.onclick = (e) => e.preventDefault();
+        } else {
+          svPlay.classList.remove('resume-disabled');
+          svPlay.onclick = null;
+        }
         sectionEl.classList.add('live');
         sectionEl.setAttribute('aria-hidden', 'false');
         sectionEl.scrollTop = 0;

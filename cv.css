@@ -98,6 +98,9 @@ a { color: var(--acc); text-decoration: none; }
   text-transform: uppercase;
 }
 
+.cv-mode-actions {
+  display: flex; align-items: center; gap: 0.5rem;
+}
 .cv-mode-toggle {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.5rem 0.9rem;
@@ -114,7 +117,16 @@ a { color: var(--acc); text-decoration: none; }
   border-color: var(--acc);
   background: rgba(255, 209, 102, 0.08);
 }
+.cv-mode-toggle.home-toggle:hover {
+  color: var(--acc-2);
+  border-color: var(--acc-2);
+  background: rgba(239, 71, 111, 0.08);
+}
 .cmt-arrow { color: var(--acc); }
+.home-toggle .cmt-arrow { color: var(--acc-2); }
+.cv-foot-actions {
+  display: inline-flex; gap: 1rem;
+}
 
 /* ============================================================
    SHELL / LAYOUT
@@ -306,7 +318,6 @@ a { color: var(--acc); text-decoration: none; }
   font-size: 0.95rem; color: var(--text);
   letter-spacing: 0.02em;
   margin-top: 0.1rem;
-  text-transform: lowercase;
 }
 
 .cv-hero-contact {
@@ -504,7 +515,7 @@ a { color: var(--acc); text-decoration: none; }
 }
 .cv-lab-subs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
   margin-top: 0.8rem;
 }
@@ -847,7 +858,7 @@ a { color: var(--acc); text-decoration: none; }
 
 .cv-aff-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.55rem;
 }
 .cv-aff {
@@ -888,7 +899,7 @@ a { color: var(--acc); text-decoration: none; }
    ============================================================ */
 
 .cv-geo-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
 }
 .cv-geo {
@@ -920,7 +931,7 @@ a { color: var(--acc); text-decoration: none; }
 
 .cv-rank-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.4rem;
 }
 .cv-rank {
@@ -950,7 +961,7 @@ a { color: var(--acc); text-decoration: none; }
 
 .cv-team-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.4rem;
 }
 .cv-team {
@@ -1018,7 +1029,7 @@ a { color: var(--acc); text-decoration: none; }
 }
 .cv-ast-pillars {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
 }
 .cv-ast-pillar {
@@ -1103,6 +1114,12 @@ a { color: var(--acc); text-decoration: none; }
   .cv-mark-mode { display: none; }
   .cmt-label { display: none; }
   .cv-proj-grid.two-col { grid-template-columns: 1fr; }
+  .cv-lab-subs { grid-template-columns: 1fr; }
+  .cv-aff-grid { grid-template-columns: 1fr; }
+  .cv-rank-grid { grid-template-columns: 1fr; }
+  .cv-team-row { grid-template-columns: 1fr; }
+  .cv-ast-pillars { grid-template-columns: 1fr; }
+  .cv-geo-grid { grid-template-columns: 1fr; }
   .cv-sec-cta { width: 100%; justify-content: center; }
 }
 

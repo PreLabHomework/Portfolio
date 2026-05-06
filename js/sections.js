@@ -275,21 +275,10 @@ function renderTimeline(s) {
   `;
 }
 
-function brandLogo(n) {
-  if (!n) return '';
-  const words = String(n).split(/\s+/).map(w => w.replace(/[^A-Za-z0-9]/g, '')).filter(Boolean);
-  if (!words.length) return n.slice(0, 3).toUpperCase();
-  if (words.length === 1) {
-    const w = words[0];
-    return w.length <= 4 ? w : w.slice(0, 3);
-  }
-  return words.map(w => w[0]).join('').slice(0, 4);
-}
-
 function renderWall(s) {
   const tiles = s.tiles.map(t => `
     <div class="wall-tile v4" style="--brand:${esc(t.brand)};--brand-text:${esc(t.text)};">
-      <div class="wt-logo">${esc(brandLogo(t.n))}</div>
+      <div class="wt-logo">${esc(t.n).split(' ').map(w => w[0]).join('').slice(0, 4)}</div>
       <div class="wt-n">${esc(t.n)}</div>
       <div class="wt-r">${esc(t.r)}</div>
       ${extLink(t.url, 'Open', 'mini-link wall-link')}

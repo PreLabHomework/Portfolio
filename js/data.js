@@ -4,7 +4,7 @@
 // ============================================================
 
 export const LINKS = {
-  resume: "https://drive.google.com/file/d/1gDsIqQ8n--Le6yuHsiU_Ep-qiuUfWjs2/view?usp=drive_link",
+  resume: "", // disabled — URL updating, will re-enable
   linkedin: "https://www.linkedin.com/in/hakat/",
   github: "https://github.com/PreLabHomework",
   waylo: "https://github.com/PreLabHomework/waylo-app",

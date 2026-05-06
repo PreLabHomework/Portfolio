@@ -2871,3 +2871,91 @@ body[data-char="labs"] .pv-headline {
   .bp-mode-list { gap: 0.22rem; }
   .bp-mode-list li { font-size: 11.5px; }
 }
+
+/* ============================================================
+   v4.7.4 HUD MODE TOGGLES (HOME + PRO MODE on interactive)
+   Plus resume link disable styling.
+   ============================================================ */
+
+.hud-cv-toggle, .hud-home-toggle {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 4px 11px;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--text-2);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line-2);
+  text-transform: uppercase;
+  margin-right: 0.4rem;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: color 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.hud-home-toggle:hover {
+  color: var(--acc2);
+  border-color: var(--acc2);
+  background: rgba(239, 71, 111, 0.08);
+}
+.hud-home-toggle .hcv-arrow { color: var(--acc2); }
+
+.hud-cv-toggle {
+  /* Pro mode is the recruiter shortcut — make it slightly more obvious */
+  color: var(--acc);
+  border-color: var(--acc);
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.10), rgba(255, 209, 102, 0.02));
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  padding: 5px 13px;
+  position: relative;
+  animation: hud-pro-pulse 2.6s ease-in-out infinite;
+}
+.hud-cv-toggle::after {
+  content: ''; position: absolute; inset: -2px;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  border: 1px solid var(--acc);
+  opacity: 0;
+  pointer-events: none;
+  animation: hud-pro-ring 2.6s ease-in-out infinite;
+}
+.hud-cv-toggle:hover {
+  color: #0a0e16;
+  background: var(--acc);
+  border-color: var(--acc);
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.55);
+  animation: none;
+}
+.hud-cv-toggle:hover::after { opacity: 0; animation: none; }
+.hud-cv-toggle .hcv-arrow { color: var(--acc); }
+.hud-cv-toggle:hover .hcv-arrow { color: #0a0e16; }
+
+@keyframes hud-pro-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 209, 102, 0); }
+  50%      { box-shadow: 0 0 14px rgba(255, 209, 102, 0.45); }
+}
+@keyframes hud-pro-ring {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  40%      { opacity: 0.55; transform: scale(1.06); }
+  100%     { opacity: 0; transform: scale(1.14); }
+}
+
+@media (max-width: 900px) {
+  .hcv-label { display: none; }
+  .hud-cv-toggle, .hud-home-toggle { padding: 4px 8px; }
+  .hud-cv-toggle::after { display: none; }
+}
+
+/* Resume link disabled state — both interactive and CV mode */
+.is-disabled, .resume-disabled {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+  pointer-events: auto;
+  position: relative;
+}
+.is-disabled::after, .resume-disabled::after {
+  content: 'updating';
+  position: absolute; top: -8px; right: -6px;
+  font-family: var(--f-mono); font-size: 8px;
+  letter-spacing: 0.18em; padding: 1px 5px;
+  color: #0a0e16; background: var(--acc);
+  border-radius: 2px;
+}

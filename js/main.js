@@ -98,7 +98,9 @@ async function enterApp() {
 setupBoot({ onStart: enterApp });
 
 // ─── mute toggle ────────────────────────────────────────────
-let muted = false;
+// Default to MUTED so visitors are not surprised by audio.
+let muted = true;
+audio.setMuted(true);
 function refreshMuteUI() {
   if (muteOn)  muteOn.style.display  = muted ? 'none' : '';
   if (muteOff) muteOff.style.display = muted ? '' : 'none';

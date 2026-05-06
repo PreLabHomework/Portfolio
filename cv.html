@@ -32,10 +32,16 @@
         <span class="cv-mark-mode">PROFESSIONAL MODE</span>
       </div>
 
-      <a href="index.html" class="cv-mode-toggle" aria-label="Switch to interactive mode">
-        <span class="cmt-arrow">▸</span>
-        <span class="cmt-label">INTERACTIVE MODE</span>
-      </a>
+      <div class="cv-mode-actions">
+        <a href="index.html" class="cv-mode-toggle home-toggle" aria-label="Back to start screen">
+          <span class="cmt-arrow">▸</span>
+          <span class="cmt-label">HOME</span>
+        </a>
+        <a href="index.html#interactive" class="cv-mode-toggle" aria-label="Switch to interactive mode">
+          <span class="cmt-arrow">▸</span>
+          <span class="cmt-label">INTERACTIVE MODE</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -57,7 +63,7 @@
         </nav>
 
         <div class="cv-rail-foot">
-          <a class="cv-rail-link" href="https://drive.google.com/file/d/1gDsIqQ8n--Le6yuHsiU_Ep-qiuUfWjs2/view?usp=drive_link" target="_blank" rel="noopener">
+          <a class="cv-rail-link resume-disabled" href="#" onclick="event.preventDefault();" aria-disabled="true">
             <span class="cvr-icn" aria-hidden="true">↓</span> Resume PDF
           </a>
           <a class="cv-rail-link" href="mailto:hamzaabukat@gmail.com">
@@ -96,16 +102,15 @@
           <div class="cv-hero-stat"><span class="k">research labs</span><span class="v">3</span></div>
           <div class="cv-hero-stat"><span class="k">papers in flight</span><span class="v">3</span></div>
           <div class="cv-hero-stat"><span class="k">patents</span><span class="v">2</span></div>
-          <div class="cv-hero-stat"><span class="k">internships</span><span class="v">4</span></div>
-          <div class="cv-hero-stat"><span class="k">awards</span><span class="v">SLU Launch '26</span></div>
+          <div class="cv-hero-stat"><span class="k">internships</span><span class="v">7</span></div>
+          <div class="cv-hero-stat"><span class="k">awards</span><span class="v">SLU LAUNCH '26</span></div>
           <div class="cv-hero-stat"><span class="k">languages spoken</span><span class="v">5</span></div>
           <div class="cv-hero-stat"><span class="k">based in</span><span class="v">St. Louis</span></div>
-          <div class="cv-hero-stat"><span class="k">ideal location</span><span class="v">MA</span></div>
-          <div class="cv-hero-stat"><span class="k">status</span><span class="v">looking for job</span></div>
+          <div class="cv-hero-stat"><span class="k">ideal location</span><span class="v">USA</span></div>
         </div>
 
         <div class="cv-hero-contact">
-          <a class="cv-hero-cta primary" href="https://drive.google.com/file/d/1gDsIqQ8n--Le6yuHsiU_Ep-qiuUfWjs2/view?usp=drive_link" target="_blank" rel="noopener">
+          <a class="cv-hero-cta primary resume-disabled" href="#" onclick="event.preventDefault();" aria-disabled="true">
             <span class="cvc-icn">↓</span> Download Resume
           </a>
           <a class="cv-hero-cta" href="mailto:hamzaabukat@gmail.com">Email</a>
@@ -122,7 +127,10 @@
         <div class="cv-foot-line"></div>
         <div class="cv-foot-row">
           <span>© 2026 HAMZA ABU KHALAF AL TAKROURI</span>
-          <a href="index.html" class="cv-foot-link">▸ INTERACTIVE MODE</a>
+          <span class="cv-foot-actions">
+            <a href="index.html" class="cv-foot-link">▸ HOME</a>
+            <a href="index.html#interactive" class="cv-foot-link">▸ INTERACTIVE MODE</a>
+          </span>
         </div>
       </footer>
 

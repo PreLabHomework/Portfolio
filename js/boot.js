@@ -15,6 +15,24 @@ export function setupBoot({ onStart }) {
   const skipEl  = document.getElementById('boot-skip');
   const fxEl    = document.getElementById('boot-fx');
 
+  // ─── URL hash routing: skip picker if a mode was requested ───
+  const hash = (window.location.hash || '').toLowerCase().replace('#', '');
+  if (hash === 'pro' || hash === 'professional' || hash === 'cv') {
+    // strip hash and redirect to professional mode
+    window.location.replace('cv.html');
+    return;
+  }
+  if (hash === 'interactive' || hash === 'int') {
+    // skip the boot picker entirely, go straight in
+    if (history.replaceState) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    bootEl.style.display = 'none';
+    bootEl.classList.add('hide');
+    onStart();
+    return;
+  }
+
   const lines = [
     { tag: '01', body: 'BOOT  …  loading portfolio lobby',                       ok: true },
     { tag: '02', body: 'AUTH  …  hamza abu khalaf al takrouri',                  ok: true },

@@ -55,7 +55,7 @@ function esc(s) {
 // ─── section header (consistent across every CV section) ───
 function header(id, char) {
   const meta = META[id];
-  const cta = char.play_url ? `
+  const cta = (char.play_url && char.play_url.trim()) ? `
     <a class="cv-sec-cta" href="${esc(char.play_url)}" target="_blank" rel="noopener" style="--sec-acc:${char.accent};">
       <span class="cv-sec-cta-arrow">▸</span>
       ${esc((char.play_label || 'OPEN'))}
