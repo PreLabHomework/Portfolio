@@ -1,88 +1,100 @@
 # Hamza's House
 
-A personal portfolio styled as a fighter-select screen. Each hero is a part of my work: three research labs, a senior design capstone, a project gallery, papers and patents, skills, timeline, affiliations, off-duty life, and one weird game I'm building on the side.
+A personal portfolio built as an Overwatch 2-style character-select screen. Each hero is a section of my work: research labs, a senior design capstone, projects, papers, skills, timeline, affiliations, personal life, and Astakeria.
 
-Hover to preview. Select to enter. ESC to come back.
+Hover to preview. Select to enter. ESC to go back.
 
-**Live at:** [https://prelabhomework.github.io/Portfolio/](https://prelabhomework.github.io/Portfolio/)
+**Live:** [https://prelabhomework.github.io/Portfolio/](https://prelabhomework.github.io/Portfolio/)
 
-The site opens with a boot sequence that ends in two choices: **Professional Mode** (clean scrollable resume) or **Interactive Mode** (the full character-select experience). Both are powered by the same content file.
-
-## What's in here
-
-```
-index.html             interactive mode shell
-cv.html                professional mode shell
-styles.css             interactive mode styles
-cv.css                 professional mode styles
-cv.js                  professional mode renderers
-js/
-  main.js              wires everything together
-  data.js              all content. one file, no CMS.
-  sections.js          per-character page renderers (interactive)
-  select.js            character-select state machine
-  stage.js             Three.js per-character figures + environments
-  shader.js            reactive WebGL background
-  boot.js              opening sequence + dual-mode picker
-  audio.js             synth tones + speechSynthesis TTS
-scripts/
-  check-content.mjs    lint for stale copy and broken links
-  check-syntax.mjs     syntax sweep across all JS modules
-```
-
-`data.js` is the single source of truth. Edit content there and both modes update.
-
-No build step required. Vanilla HTML, ES modules, GSAP, and Three.js. The `package.json` is for dev tooling and an optional Vite dev server. Live Server works fine.
+---
 
 ## Two modes
 
-**Professional Mode** (`cv.html`) is for recruiters, HR, and PIs. Sticky left rail, scrollable right pane, no animations, print-friendly. Recruiter shortcut: `https://prelabhomework.github.io/Portfolio/cv.html`.
+**Arena Mode** (`index.html`) is for everyone. Character roster, per-hero 3D figures, a reactive OW2-style atmospheric background, audio cues, and full detail screens for each section.
 
-**Interactive Mode** (`index.html`) is for everyone else. Fighter-select roster, per-character 3D figures, reactive background, audio cues. ESC returns from a section. Use the HUD HOME button to return to the start screen.
+**Pro Mode** (`cv.html`) is for recruiters. Sticky left rail, scrollable right pane, clean layout, print-friendly. Direct link: `/cv.html`.
 
-URL hashes skip the boot picker:
-- `index.html#interactive` enters interactive mode directly
-- `index.html#pro` redirects to professional mode
-- `index.html#projects`, `#labs`, `#capstone`, and other roster ids open that section directly
+Both modes pull from the same `js/data.js`. Edit content once, both modes update.
 
-## Run it locally
+URL hashes open a section directly — `#labs`, `#capstone`, `#projects`, `#experience`, etc.
 
-With VS Code Live Server (easiest):
+---
 
-1. Open the folder in VS Code
-2. Right-click `index.html`, then click `Open with Live Server`
+## File structure
 
-With Vite (faster reload, optional):
+```
+index.html          Arena mode shell
+cv.html             Pro mode shell
+styles.css          Arena mode styles
+cv.css              Pro mode styles
+cv.js               Pro mode renderers
+js/
+  data.js           All content. One file, no CMS.
+  main.js           Wires everything together
+  sections.js       Per-hero detail screen renderers
+  stage.js          Three.js per-hero figures
+  shader.js         Canvas 2D atmospheric background
+  audio.js          Synth tones + hover audio
+assets/
+  arena-backdrop.png  Boot screen background
+  heroes/             Hero portrait tiles
+scripts/
+  check-syntax.mjs    Syntax check across all JS modules
+  check-content.mjs   Content audit: links, em dashes, roster integrity
+```
+
+---
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
+Opens at `http://127.0.0.1:5173`. Hot reload on save.
+
+Or use VS Code Live Server: right-click `index.html` and open with Live Server.
+
+---
+
+## Build
+
+```bash
+npm run build
+```
+
+Output goes to `dist/`. Built with Vite.
+
+---
+
 ## Before pushing
 
 ```bash
-npm run check
+npm run check:syntax
+npm run check:content
 ```
 
-Runs a syntax check across the JS modules and a content audit (no stale copy, no broken links, no duplicate roster entries). Useful before every push because vanilla JS breaks silently.
+Syntax check across all JS modules, then a content audit for broken links, encoding issues, and duplicate roster entries. Both must pass before pushing.
+
+---
 
 ## Tech
 
-* Vanilla HTML, CSS, ES modules. No framework, no bundler required.
-* Three.js for the per-character 3D figures and environments
-* WebGL fragment shader for the reactive background
-* GSAP for animation
-* `speechSynthesis` for the hover voice cues
-* Web Audio API for the synth tones
-* Audio is muted by default. Visitors opt in with the speaker icon.
+- Vanilla HTML, CSS, ES modules. No framework.
+- **Three.js** for the per-hero 3D figures and environments
+- **Canvas 2D** for the reactive atmospheric background shader (bokeh, columns, spotlight, dust)
+- **Vite** for dev server and production build
+- **GSAP** for figure animations (loaded via CDN, optional)
+- **Web Audio API** for synth tones
+- `speechSynthesis` for hover voice cues (muted by default)
 
-Designed first for desktop. Mobile is functional but the experience is built for a wide screen.
+Designed for desktop. Wide screen gets the full experience.
 
-## Credits
+---
 
-Built by [Hamza Abu Khalaf Al Takrouri](https://www.linkedin.com/in/hakat/). Senior Computer and Electrical Engineer at Saint Louis University, graduating May 2026.
+## About
 
-Visual references: Overwatch 2 character select, Mortal Kombat X roster screen.
+Built by [Hamza Abu Khalaf Al Takrouri](https://www.linkedin.com/in/hakat/) — Computer and Electrical Engineer, Saint Louis University, graduated May 2026.
 
-Open to firmware, hardware, software, and anything that lets me work close to the metal. [LinkedIn](https://www.linkedin.com/in/hakat/) · [GitHub](https://github.com/PreLabHomework) · contact: hamzaabukat@gmail.com
+[LinkedIn](https://www.linkedin.com/in/hakat/) · [GitHub](https://github.com/PreLabHomework) · hamzaabukat@gmail.com
