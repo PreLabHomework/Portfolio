@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080d14" />
+  <meta name="description" content="Hamza Abu Khalaf Al Takrouri portfolio: embedded systems, firmware, hardware, edge AI, clinical devices, radar ML, and mobile systems." />
+  <title>Hamza Abu Khalaf | Arena Portfolio</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23080d14'/%3E%3Cpath d='M14 46 32 10l18 36h-9l-4-9H27l-4 9z' fill='%23f9a826'/%3E%3Cpath d='M28 29h8l-4-10z' fill='%23080d14'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="boot" class="boot" role="dialog" aria-label="Portfolio launch">
+    <img class="boot-bg" src="assets/arena-backdrop.png" alt="" />
+    <div class="boot-shade"></div>
+    <section class="boot-card boot-choice">
+      <div class="boot-titlelock" aria-hidden="true">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+        <span class="boot-kicker">PERSONAL PORTFOLIO / ST. LOUIS</span>
+        <h1><strong>HAMZA'S</strong> HOUSE</h1>
+      </div>
+
+      <div class="experience-title">
+        <span></span>
+        <strong>CHOOSE YOUR EXPERIENCE</strong>
+        <span></span>
+      </div>
+
+      <div class="experience-grid">
+        <a class="experience-card pro-card" href="cv.html">
+          <span class="experience-kicker">FOR RECRUITERS / HR / PIs</span>
+          <strong>PROFESSIONAL MODE</strong>
+          <em>clean resume scan</em>
+          <p>Resume-style scroll, direct proof links, contact, print-friendly layout, and the same source data without the full arena layer.</p>
+          <span class="experience-enter">ENTER</span>
+        </a>
+
+        <button id="boot-start" class="experience-card arena-card" type="button">
+          <span class="experience-kicker">FOR EVERYONE ELSE</span>
+          <strong>ARENA MODE</strong>
+          <em>hero select, full details</em>
+          <p>Character roster, hover previews, section atmospheres, richer project lore, and the portfolio as a game menu.</p>
+          <span class="experience-enter">ENTER</span>
+        </button>
+      </div>
+
+      <div class="boot-last">LAST VISIT / ARENA</div>
+    </section>
+    <button id="boot-skip" class="boot-skip" type="button">SKIP TO ARENA</button>
+  </div>
+
+  <div id="app" class="arena-app" aria-hidden="true">
+    <header class="hud">
+      <div class="hud-left">
+        <span class="hud-logo">HA</span>
+        <div>
+          <strong>SELECT</strong>
+          <span>PORTFOLIO / HERO ROSTER</span>
+        </div>
+      </div>
+      <div class="hud-center">HAMZA ABU KHALAF AL TAKROURI</div>
+      <div class="hud-right">
+        <a href="cv.html">PRO MODE</a>
+        <a href="https://github.com/PreLabHomework" target="_blank" rel="noopener">GITHUB</a>
+        <span id="hud-clock">--:-- CST</span>
+        <button id="hud-mute" class="hud-icon" type="button" aria-label="Audio muted">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="stage" class="arena-stage">
+      <img class="arena-backdrop" src="assets/arena-backdrop.png" alt="" />
+      <canvas id="bg-canvas" class="fx-canvas"></canvas>
+      <canvas id="stage-canvas" class="hero-canvas"></canvas>
+      <div class="arena-vignette"></div>
+
+      <aside class="main-menu-wrap" aria-label="Primary portfolio sections">
+        <div class="menu-title">PLAY</div>
+        <nav id="main-menu" class="main-menu"></nav>
+      </aside>
+
+      <section id="preview" class="preview" aria-live="polite">
+        <span id="pv-code" class="pv-code"></span>
+        <h2 id="pv-headline"></h2>
+        <div id="pv-sub" class="pv-sub"></div>
+        <p id="pv-blurb"></p>
+        <div id="pv-stats" class="pv-stats"></div>
+        <div id="pv-tagline" class="pv-tagline"></div>
+      </section>
+
+      <section id="detail-view" class="detail-view" aria-label="Portfolio section detail"></section>
+    </main>
+
+    <footer class="select-bar">
+      <div class="select-top">
+        <strong>CHOOSE YOUR HERO</strong>
+        <span>PORTFOLIO ROSTER / ONLINE</span>
+      </div>
+      <div id="sel-grid" class="sel-grid" role="listbox" aria-label="Portfolio hero roster"></div>
+    </footer>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
