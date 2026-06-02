@@ -500,7 +500,7 @@ export const SECTIONS = {
       { date: "APR 2026", tag: "AWARD", body: "SLU Launch Entrepreneurship Prize ($2,500) for QBC Blood Cell Counter redesign (CountKit) with Sam Ghaddar: low-cost clinical hematology instrument for low-resource and field settings." },
       { date: "APR 2026", tag: "QBC", body: "QBC Blood Cell Counter redesign completed: Nextion touchscreen, Arduino Nano, and 24-bit CLK/DATA iGaging caliper replace the fragile 1970s optical/motorized system. Cost dropped from ~$10k to under $300." },
       { date: "APR 2026", tag: "CAPSTONE", body: "TremorMonitor rehaul: BLE packet decoding, SQLite session storage, frequency charts, CSV export, medication mode, and severity thresholds." },
-      { date: "APR 2026", tag: "GUARD", body: "GUARD pipeline validated end to end on a 5-driver, 25-session dataset: spherical-grid point cloud preprocessing, GAN behavioral registration (head+arms â†' torso), and ACA trust-pool authentication." },
+      { date: "APR 2026", tag: "GUARD", body: "GUARD pipeline validated end to end on a 5-driver, 25-session dataset: spherical-grid point cloud preprocessing, GAN behavioral registration (head+arms to torso), and ACA trust-pool authentication." },
       { date: "2025", tag: "CHROME", body: "PT KIDS OTA firmware tool, R Shiny dashboard, Bluetooth stack, and SolidWorks PPG finger clamp for pediatric haptic smartwatch work." },
       { date: "SUMMER 2025", tag: "INTERN", body: "Doha Bank Data Governance & Engineering Intern. Cross-departmental rotation across 9+ banking divisions including databases, Linux systems, server infrastructure, cloud storage, IT operations, and data engineering." },
       { date: "WINTER 2025", tag: "MIT.NANO", body: "MIT.nano volunteer lab technician under NDA. Silicon and semiconductor fabrication, cleanroom workflows, microprocessor-driven instrument control, and 3D printing for prototyping." },
@@ -663,4 +663,3 @@ export const SECTIONS = {
     ]
   }
 };
-

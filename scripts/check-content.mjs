@@ -1,11 +1,14 @@
 import { ROSTER, SECTIONS, LINKS } from '../js/data.js';
+import { readFileSync } from 'node:fs';
+import { URL } from 'node:url';
 
 let failed = false;
 const fail = (msg) => { console.error(`ERROR: ${msg}`); failed = true; };
 const warn = (msg) => console.warn(`WARN: ${msg}`);
 
 const textBlob = JSON.stringify({ ROSTER, SECTIONS, LINKS });
-if (textBlob.includes('2014')) fail('Visible content contains an em dash character. Use a comma, colon, or middle dot instead.');
+if (textBlob.includes('\u2014')) fail('Visible content contains an em dash character. Use a comma, colon, or middle dot instead.');
+if (/[\u00c2\u00e2\ufffd]/.test(textBlob)) fail('Visible content contains mojibake artifacts.');
 
 for (const [name, url] of Object.entries(LINKS)) {
   if (!/^https?:\/\//.test(url)) fail(`LINKS.${name} is not an absolute URL: ${url}`);
@@ -25,6 +28,22 @@ for (const c of ROSTER) {
 for (const [id, section] of Object.entries(SECTIONS)) {
   if (!section.layout) fail(`Section ${id} has no layout.`);
   if (section.heading && /^[a-z]/.test(section.heading)) warn(`Section ${id} heading starts lowercase: ${section.heading}`);
+}
+
+const sourceFiles = [
+  'index.html',
+  'cv.html',
+  'cv.js',
+  'js/main.js',
+  'js/sections.js',
+  'js/stage.js',
+  'js/shader.js',
+  'README.md'
+];
+
+for (const file of sourceFiles) {
+  const source = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+  if (/[\u00c2\u00e2\ufffd]/.test(source)) fail(`${file} contains mojibake artifacts.`);
 }
 
 const projectTitles = SECTIONS.projects?.items?.map(p => p.title) || [];

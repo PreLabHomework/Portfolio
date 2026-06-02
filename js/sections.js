@@ -54,12 +54,6 @@ function linkRail(links = []) {
   return `<div class="hi-rail">${valid.map(l => link(l.url, l.note ? `${l.label}` : l.label)).join('')}</div>`;
 }
 
-// signal line: plain sentence, no badge
-function signal(items = []) {
-  if (!items || !items.length) return '';
-  return `<p class="hi-signal">${items.map(esc).join(' · ')}</p>`;
-}
-
 // the core unit: icon + label + meta + sentence
 function row(title, body, opts = {}) {
   const { meta = '', key = title, href = '', hrefLabel = 'link', status = '', tone = 'warn' } = opts;
@@ -95,8 +89,6 @@ function glyph(key = '') {
       : `fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"`;
     return `<svg viewBox="0 0 48 48" ${attrs} aria-hidden="true">${d}</svg>`;
   };
-  const F = d => I(d, true);
-
   // IMU / sensor / wearable / caliper / PPG / measurement
   if (/sense|imu|sensor|ppg|wearable|motion|caliper|measurement/.test(k))
     return I('<rect x="9" y="18" width="30" height="12" rx="3"/><path d="M9 24h30M17 18v-5a7 7 0 0 1 14 0v5M17 30v5a7 7 0 0 0 14 0v-5"/><circle cx="24" cy="24" r="2.5" fill="currentColor"/>');
@@ -304,11 +296,6 @@ function renderLabs(s) {
 
 // Career record: OW deployment-log read. Stat strip + de-boxed job entries.
 function renderExperience(s) {
-  const years = [];
-  s.jobs.forEach(j => (String(j.date).match(/\d{4}/g) || []).forEach(y => years.push(+y)));
-  const span = years.length ? `${Math.min(...years)} – ${Math.max(...years)}` : '';
-  const regions = [...new Set(s.jobs.map(j => j.place.split(',').pop().trim()))].join(' · ');
-
   const recs = s.jobs.map(job => {
     const prose = job.bullets.map(b => `<p>${esc(b)}</p>`).join('');
     return `
@@ -443,9 +430,6 @@ function renderArchive(s) {
 }
 
 function renderSkills(s) {
-  const LANG_LEVEL = { 22: 'native', 20: 'fluent', 3: 'conversational' };
-  const getLangLevel = yrs => yrs >= 20 ? 'native' : yrs >= 5 ? 'fluent' : 'beginner';
-
   const renderBarCat = cat => {
     const max = Math.max(...cat.items.map(i => i.yrs), 8);
     const rows = cat.items.map(it => {
@@ -466,26 +450,8 @@ function renderSkills(s) {
     </section>`;
   };
 
-  const renderLangCat = cat => {
-    const badges = cat.items.map(it => {
-      const level = getLangLevel(it.yrs);
-      return `<div class="skl-lang skl-lang-${level}">
-        <span class="skl-lang-n">${esc(it.n)}</span>
-        <span class="skl-lang-lv">${level}</span>
-      </div>`;
-    }).join('');
-    return `<section class="hi-group hi-skillcat">
-      <div class="hi-group-title">${esc(cat.name)}</div>
-      <div class="skl-lang-grid">${badges}</div>
-    </section>`;
-  };
-
-  const isLang = cat => /spoken|language/i.test(cat.name);
   const leftCats  = s.categories.slice(0, 2);
   const rightCats = s.categories.slice(2);
-
-  const totalItems = s.categories.reduce((n, c) => n + c.items.length, 0);
-  const topLang = s.categories[0]?.items[0];
 
   return `
     ${head(s)}
@@ -518,10 +484,6 @@ function renderTimeline(s) {
     </div>
   `).join('');
 
-  const tlYears = [];
-  s.events.forEach(e => (String(e.date).match(/\d{4}/g) || []).forEach(y => tlYears.push(+y)));
-  const tlSpan = tlYears.length ? `${Math.min(...tlYears)} – ${Math.max(...tlYears)}` : '';
-
   return `
     ${head(s)}
     <div class="tl-grid">${cards}</div>
@@ -534,9 +496,6 @@ function renderWall(s) {
     { label: 'Industry', keys: ['SAMSUNG', 'CORSAIR', 'GLAXOSMITHKLINE (GSK)', 'DOHA BANK', 'GSK'] },
     { label: 'Publications & Orgs', keys: ['IEEE', 'RED CROSS · RED CRESCENT', 'THE STEM SPECTRUM', 'PARK HOUSE ENGLISH SCHOOL'] }
   ];
-
-  const tileMap = {};
-  (s.tiles || []).forEach(t => { tileMap[t.n.toUpperCase()] = t; });
 
   const findTile = key => {
     const up = key.toUpperCase();
@@ -551,7 +510,6 @@ function renderWall(s) {
     </div>`;
 
   // Render grouped layout
-  const groupedTileNames = new Set(GROUPS.flatMap(g => g.keys.map(k => k.toUpperCase())));
   const ungrouped = s.tiles.filter(t => !GROUPS.some(g => g.keys.some(k => t.n.toUpperCase().includes(k.toUpperCase().split(' ')[0]))));
 
   const groups = GROUPS.map(g => {
