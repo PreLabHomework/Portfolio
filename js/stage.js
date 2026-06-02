@@ -67,16 +67,16 @@ export function createStage(canvas) {
 
   function getFigureLayout() {
     const width = canvas.getBoundingClientRect().width || window.innerWidth;
-    if (width < 560) return { x: 1.02, scale: 0.64 };
-    if (width < 820) return { x: 1.25, scale: 0.74 };
-    return { x: 1.72, scale: 0.92 };
+    if (width < 560) return { x: 0.88, y: -0.08, scale: 0.72 };
+    if (width < 820) return { x: 1.08, y: -0.10, scale: 0.82 };
+    return { x: 1.48, y: -0.14, scale: 1.06 };
   }
 
   function applyFigureLayout(animate = false) {
     if (!currentFigure) return;
     const layout = getFigureLayout();
     currentFigure.position.x = layout.x;
-    currentFigure.userData.baseY = 0;
+    currentFigure.userData.baseY = layout.y;
     if (animate && window.gsap) {
       gsap.to(currentFigure.scale, { x: layout.scale, y: layout.scale, z: layout.scale, duration: 0.5, ease: 'back.out(1.6)' });
     } else {
@@ -2092,7 +2092,7 @@ export function createStage(canvas) {
     disposeFigure();
     currentFigure = group;
     const layout = getFigureLayout();
-    currentFigure.position.set(layout.x, 0, 0);
+    currentFigure.position.set(layout.x, layout.y, 0);
     scene.add(currentFigure);
 
     const restY = 0.12; // slight 3/4 hero stance instead of dead-on flat

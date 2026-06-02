@@ -477,14 +477,14 @@ a {
 
 .arena-backdrop {
   object-fit: cover;
-  filter: saturate(1.08) contrast(1.03) brightness(0.78);
+  filter: saturate(1.03) contrast(1.01) brightness(0.98);
   transform: scale(1.015);
 }
 
 .fx-canvas {
   z-index: 2;
   mix-blend-mode: screen;
-  opacity: 0.72;
+  opacity: 0.12;
 }
 
 .hero-canvas {
@@ -496,8 +496,8 @@ a {
   z-index: 6;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 8, 13, 0.84), transparent 24%, transparent 68%, rgba(5, 8, 13, 0.58)),
-    linear-gradient(180deg, rgba(5, 8, 13, 0.12), transparent 52%, rgba(5, 8, 13, 0.9));
+    linear-gradient(90deg, rgba(5, 8, 13, 0.70), rgba(5, 8, 13, 0.18) 23%, transparent 54%, rgba(5, 8, 13, 0.22) 100%),
+    linear-gradient(180deg, rgba(5, 8, 13, 0.04), transparent 56%, rgba(5, 8, 13, 0.58));
 }
 
 .main-menu-wrap {
