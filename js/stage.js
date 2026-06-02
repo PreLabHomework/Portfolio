@@ -67,9 +67,9 @@ export function createStage(canvas) {
 
   function getFigureLayout() {
     const width = canvas.getBoundingClientRect().width || window.innerWidth;
-    if (width < 560) return { x: 0.88, y: -0.08, scale: 0.72 };
-    if (width < 820) return { x: 1.08, y: -0.10, scale: 0.82 };
-    return { x: 1.48, y: -0.14, scale: 1.06 };
+    if (width < 560) return { x: 0.88, y: -0.13, scale: 0.72 };
+    if (width < 820) return { x: 1.08, y: -0.16, scale: 0.82 };
+    return { x: 1.48, y: -0.22, scale: 1.06 };
   }
 
   function applyFigureLayout(animate = false) {

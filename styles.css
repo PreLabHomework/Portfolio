@@ -15,6 +15,8 @@
   --dim: #788497;
   --danger: #ff4b58;
   --ok: #22c55e;
+  --petra-line: rgba(227, 146, 78, 0.28);
+  --petra-glow: rgba(236, 129, 60, 0.24);
   --font-display: "Oswald", "Bahnschrift Condensed", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
   --font-ui: "Inter Tight", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", Consolas, monospace;
@@ -376,8 +378,11 @@ a {
   align-items: center;
   gap: 18px;
   padding: 0 20px;
-  border-bottom: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(7, 12, 19, 0.96), rgba(7, 12, 19, 0.8));
+  border-bottom: 1px solid var(--petra-line);
+  background:
+    linear-gradient(180deg, rgba(10, 11, 15, 0.97), rgba(16, 10, 11, 0.86)),
+    linear-gradient(90deg, rgba(116, 54, 32, 0.24), transparent 38%, rgba(18, 24, 32, 0.24));
+  box-shadow: 0 1px 0 rgba(255, 210, 150, 0.06), 0 10px 34px rgba(16, 6, 4, 0.22);
 }
 
 .hud-left,
@@ -496,8 +501,9 @@ a {
   z-index: 6;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 8, 13, 0.70), rgba(5, 8, 13, 0.18) 23%, transparent 54%, rgba(5, 8, 13, 0.22) 100%),
-    linear-gradient(180deg, rgba(5, 8, 13, 0.04), transparent 56%, rgba(5, 8, 13, 0.58));
+    radial-gradient(circle at 68% 57%, rgba(236, 129, 60, 0.12), transparent 24%),
+    linear-gradient(90deg, rgba(8, 8, 12, 0.70), rgba(38, 17, 13, 0.25) 24%, transparent 56%, rgba(44, 20, 14, 0.16) 100%),
+    linear-gradient(180deg, rgba(5, 8, 13, 0.03), transparent 56%, rgba(12, 7, 8, 0.56));
 }
 
 .main-menu-wrap {
@@ -509,7 +515,7 @@ a {
 }
 
 .menu-title {
-  color: var(--acc);
+  color: color-mix(in srgb, var(--acc) 72%, #e3924e);
   margin-bottom: 8px;
 }
 
@@ -537,7 +543,7 @@ a {
 .main-menu button.is-active {
   color: #fff;
   transform: translateX(8px);
-  text-shadow: 0 0 22px var(--acc);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--acc) 62%, #e3924e), 0 3px 16px rgba(58, 20, 10, 0.72);
 }
 
 
@@ -609,7 +615,10 @@ a {
   min-height: 54px;
   padding: 8px 10px;
   border-bottom: 3px solid var(--acc);
-  background: rgba(6, 12, 20, 0.58);
+  background:
+    linear-gradient(180deg, rgba(58, 28, 19, 0.58), rgba(8, 10, 14, 0.48)),
+    linear-gradient(90deg, color-mix(in srgb, var(--acc) 10%, transparent), transparent 64%);
+  box-shadow: inset 0 1px 0 rgba(255, 211, 155, 0.07);
 }
 
 .pv-stat span {
@@ -642,10 +651,11 @@ a {
   grid-template-rows: 32px 1fr;
   min-height: 0;
   padding: 8px 18px 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--petra-line);
   background:
-    linear-gradient(180deg, rgba(9, 14, 22, 0.96), rgba(8, 12, 19, 0.98)),
-    radial-gradient(circle at 50% 0, color-mix(in srgb, var(--acc) 18%, transparent), transparent 48%);
+    linear-gradient(180deg, rgba(20, 12, 12, 0.96), rgba(8, 10, 14, 0.98)),
+    radial-gradient(circle at 65% 0, var(--petra-glow), transparent 42%),
+    linear-gradient(90deg, rgba(108, 46, 26, 0.20), transparent 34%, rgba(9, 18, 24, 0.22));
 }
 
 .select-top {
@@ -685,8 +695,10 @@ a {
   height: 126px;
   padding: 8px 8px 7px;
   color: var(--muted);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(227, 146, 78, 0.18);
+  background:
+    linear-gradient(180deg, rgba(72, 37, 24, 0.22), rgba(8, 11, 16, 0.72)),
+    linear-gradient(90deg, rgba(255, 184, 104, 0.05), transparent 52%);
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
   transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease;
 }
@@ -704,7 +716,9 @@ a {
 .slot.is-active {
   color: #fff;
   border-color: var(--slot-acc);
-  background: rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(180deg, rgba(82, 42, 26, 0.36), rgba(10, 14, 20, 0.72)),
+    color-mix(in srgb, var(--slot-acc) 8%, transparent);
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.32), 0 0 18px color-mix(in srgb, var(--slot-acc) 36%, transparent);
 }
