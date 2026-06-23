@@ -4,7 +4,8 @@
 // ============================================================
 
 export const LINKS = {
-  resume: "https://drive.google.com/file/d/1B17Y6SKspYogM5aTdQrWbY-VDs7hbvD3/view?usp=sharing",
+  resume: "https://drive.google.com/file/d/1KPpaF4SslyHd3tfZcxat-oF_x0n2g95O/view?usp=sharing",
+  resumeAkat: "https://drive.google.com/file/d/1FxQQoqarz58hHtp1wZ4GobYd6D7_j80B/view?usp=sharing",
   linkedin: "https://www.linkedin.com/in/hakat/",
   github: "https://github.com/PreLabHomework",
   waylo: "https://github.com/PreLabHomework/waylo-app",
@@ -61,8 +62,8 @@ export const ROSTER = [
     preview: {
       headline: "TREMORMONITOR",
       sub: "REACT NATIVE · BLE · SQLITE · ESP32-S3",
-      blurb: "Senior design system for Parkinson's tremor monitoring and stabilization. The app decodes 5-byte ESP32 packets over BLE, records live sessions, stores SQLite data, charts frequency, and exports CSV.",
-      stats: [["PROJECT", "Tremor Trackers"], ["DOMAIN", "Parkinson's Detection"], ["TEAM", "4 Engineers"], ["DELIVERABLE", "Device + Mobile App"]]
+      blurb: "Full-stack Parkinson's monitoring system sold to an active research lab post-development. ESP32-S3 FreeRTOS firmware with BLE GATT, paired with a React Native app for session logging, frequency charting, and clinical CSV export.",
+      stats: [["STATUS", "Sold To Research Lab"], ["DOMAIN", "Parkinson's Detection"], ["TEAM", "4 Engineers"], ["DELIVERABLE", "ESP32 + React Native App"]]
     },
     play_url: LINKS.tremorMonitor, play_label: "VIEW APP", menu: true
   },
@@ -127,8 +128,8 @@ export const ROSTER = [
     preview: {
       headline: "ASTAKERIA",
       sub: "ECHOES OF THE OVERWRITTEN",
-      blurb: "A first-person action RPG concept where the world reads how you play and rewrites itself around your habits. Five heroes. No loot. One system called Entropy.",
-      stats: [["TYPE", "First-Person Action RPG"], ["ENGINE", "Godot 4.x / GDScript"], ["SYSTEM", "Adaptive Entropy"], ["SCOPE", "80-pg GDD + Dev Guide"]]
+      blurb: "Active alpha: hero-based action RPG with FSM combat, shared OOP hero base class, and Nemesis Intelligence autoload singletons tracking behavioral signals to evolve enemy traits. Built in Godot 4.x.",
+      stats: [["STATUS", "Active Alpha"], ["ENGINE", "Godot 4.x / GDScript"], ["SYSTEM", "FSM Combat + Nemesis AI"], ["HEROES", "3+ Playable"]]
     },
     play_url: LINKS.github, play_label: "VIEW GITHUB"
   },
@@ -148,9 +149,9 @@ export const ROSTER = [
     tagline: "EMAIL · PHONE · LINKEDIN · GITHUB", accent: "#34d399", accent2: "#22d3ee", role: "COMMS", figure: "comms",
     preview: {
       headline: "READY TO TALK",
-      sub: "OPEN TO ROLES Available now",
+      sub: "OPEN TO ROLES / AVAILABLE NOW",
       blurb: "Fast contact, resume link, role targets, and location preferences in one clean comms panel. Open to software, firmware, embedded, hardware, and EE roles.",
-      stats: [["EMAIL", "READY"], ["PHONE", "READY"], ["OPEN", "MAY 2026"], ["MODE", "ONLINE"]]
+      stats: [["EMAIL", "READY"], ["PHONE", "READY"], ["OPEN", "AVAILABLE NOW"], ["MODE", "ONLINE"]]
     },
     play_url: LINKS.resume, play_label: "VIEW RESUME"
   },
@@ -176,13 +177,29 @@ export const SECTIONS = {
     intro: "Welcome to my portfolio. I styled it after a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story. Hover to preview, select to enter, and use Back or ESC to return to the roster.",
     bio: [
       "I'm Hamza Abu Khalaf Al Takrouri, a Computer and Electrical Engineer from Saint Louis University, graduated May 2026 with minors in Computer Science and Mathematics. My work connects hardware, firmware, sensing, and software across medical devices, wireless systems, FPGA design, applied AI, and research tooling.",
-      "Three active research labs, one senior design capstone, co-authored work targeting IEEE INFOCOM, a $2,500 entrepreneurship prize, and industry programs at Doha Bank, Corsair, Samsung, and GSK across four countries."
+      "Three active research labs, one senior design capstone, co-authored work under review at IEEE INFOCOM 2027, a $2,500 SLU Launch Inventor Award, and industry programs at Doha Bank, Corsair, Samsung, and GSK across four countries."
     ],
     quickfacts: [
       { k: "Based In", v: "St. Louis, Missouri" },
       { k: "Open To", v: "Software, Firmware, Embedded, EE Roles" },
       { k: "Focus", v: "Embedded Systems, Firmware, Signal Processing, Applied AI" },
       { k: "Background", v: "Computer Eng + Electrical Eng + CS + Math" }
+    ],
+    personas: [
+      {
+        id: "abu",
+        label: "ABU · FIRMWARE / EMBEDDED",
+        target: "Embedded Firmware · Hardware-Software Co-Design · IoT · Medical Device",
+        summary: "Computer and Electrical Engineering graduate specializing in embedded firmware, low-level C/C++ development, and hardware-software co-design across RTOS, FreeRTOS, ESP32, ATmega, ARM Cortex-A, and FPGA platforms. Proven experience deploying firmware tooling, executing hardware bring-up and signal validation, integrating UART, SPI, I2C, BLE, CAN, ADC, PWM, and GPIO interfaces, and tracing embedded system failures to root cause using JTAG and serial instrumentation.",
+        resumeUrl: "https://drive.google.com/file/d/1KPpaF4SslyHd3tfZcxat-oF_x0n2g95O/view?usp=sharing"
+      },
+      {
+        id: "akat",
+        label: "AKAT · SOFTWARE / AI / ML",
+        target: "Software Engineer · ML Engineer · AI Engineer · Data Engineer",
+        summary: "Computer and Electrical Engineering graduate specializing in software engineering, applied AI, machine learning systems, and data pipelines. Built end-to-end ML systems, deployed research tools, and full-stack applications across radar authentication, clinical wearables, enterprise banking, and connected software. Experienced in Python, PyTorch, SQL, REST APIs, NLP, JavaScript, model evaluation, and data processing, with additional background in embedded sensors and hardware-software integration that supports development from data acquisition through user-facing deployment.",
+        resumeUrl: "https://drive.google.com/file/d/1FxQQoqarz58hHtp1wZ4GobYd6D7_j80B/view?usp=sharing"
+      }
     ],
   },
 
@@ -223,7 +240,7 @@ export const SECTIONS = {
         story: [
           "GUARD is a multi-author research project on GAN-based continuous driver authentication using TI IWR6843 mmWave radar. The pipeline processes spherical-grid point clouds with temporal features including velocity, variance, and frame delta per voxel, then performs continuous identity verification without storing biometrics.",
           "The system uses a two-phase architecture: GAN-based behavioral registration that learns a head+arms-to-torso mapping, followed by a real-time ACA trust-pool module for continuous identity verification. Authentication is dual, using both reconstruction error and discriminator score thresholds.",
-          "The pipeline is validated end-to-end across preprocessing, GAN training, and evaluation on a 5-driver, 25-session dataset. The approach avoids cameras and preserves privacy, operating under varied lighting conditions. Target venue is IEEE INFOCOM 2027."
+          "The pipeline is validated end-to-end across preprocessing, GAN training, and evaluation on a 5-driver, 25-session dataset, achieving 100% unauthorized-driver detection, 90% true acceptance rate, and 100% mimicry rejection within 4 minutes. The approach avoids cameras and preserves privacy. Manuscript under review at IEEE INFOCOM 2027."
         ],
         subprojects: [
           { n: "GUARD Pipeline", d: "Spherical-grid point cloud preprocessing on TI IWR6843 radar data with velocity, variance, and frame-delta temporal features per voxel.", url: LINKS.guard },
@@ -232,7 +249,7 @@ export const SECTIONS = {
           { n: "End-to-End Repo", d: "Preprocessing, training, and evaluation pipeline confirmed functional end-to-end on GitHub.", url: LINKS.guard }
         ],
         proof: ["TI IWR6843 Radar", "GAN Behavioral Registration", "ACA Trust-Pool Module", "5-Driver / 25-Session Dataset", "Dual-Threshold Authentication"],
-        funding: "Co-authored paper targeting IEEE INFOCOM 2027. Official lab website linked separately.",
+        funding: "Co-authored manuscript under review at IEEE INFOCOM 2027. Official lab website linked separately.",
         links: [
           { label: "GUARD Repo", url: LINKS.guard },
           { label: "Official WNIS Lab Website", url: LINKS.wnisWebsite, note: "official site" }
@@ -245,7 +262,7 @@ export const SECTIONS = {
         pi: "Hardware Redesign And Diagnostic Systems",
         status: "QBC MODERNIZATION · FIRMWARE RECOVERY · CLINICAL WORKFLOW",
         story: [
-          "The QBC modernization project redesigns a 1970s Becton Dickinson QBC II Plus blood counter for use in low-resource and field clinical environments. The original device built around an Intel D8749H MCS-48 microcontroller uses fragile motorized optical scanning that breaks easily and costs roughly $10,000 to replace. The work was done in collaboration with Sam Ghaddar and won the SLU Launch Entrepreneurship Prize ($2,500).",
+          "The QBC modernization project redesigns a 1970s Becton Dickinson QBC II Plus blood counter for clinical deployment in Haiti and West Africa. Device cost was reduced from $10,000 to under $300 while preserving full clinical measurement capability, the project won the $2,500 SLU Launch Inventor Award (with Sam Ghaddar), and it is being prepared for field deployment in low-resource clinical settings. The original device built around an Intel D8749H MCS-48 microcontroller uses fragile motorized optical scanning that breaks easily at scale.",
           "The redesign replaces the motor, belt drive, LED strips, and photodiode array with a manual digital-caliper measurement architecture: a 24-bit CLK/DATA iGaging caliper, Arduino Nano, and Nextion 5-inch touchscreen. This drops total device cost from ~$10k to under $300 while preserving clinical measurement of the seven blood-layer positions and eight clinical values calculated from centrifuged capillary tubes."
         ],
         subprojects: [
@@ -279,6 +296,17 @@ export const SECTIONS = {
           "Studied cybersecurity and fintech operations: SOC monitoring, SIEM/SOAR platforms, PAM and DAM controls, incident response, SWIFT transaction infrastructure, digital banking channels, QR payment processing, and IT governance under ITIL/ITSM frameworks. Learned how risk, auditability, and regulatory compliance are engineered into banking systems rather than bolted on."
         ],
         tags: ["Oracle", "SQL", "Linux", "VMware", "Cybersecurity", "Banking Infrastructure"]
+      },
+      {
+        org: "MIT.NANO",
+        title: "Cleanroom Volunteer",
+        place: "Cambridge, MA",
+        date: "Winter 2024 - 2025",
+        bullets: [
+          "Worked as a cleanroom volunteer at MIT.nano, MIT's shared nanofabrication facility, with hands-on exposure to photolithography, thin-film deposition, wafer processing, and semiconductor fabrication workflows under NDA.",
+          "Operated under the supervision of MIT.nano staff across cleanroom fabrication processes used in microprocessor and device research, developing firsthand understanding of the fabrication constraints that inform hardware and chip design at the process level."
+        ],
+        tags: ["Cleanroom", "Photolithography", "Semiconductor Fabrication", "Thin-Film Deposition"]
       },
       {
         org: "CORSAIR",
@@ -330,7 +358,7 @@ export const SECTIONS = {
   capstone: {
     layout: "capstone",
     heading: "TREMOR TRACKERS",
-    sub: "Senior Design · Biomedical wearable for continuous Parkinson's tremor detection, BLE telemetry, and long-term session monitoring.",
+    sub: "Sold to an active Parkinson's research lab post-development. ESP32-S3 firmware + React Native app for continuous tremor detection, BLE telemetry, and clinical session monitoring.",
     team: "4-member senior design team",
     deadline: "MAY 2026",
     clinical: {
@@ -349,7 +377,7 @@ export const SECTIONS = {
     app: {
       name: "TremorMonitor",
       platform: "React Native / Expo",
-      description: "The companion app decodes BLE packets in real time, records live tremor sessions, stores them in SQLite, visualizes frequency and severity trends, and exports clinical CSV reports. Medication mode lets patients log dosing times and correlate them with tremor severity data.",
+      description: "Sold to an active Parkinson's research lab post-development. The companion app decodes BLE packets in real time, records live tremor sessions, stores them in SQLite, visualizes frequency and severity trends, and exports clinical CSV reports.",
       modules: [
         { n: "BLEService", d: "Connects to ESP32-S3, decodes 5-byte packet stream, manages connection state and reconnection." },
         { n: "LiveMonitor", d: "Real-time frequency and amplitude display during active recording sessions." },
@@ -375,6 +403,18 @@ export const SECTIONS = {
         body: "Implemented a complete UART serial transmitter from scratch in VHDL on a Digilent Basys 3 (Artix-7 FPGA). Divides a 100 MHz FPGA clock to 9600 baud, constructs 10-bit frames (start + 8 data bits LSB-first + stop), and continuously streams ASCII through the USB-UART bridge. Every layer is hand-built: clock divider, baud strobe, FSM with IDLE/LOAD/SHIFT states, ASCII ROM, and output signal. No IP cores, no software serial libraries - digital logic implementing a communication protocol at the hardware level.",
         proof: "Hardware-level serial protocol design, FPGA timing, FSM architecture, register-transfer level thinking, and building communication standards in logic rather than relying on software abstractions",
         tech: ["VHDL", "Vivado", "Basys 3", "Artix-7", "UART"], url: LINKS.uart
+      },
+      {
+        tag: "EMBEDDED", title: "AVR Embedded Control System", year: "2024",
+        body: "Register-level firmware on an ATmega32A/STK500 platform. Implemented three external ISRs in AVR Assembly with full SREG/stack preservation, interrupt vector table configuration, and priority validation across simultaneous trigger scenarios, debugged via JTAGICE MkII. Extended with Timer0 prescaler delays, matrix keypad scanning with ASCII lookup tables, and SRAM message storage. C ADC loop reading an LM34 temperature sensor generates fast PWM to position a servo across seven calibrated angles with switch debouncing.",
+        proof: "Register-level assembly firmware, interrupt architecture, hardware debugging with JTAG, ADC/PWM signal chain, real peripheral integration",
+        tech: ["AVR Assembly", "C", "ATmega32A", "JTAGICE MkII", "ADC", "PWM"]
+      },
+      {
+        tag: "ANALOG", title: "High-Gain 2N7000 Two-Stage MOSFET Amplifier", year: "2025",
+        body: "Designed and bench-validated a two-stage common-source 2N7000 MOSFET amplifier on a single 12 V supply. Iterated bias points, drain/source resistances, and bypass networks through Multisim simulation and oscilloscope measurement on a 10 mV peak input signal. Achieved 404 V/V total voltage gain, 400+ kHz bandwidth, and 150 to 235 kOhm input resistance.",
+        proof: "Analog circuit design, MOSFET biasing theory, simulation-to-bench validation workflow, frequency response characterization",
+        tech: ["Analog Design", "Multisim", "2N7000 MOSFET", "Oscilloscope"]
       },
       {
         tag: "DATA", title: "WiFi Coverage & Handover Analyzer", year: "2024",
@@ -417,9 +457,9 @@ export const SECTIONS = {
   research: {
     layout: "archive",
     heading: "PAPERS & PATENTS",
-    sub: "Active research tracks targeting IEEE INFOCOM, one submitted paper, one published paper, and continuing education from MIT, CMU, and Samsung.",
+    sub: "Active research tracks: manuscript under review at IEEE INFOCOM 2027, one submitted paper, one published paper, and continuing education from MIT, CMU, and Samsung.",
     papers: [
-      { status: "ACTIVE", statusTone: "warn", title: "GUARD: GAN-Based Driver Authentication via mmWave Radar", venue: "IEEE INFOCOM", year: "Target 2027", blurb: "Multi-author research. mmWave radar continuous driver authentication: GAN behavioral registration, ACA trust-pool verification, no cameras, no stored biometrics.", url: LINKS.guard },
+      { status: "UNDER REVIEW", statusTone: "ok", title: "GUARD: GAN-Based Driver Authentication via mmWave Radar", venue: "IEEE INFOCOM 2027", year: "Under Review", blurb: "Multi-author research. mmWave radar continuous driver authentication: GAN behavioral registration, ACA trust-pool verification, no cameras, no stored biometrics. 100% unauthorized detection, 90% true acceptance, 100% mimicry rejection within 4 minutes across a 5-driver 25-session dataset.", url: LINKS.guard },
       { status: "ACTIVE", statusTone: "ok", title: "QBC Hematology Diagnostic Modernization", venue: "Musculoskeletal Biomechanics Lab", year: "2025 - Present", blurb: "Modernized 1970s QBC instrument: Nextion touchscreen, Arduino Nano, iGaging digital calipers, clinical value conversion. Cost: ~$10k to under $300." },
       { status: "SUBMITTED", statusTone: "ok", title: "Haptic Wearables for DeafBlind Communication", venue: "CHROME Lab", blurb: "PT KIDS OTA firmware, BLE clinical wearable pipeline, R Shiny session dashboard, SolidWorks PPG finger clamp.", url: LINKS.chromeFirmware },
       { status: "PUBLISHED", statusTone: "done", title: "Advancements in Computer Forensic Analysis", venue: "TheStemSpectrum.org", year: "2025", blurb: "Smart forensic glasses: OpenCV SIFT/FLANN prototype for field-side fingerprint screening. Two papers merged into one publication." }
@@ -449,7 +489,8 @@ export const SECTIONS = {
         { n: "Java", yrs: 2, note: "coursework and NL-to-code project" },
         { n: "LaTeX", yrs: 2, note: "papers, reports, CV formatting" },
         { n: "SQL", yrs: 1, note: "SQLite and enterprise data validation" },
-        { n: "R", yrs: 1, note: "Shiny dashboards for CHROME Lab" }
+        { n: "R", yrs: 1, note: "Shiny dashboards for CHROME Lab" },
+        { n: "AVR Assembly", yrs: 1, note: "register-level ISRs, ATmega32A, interrupt vector table" }
       ]},
       { name: "HARDWARE", items: [
         { n: "Arduino", yrs: 5, note: "Nano, Uno, prototyping, QBC" },
@@ -458,13 +499,14 @@ export const SECTIONS = {
         { n: "FPGA", yrs: 2, note: "Basys 3, VHDL, HDMI, UART" },
         { n: "BLE", yrs: 2, note: "RN4870, GATT, packets, OTA" },
         { n: "ATmega328P", yrs: 1, note: "clinical wearable firmware" },
+        { n: "ATmega32A", yrs: 1, note: "AVR Assembly ISRs, ADC/PWM, JTAGICE MkII debugging" },
         { n: "TI IWR6843", yrs: 1, note: "mmWave radar processing" },
         { n: "IMU", yrs: 1, note: "sensor fusion and tremor monitoring" },
         { n: "SolidWorks", yrs: 1, note: "PPG clamp and wearable housings" }
       ]},
       { name: "ELECTRICAL ENGINEERING", items: [
         { n: "Signal Processing", yrs: 3, note: "FFT, tremor frequency, radar temporal features" },
-        { n: "Circuit Analysis", yrs: 3, note: "analog/digital labs, measurement workflows" },
+        { n: "Circuit Analysis", yrs: 3, note: "analog/digital labs, MOSFET biasing, Multisim simulation" },
         { n: "Digital Logic", yrs: 2, note: "FSMs, timing, UART, HDMI video" },
         { n: "Sensors", yrs: 2, note: "IMU, PPG, mmWave radar, digital calipers" },
         { n: "Semiconductor Lab Work", yrs: 1, note: "MIT.nano cleanroom and fabrication exposure" },
@@ -508,7 +550,7 @@ export const SECTIONS = {
       { date: "2024", tag: "NETWORK", body: "WiFi Coverage & Handover Analyzer: 194,000+ measurements across 952 survey locations with MATLAB-modeled findings." },
       { date: "SPRING 2024", tag: "FPGA", body: "FPGA Signal Monitor with HDMI output on Basys 3 using FSM-driven VHDL." },
       { date: "2024", tag: "MIT", body: "MIT Sloan AI Implications for Business Strategy certification." },
-      { date: "SUMMER 2023", tag: "SAMSUNG", body: "Arabic dialect speech-to-text AI system built during Samsung AI Workshop." },
+      { date: "WINTER 2023", tag: "SAMSUNG", body: "Arabic dialect speech-to-text AI system built during Samsung AI Workshop." },
       { date: "SPRING 2023", tag: "CORSAIR", body: "Firmware Programming Intern. C++ firmware for Raspberry Pi-based keyboard and mouse peripherals." },
       { date: "FALL 2022", tag: "GSK", body: "Technology Research Program in Madrid. AI-enabled lab automation and RFID asset tracking workflows." },
       { date: "2022 TO 2023", tag: "NLP", body: "Natural Language to Code Translator across Java, C++, and Python syntax." },
@@ -632,7 +674,7 @@ export const SECTIONS = {
       engine: "Godot 4.x / GDScript",
       architecture: "Autoload/singleton pattern for Entropy, Save, Combat, and Enemy AI systems. Signal-based decoupled communication between hero, world, and reactive systems.",
       combatFlow: "FSM-driven enemy AI with states: Idle, Patrol, Alert, Engage, Retreat, Counter. Combat signals fire to the Entropy bus on every meaningful player action.",
-      buildPhases: ["Phase 1: Combat prototype - one hero, one enemy type, readable combat, FSM working", "Phase 2: Entropy spine  -  behavioral tracking, one reaction tier, world acknowledges player", "Phase 3: Alpha  -  all 5 heroes, Nemesis lite, 3 Entropy tiers, main questline draft", "Phase 4: Launch scope  -  full 5 tiers, all heroes tuned, 10-hour playthrough, polish pass"]
+      buildPhases: ["Phase 1: Combat prototype - one hero, one enemy type, readable combat, FSM working. DONE.", "Phase 2: Entropy spine - behavioral tracking, one reaction tier, world acknowledges player. DONE.", "Phase 3 (CURRENT): Alpha - 3+ heroes playable, Nemesis Intelligence, Entropy system, multiple regions. Bug testing and demos.", "Phase 4: Launch scope - full 5 tiers, all heroes tuned, 10-hour playthrough, polish pass."]
     },
     quote: "The world does not remember you. It writes you."
   },

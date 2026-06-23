@@ -1833,3 +1833,63 @@ a.cv-contact-value:hover { color: var(--sec-acc, var(--acc)); }
   color: #0a0e16;
   border: none;
 }
+
+/* ─── Dual Persona Blocks ─────────────────────────────────── */
+.cv-personas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.cv-persona {
+  padding: 1.2rem 1.4rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--acc);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.005));
+}
+.cv-persona[data-persona="akat"] { border-left-color: var(--acc-2); }
+.cv-persona-label {
+  font-family: var(--f-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.28em;
+  color: var(--acc);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.cv-persona[data-persona="akat"] .cv-persona-label { color: var(--acc-2); }
+.cv-persona-target {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+}
+.cv-persona-summary {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  max-width: 68ch;
+}
+.cv-persona-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--acc);
+  text-transform: uppercase;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid currentColor;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.cv-persona[data-persona="akat"] .cv-persona-resume { color: var(--acc-2); }
+.cv-persona-resume:hover { opacity: 1; }
+@media (max-width: 700px) { .cv-personas { grid-template-columns: 1fr; } }
+@media print {
+  .cv-persona-summary, .cv-persona-target { color: #000 !important; }
+  .cv-persona-label, .cv-persona-resume { color: #222 !important; }
+}
+
+/* resume-picker-btn triggers the full-screen OW-style modal (js/resume-picker.js) */

@@ -2,6 +2,7 @@ import { ROSTER } from "./data.js";
 import { renderSection, postRender } from "./sections.js";
 import { createShader } from "./shader.js";
 import * as audio from "./audio.js";
+import { initResumePickers } from "./resume-picker.js";
 
 const app = document.getElementById("app");
 const boot = document.getElementById("boot");
@@ -197,7 +198,9 @@ function openDetail(index, options = {}) {
         </button>
         <span class="detail-code">${hero.codename} / ${hero.role}</span>
         <div class="detail-actions">
-          ${hero.play_url ? `<a class="ow-action" href="${hero.play_url}" target="_blank" rel="noopener">${hero.play_label || "OPEN"}</a>` : ""}
+          ${hero.id === 'home'
+            ? `<button type="button" class="ow-action resume-picker-btn">${hero.play_label || 'VIEW RESUME'}</button>`
+            : (hero.play_url ? `<a class="ow-action" href="${hero.play_url}" target="_blank" rel="noopener">${hero.play_label || "OPEN"}</a>` : "")}
         </div>
       </header>
       <div class="detail-body">${renderSection(hero.id)}</div>
@@ -208,6 +211,7 @@ function openDetail(index, options = {}) {
   window.setTimeout(() => detailEl.classList.remove("entering"), 620);
   detailEl.scrollTop = 0;
   postRender(hero.id, detailEl);
+  initResumePickers(detailEl);
   detailEl.querySelectorAll("[data-close-detail]").forEach(button => {
     button.addEventListener("click", closeDetail);
   });
