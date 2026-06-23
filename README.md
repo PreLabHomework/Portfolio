@@ -1,6 +1,6 @@
 # Hamza's House
 
-A personal portfolio built as an Overwatch 2-style character-select screen. Each hero is a section of my work: research labs, a senior design capstone, projects, papers, skills, timeline, affiliations, personal life, and Astakeria.
+Portfolio site built as an Overwatch 2 arena character-select screen. Each section is a hero with stats, lore, and a full detail view. Dual mode: Arena (full experience) and Pro (recruiter-friendly CV). Vite + vanilla JS + WebGL canvas.
 
 Hover to preview. Select to enter. ESC to go back.
 
@@ -12,11 +12,13 @@ Hover to preview. Select to enter. ESC to go back.
 
 **Arena Mode** (`index.html`) is for everyone. Character roster, per-hero 3D figures, a reactive OW2-style atmospheric background, audio cues, and full detail screens for each section.
 
-**Pro Mode** (`cv.html`) is for recruiters. Sticky left rail, scrollable right pane, clean layout, print-friendly. Direct link: `/cv.html`.
+**Pro Mode** (`cv.html`) is for recruiters. Sticky left rail, scrollable right pane, clean layout, print-friendly. Dual-persona system: ABU (Firmware / Embedded) and AKAT (Software / AI / ML) summaries always visible. Direct link: `/cv.html`.
 
-Both modes pull from the same `js/data.js`. Edit content once, both modes update.
+Both modes pull from `js/data.js`. Edit content once, both modes update.
 
-URL hashes open a section directly — `#labs`, `#capstone`, `#projects`, `#experience`, etc.
+Clicking any resume button opens a full-screen OW-style resume select modal with two track cards, ABU (gold) and AKAT (cyan), each linking to its own resume PDF.
+
+URL hashes open a section directly: `#labs`, `#capstone`, `#projects`, `#experience`, etc.
 
 ---
 
@@ -32,11 +34,12 @@ js/
   data.js           All content. One file, no CMS.
   main.js           Wires everything together
   sections.js       Per-hero detail screen renderers
+  resume-picker.js  Full-screen OW-style resume select modal
   stage.js          Three.js per-hero figures
   shader.js         Canvas 2D atmospheric background
   audio.js          Synth tones + hover audio
 assets/
-  arena-backdrop.png  Boot screen background
+  arena-backdrop.png  Boot screen + resume modal background
   heroes/             Hero portrait tiles
 scripts/
   check-syntax.mjs    Syntax check across all JS modules
@@ -53,8 +56,6 @@ npm run dev
 ```
 
 Opens at `http://127.0.0.1:5173`. Hot reload on save.
-
-Or use VS Code Live Server: right-click `index.html` and open with Live Server.
 
 ---
 
@@ -82,10 +83,9 @@ Syntax check across all JS modules, then a content audit for broken links, encod
 ## Tech
 
 - Vanilla HTML, CSS, ES modules. No framework.
-- **Three.js** for the per-hero 3D figures and environments
+- **Three.js** for per-hero 3D figures and environments
 - **Canvas 2D** for the reactive atmospheric background shader (bokeh, columns, spotlight, dust)
 - **Vite** for dev server and production build
-- **GSAP** for figure animations (loaded via CDN, optional)
 - **Web Audio API** for synth tones
 - `speechSynthesis` for hover voice cues (muted by default)
 
