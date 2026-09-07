@@ -1,11 +1,13 @@
 ﻿// ============================================================
-//  HAMZA'S HOUSE - v4.6 final recruiter polish
-//  Source priority: Hamza Abu Resume first, CV only for extras.
+//  HAMZA'S HOUSE - v9 content pass
+//  Source of truth: HamzaAkat_Resume.pdf (Sept 2026).
+//  Positioning: M.S. Computer Engineering student at George Mason,
+//  based in Fairfax VA, open to internships and co-ops.
 // ============================================================
 
 export const LINKS = {
+  // TODO(hamza): swap in the new single-resume Drive link when the PDF is final.
   resume: "https://drive.google.com/file/d/1KPpaF4SslyHd3tfZcxat-oF_x0n2g95O/view?usp=sharing",
-  resumeAkat: "https://drive.google.com/file/d/1FxQQoqarz58hHtp1wZ4GobYd6D7_j80B/view?usp=sharing",
   linkedin: "https://www.linkedin.com/in/hakat/",
   github: "https://github.com/PreLabHomework",
   waylo: "https://github.com/PreLabHomework/waylo-app",
@@ -18,7 +20,8 @@ export const LINKS = {
   chromeWebsite: "https://sites.google.com/slu.edu/gorlewicz-lab/home",
   wnisWebsite: "https://sites.google.com/view/nancen/home",
   biomechWebsite: "https://sites.google.com/slu.edu/reiterlab/",
-  wifi: "https://github.com/PreLabHomework/Handover-Analyzer"
+  wifi: "https://github.com/PreLabHomework/Handover-Analyzer",
+  firmcore: "https://github.com/prelabhomework/Firmcore"
 };
 
 export const ROSTER = [
@@ -28,8 +31,8 @@ export const ROSTER = [
     preview: {
       headline: "HAMZA'S HOUSE",
       sub: "PORTFOLIO MODE",
-      blurb: "Welcome to my portfolio. It is styled as a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story.",
-      stats: [["GRAD", "MAY 2026"], ["CORE", "EMBEDDED · FIRMWARE"], ["OPEN TO", "Firmware · Hardware · Software"], ["BASED", "ST. LOUIS"]]
+      blurb: "Welcome to my portfolio. It is styled as a character-select screen because most portfolios look the same. Each hero is a part of my work: firmware, digital hardware, research, and the things I build for myself.",
+      stats: [["PROGRAM", "M.S. COMPUTER ENGINEERING"], ["SCHOOL", "GEORGE MASON · CAES/DSYS"], ["CORE", "EMBEDDED · FIRMWARE · RTL"], ["OPEN TO", "Internships · Co-ops"]]
     },
     play_url: LINKS.resume, play_label: "VIEW RESUME", menu: true
   },
@@ -39,20 +42,20 @@ export const ROSTER = [
     preview: {
       headline: "RESEARCH DOSSIERS",
       sub: "CHROME · WNIS · BIOMECHANICS",
-      blurb: "Three active SLU research tracks: PT KIDS clinical wearables and haptic smartwatch work, GUARD radar-based driver authentication, and QBC hematology diagnostic modernization.",
-      stats: [["LABS", "CHROME · WNIS · BIOMECH"], ["TYPE", "Active Research"], ["FIELDS", "Wearables · Radar · Clinical HW"], ["OUTPUT", "Firmware · Tools · Papers"]]
+      blurb: "Three SLU research tracks over two years: PT KIDS clinical wearable firmware deployment at CHROME Lab, GUARD radar-based driver authentication at WNIS Lab, and QBC hematology analyzer reverse engineering at the Musculoskeletal Biomechanics Lab.",
+      stats: [["LABS", "CHROME · WNIS · BIOMECH"], ["SPAN", "FALL 2025 - SPRING 2026"], ["FIELDS", "Wearables · mmWave Radar · Clinical HW"], ["OUTPUT", "Firmware · Tools · INFOCOM 2027 Submission"]]
     },
     play_url: LINKS.chromeFirmware, play_label: "VIEW LAB CODE", menu: true
   },
   {
     id: "experience", codename: "EXP-03", title: "EXPERIENCE", subtitle: "INDUSTRY ROTATION",
-    tagline: "BANKING · FIRMWARE · AI · PHARMA", accent: "#38bdf8", accent2: "#818cf8", role: "WORK", figure: "operator", model: "assets/models/experience.glb",
+    tagline: "AI · BANKING · FIRMWARE · PHARMA", accent: "#38bdf8", accent2: "#818cf8", role: "WORK", figure: "operator", model: "assets/models/experience.glb",
     menu: true,
     preview: {
       headline: "WORK HISTORY",
-      sub: "DOHA BANK · CORSAIR · SAMSUNG · GSK",
-      blurb: "Industry programs and internships: Doha Bank data engineering across nine divisions, Corsair C++ firmware, Samsung AI and machine learning, and GSK pharmaceutical research.",
-      stats: [["COMPANIES", "Doha Bank · Corsair · Samsung · GSK"], ["TYPE", "Intern · Extern · Program · Shadow"], ["SECTORS", "Banking · Firmware · AI · Pharma"], ["REGIONS", "Qatar · Spain · Remote"]]
+      sub: "POWER INTL · DOHA BANK · CORSAIR · SAMSUNG · GSK",
+      blurb: "Industry rotations across three countries: Power International Holding data and AI engineering, Doha Bank data engineering, Corsair C++ firmware, the Samsung Innovation Campus AI program, and GSK pharmaceutical research.",
+      stats: [["COMPANIES", "Power Intl · Doha Bank · Corsair · Samsung · GSK"], ["LATEST", "Data & AI Intern, Summer 2026"], ["SECTORS", "AI · Banking · Firmware · Pharma"], ["REGIONS", "Qatar · Spain · Remote"]]
     },
     play_url: LINKS.linkedin, play_label: "VIEW LINKEDIN"
   },
@@ -61,22 +64,22 @@ export const ROSTER = [
     tagline: "PARKINSON'S TREMOR MONITORING", accent: "#ef4444", accent2: "#f87171", role: "FINAL YEAR", figure: "engineer", model: "assets/models/capstone.glb",
     preview: {
       headline: "TREMORMONITOR",
-      sub: "REACT NATIVE · BLE · SQLITE · ESP32-S3",
-      blurb: "Full-stack Parkinson's monitoring system sold to an active research lab post-development. ESP32-S3 FreeRTOS firmware with BLE GATT, paired with a React Native app for session logging, frequency charting, and clinical CSV export.",
-      stats: [["STATUS", "Sold To Research Lab"], ["DOMAIN", "Parkinson's Detection"], ["TEAM", "4 Engineers"], ["DELIVERABLE", "ESP32 + React Native App"]]
+      sub: "ESP32-S3 · FREERTOS · BLE GATT · FFT",
+      blurb: "Real-time firmware on ESP32-S3 with FreeRTOS multi-task scheduling, interrupt-driven IMU acquisition, DMA-assisted sensor reads, FFT-based tremor detection, closed-loop actuator feedback, and a custom BLE GATT service with 5-byte packet encoding. Sole software developer on a four-person team. Sold to a research lab.",
+      stats: [["MCU", "ESP32-S3 (Xtensa LX7)"], ["STACK", "FreeRTOS · C++ · BLE GATT · FFT"], ["PATH", "Sensor to BLE to SQLite to Firebase"], ["STATUS", "Shipped · Sold To Lab"]]
     },
     play_url: LINKS.tremorMonitor, play_label: "VIEW APP", menu: true
   },
   {
     id: "projects", codename: "PRJ-05", title: "PROJECTS", subtitle: "SHOWCASE",
-    tagline: "STANDALONE · COURSEWORK · SHIPPED", accent: "#f59e0b", accent2: "#fbbf24", role: "BUILDER", figure: "builder", model: "assets/models/projects.glb",
+    tagline: "FIRMWARE · RTL · TOOLING", accent: "#f59e0b", accent2: "#fbbf24", role: "BUILDER", figure: "builder", model: "assets/models/projects.glb",
     preview: {
       headline: "PROJECT SHOWCASE",
       sub: "BUILDS OUTSIDE THE MAIN LAB PIPELINE",
-      blurb: "Standalone and coursework builds: WiFi handover analysis, FPGA HDMI visualization, Waylo, UART transmission, NLP code generation, Arabic speech recognition, research websites, and browser audio.",
-      stats: [["SPANS", "FPGA · ML · Networking · Web · Mobile"], ["TYPE", "Coursework + Research + Personal"], ["FROM", "2022 ONWARDS"], ["CODE", "Most On GitHub"]]
+      blurb: "Standalone builds: Firmcore, a header-only embedded C++20 library; an FPGA UART transmitter in VHDL on Artix-7; an AVR peripheral control system in assembly; and the WiFi coverage analyzer delivered to SLU IT.",
+      stats: [["SPANS", "C++20 · VHDL · AVR ASM · Python"], ["PROOF", "21M Fuzz Execs · 1.9 KB Flash"], ["FROM", "2022 ONWARDS"], ["CODE", "github.com/prelabhomework"]]
     },
-    play_url: LINKS.github, play_label: "VIEW GITHUB", menu: true
+    play_url: LINKS.firmcore, play_label: "VIEW FIRMCORE", menu: true
   },
   {
     id: "research", codename: "PUB-06", title: "RESEARCH", subtitle: "PAPERS · PATENTS",
@@ -85,7 +88,7 @@ export const ROSTER = [
       headline: "PAPERS & PATENTS",
       sub: "ACTIVE AND HISTORICAL RECORDS",
       blurb: "Research outputs and continuing education across radar ML, clinical hardware modernization, haptic wearables, forensics, AI strategy, cybersecurity, and robotics.",
-      stats: [["ACTIVE", "GUARD · QBC · PT Kids"], ["PUBLISHED", "TheStemSpectrum 2025"], ["CONTINUING ED", "MIT · CMU · Samsung"], ["TARGET", "IEEE INFOCOM 2027"]]
+      stats: [["TRACKS", "GUARD · QBC · PT KIDS"], ["GUARD", "100% Unauthorized-Driver Detection"], ["DATASET", "5 Drivers · 25 Sessions · 20 FPS"], ["UNDER REVIEW", "IEEE INFOCOM 2027"]]
     },
     play_url: LINKS.guard, play_label: "VIEW GUARD", menu: true
   },
@@ -95,30 +98,30 @@ export const ROSTER = [
     preview: {
       headline: "LOADOUT",
       sub: "PRACTICAL ENGINEERING STACK",
-      blurb: "Programming, embedded hardware, ML/data tooling, firmware workflows, web/mobile development, and spoken languages, sorted by actual experience instead of inflated noise.",
-      stats: [["TOP", "Python · C++ · VHDL · JS"], ["HARDWARE", "FPGA · ESP32 · BLE · Radar"], ["SPOKEN", "6 Languages"], ["DOMAIN", "Embedded · ML · Signal"]]
+      blurb: "Computer architecture and digital design first, then embedded firmware, FPGA and RTL, validation and debug, systems tooling, edge AI, and software. Sorted by actual depth instead of inflated noise.",
+      stats: [["TOP", "C · C++20 · VHDL · AVR ASM · Python"], ["HARDWARE", "Artix-7 · ESP32-S3 · ATmega · IWR6843"], ["DEBUG", "JTAG · Scope · Logic Analyzer"], ["SPOKEN", "4 Languages"]]
     },
     play_url: LINKS.resume, play_label: "VIEW RESUME", menu: true
   },
   {
     id: "timeline", codename: "TLN-08", title: "TIMELINE", subtitle: "SCROLL",
-    tagline: "AMMAN · DOHA · MADRID · ST. LOUIS", accent: "#f472b6", accent2: "#f9a8d4", role: "HISTORY", figure: "archivist", model: "assets/models/timeline.glb",
+    tagline: "AMMAN · DOHA · MADRID · ST. LOUIS · FAIRFAX", accent: "#f472b6", accent2: "#f9a8d4", role: "HISTORY", figure: "archivist", model: "assets/models/timeline.glb",
     preview: {
       headline: "TIMELINE",
       sub: "CHRONOLOGICAL PATH",
       blurb: "A journal of internships, research labs, engineering projects, publications, certificates, leadership, and the places that shaped the work.",
-      stats: [["FROM", "2018"], ["TO", "2026"], ["COUNTRIES", "Jordan · Qatar · Spain · USA"], ["FORMAT", "Chronological"]]
+      stats: [["FROM", "2018"], ["TO", "2028"], ["COUNTRIES", "Jordan · Qatar · Spain · USA"], ["FORMAT", "Chronological"]]
     },
     play_url: LINKS.linkedin, play_label: "VIEW LINKEDIN", menu: true
   },
   {
     id: "affiliations", codename: "AFF-09", title: "AFFILIATIONS", subtitle: "WALL",
-    tagline: "MIT · SLU · CMU · SAMSUNG", accent: "#e5e7eb", accent2: "#60a5fa", role: "NETWORK", figure: "network", model: "assets/models/affiliations.glb",
+    tagline: "GMU · SLU · MIT · SAMSUNG", accent: "#e5e7eb", accent2: "#60a5fa", role: "NETWORK", figure: "network", model: "assets/models/affiliations.glb",
     preview: {
       headline: "AFFILIATIONS",
       sub: "INSTITUTIONS · COMPANIES · PROGRAMS",
       blurb: "Institutions, companies, labs, programs, publications, and organizations connected to the work. Brand-colored tiles for a cleaner collaborator-wall feel.",
-      stats: [["TOTAL", "11"], ["ACADEMIC", "MIT · SLU · CMU"], ["INDUSTRY", "CORSAIR · GSK · SAMSUNG"], ["ORG", "IEEE"]]
+      stats: [["ACADEMIC", "GMU · SLU · MIT"], ["INDUSTRY", "CORSAIR · GSK · SAMSUNG"], ["AWARD", "SLU Launch Inventor, $2,500"], ["IN PROGRESS", "USPTO Patent Bar"]]
     },
     play_url: LINKS.linkedin, play_label: "VIEW LINKEDIN"
   },
@@ -135,12 +138,12 @@ export const ROSTER = [
   },
   {
     id: "personal", codename: "PSN-11", title: "PERSONAL", subtitle: "OFF-DUTY",
-    tagline: "FOUR COUNTRIES · SIX LANGUAGES", accent: "#fb923c", accent2: "#fdba74", role: "CIVILIAN", figure: "civilian", model: "assets/models/personal.glb",
+    tagline: "FOUR COUNTRIES · FOUR LANGUAGES", accent: "#fb923c", accent2: "#fdba74", role: "CIVILIAN", figure: "civilian", model: "assets/models/personal.glb",
     preview: {
       headline: "OFF-DUTY",
       sub: "GAMING · SPORTS · STORIES",
-      blurb: "Four countries, six languages, top 500 in two shooters, vice president of a high school council, World Scholar's Cup debate, and a protected Steam library.",
-      stats: [["COUNTRIES", "4"], ["LANGUAGES", "6"], ["OW", "TOP 500"], ["TEAMS", "5 FAVORITES"]]
+      blurb: "Four countries, four languages, top 500 in two shooters, vice president of a high school council, World Scholar's Cup top 5% team debate at the Global Round, and a protected Steam library.",
+      stats: [["COUNTRIES", "4"], ["LANGUAGES", "4"], ["OW", "TOP 500"], ["TEAMS", "5 FAVORITES"]]
     },
     play_url: LINKS.linkedin, play_label: "CONNECT"
   },
@@ -149,9 +152,9 @@ export const ROSTER = [
     tagline: "EMAIL · PHONE · LINKEDIN · GITHUB", accent: "#34d399", accent2: "#22d3ee", role: "COMMS", figure: "comms", model: "assets/models/contact.glb",
     preview: {
       headline: "READY TO TALK",
-      sub: "OPEN TO ROLES / AVAILABLE NOW",
-      blurb: "Fast contact, resume link, role targets, and location preferences in one clean comms panel. Open to software, firmware, embedded, hardware, and EE roles.",
-      stats: [["EMAIL", "READY"], ["PHONE", "READY"], ["OPEN", "AVAILABLE NOW"], ["MODE", "ONLINE"]]
+      sub: "OPEN TO INTERNSHIPS AND CO-OPS",
+      blurb: "Fast contact, resume link, role targets, and location in one clean comms panel. Open to internships and co-ops in embedded, firmware, RTL, and validation.",
+      stats: [["EMAIL", "READY"], ["PHONE", "READY"], ["OPEN", "INTERNSHIPS · CO-OPS"], ["BASED", "FAIRFAX, VA"]]
     },
     play_url: LINKS.resume, play_label: "VIEW RESUME"
   },
@@ -176,37 +179,22 @@ export const SECTIONS = {
     sub: "Portfolio Mode: Hover A Character, Preview The Story, Select To Enter.",
     intro: "Welcome to my portfolio. I styled it after a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story. Hover to preview, select to enter, and use Back or ESC to return to the roster.",
     bio: [
-      "I'm Hamza Abu Khalaf Al Takrouri, a Computer and Electrical Engineer from Saint Louis University, graduated May 2026 with minors in Computer Science and Mathematics. My work connects hardware, firmware, sensing, and software across medical devices, wireless systems, FPGA design, applied AI, and research tooling.",
-      "Three active research labs, one senior design capstone, co-authored work under review at IEEE INFOCOM 2027, a $2,500 SLU Launch Inventor Award, and industry programs at Doha Bank, Corsair, Samsung, and GSK across four countries."
+      "I'm Hamza Abu Khalaf Al Takrouri, a Computer and Electrical Engineering graduate from Saint Louis University, now an M.S. Computer Engineering student at George Mason University on the CAES/DSYS concentration. My work is embedded firmware, digital systems, and hardware-software co-design, with growing depth in computer architecture, FPGA and RTL design, and accelerator-oriented computing.",
+      "Three research labs, one senior design capstone sold to a research lab, co-authored work under review at IEEE INFOCOM 2027, a $2,500 SLU Launch Inventor Award, and industry programs at Power International Holding, Doha Bank, Corsair, Samsung, and GSK."
     ],
     quickfacts: [
-      { k: "Based In", v: "St. Louis, Missouri" },
-      { k: "Open To", v: "Software, Firmware, Embedded, EE Roles" },
-      { k: "Focus", v: "Embedded Systems, Firmware, Signal Processing, Applied AI" },
-      { k: "Background", v: "Computer Eng + Electrical Eng + CS + Math" }
-    ],
-    personas: [
-      {
-        id: "abu",
-        label: "ABU · FIRMWARE / EMBEDDED",
-        target: "Embedded Firmware · Hardware-Software Co-Design · IoT · Medical Device",
-        summary: "Computer and Electrical Engineering graduate specializing in embedded firmware, low-level C/C++ development, and hardware-software co-design across RTOS, FreeRTOS, ESP32, ATmega, ARM Cortex-A, and FPGA platforms. Proven experience deploying firmware tooling, executing hardware bring-up and signal validation, integrating UART, SPI, I2C, BLE, CAN, ADC, PWM, and GPIO interfaces, and tracing embedded system failures to root cause using JTAG and serial instrumentation.",
-        resumeUrl: "https://drive.google.com/file/d/1KPpaF4SslyHd3tfZcxat-oF_x0n2g95O/view?usp=sharing"
-      },
-      {
-        id: "akat",
-        label: "AKAT · SOFTWARE / AI / ML",
-        target: "Software Engineer · ML Engineer · AI Engineer · Data Engineer",
-        summary: "Computer and Electrical Engineering graduate specializing in software engineering, applied AI, machine learning systems, and data pipelines. Built end-to-end ML systems, deployed research tools, and full-stack applications across radar authentication, clinical wearables, enterprise banking, and connected software. Experienced in Python, PyTorch, SQL, REST APIs, NLP, JavaScript, model evaluation, and data processing, with additional background in embedded sensors and hardware-software integration that supports development from data acquisition through user-facing deployment.",
-        resumeUrl: "https://drive.google.com/file/d/1FxQQoqarz58hHtp1wZ4GobYd6D7_j80B/view?usp=sharing"
-      }
+      { k: "Based In", v: "Fairfax, Virginia" },
+      { k: "Open To", v: "Internships and Co-ops" },
+      { k: "Focus", v: "Embedded Firmware, Digital Design, FPGA/RTL, Validation" },
+      { k: "Program", v: "M.S. Computer Engineering, George Mason (2026-2028)" },
+      { k: "Background", v: "B.S. Computer Eng + Electrical Eng, CS + Math minors" }
     ],
   },
 
   labs: {
     layout: "labs",
     heading: "RESEARCH LABS",
-    sub: "Three active research tracks at Saint Louis University: clinical wearables, mmWave radar authentication, and medical device modernization.",
+    sub: "Three research tracks at Saint Louis University across two years: clinical wearable firmware, mmWave radar authentication, and medical device modernization.",
     labs: [
       {
         key: "chrome",
@@ -283,8 +271,19 @@ export const SECTIONS = {
   experience: {
     layout: "experience",
     heading: "WORK EXPERIENCE",
-    sub: "Industry internships and programs across banking infrastructure, peripheral firmware, applied AI, and pharmaceutical R&D. Four organizations. Four countries.",
+    sub: "Industry internships and programs across data and AI engineering, banking infrastructure, peripheral firmware, semiconductor fabrication, and pharmaceutical R&D.",
     jobs: [
+      {
+        org: "POWER INTERNATIONAL HOLDING",
+        title: "Data and AI Intern",
+        place: "Doha, Qatar",
+        date: "Summer 2026",
+        bullets: [
+          "Contributed to an ETL pipeline ingesting Epic clinical-system events and operational data, feeding a predictive-monitoring model that flagged systems at elevated risk of outage before incidents were user-reported. Findings surfaced on an IT operations dashboard used by systems engineers and IT leadership.",
+          "Contributed to an internal LLM-based incident-triage assistant that retrieved similar historical tickets and documentation, then summarized likely causes and surfaced troubleshooting steps for engineers handling live incidents."
+        ],
+        tags: ["ETL", "Predictive Monitoring", "LLM Retrieval", "Epic", "IT Operations"]
+      },
       {
         org: "DOHA BANK",
         title: "Data Engineering Intern",
@@ -396,8 +395,20 @@ export const SECTIONS = {
   projects: {
     layout: "gallery",
     heading: "PROJECTS",
-    sub: "FPGA logic, NLP pipelines, mobile apps, WiFi infrastructure analysis, computer vision research, and biomedical web builds. Most are open source.",
+    sub: "Embedded C++ libraries, FPGA logic, register-level AVR work, WiFi infrastructure analysis, and research tooling. Most are open source.",
     items: [
+      {
+        tag: "EMBEDDED", title: "Firmcore Embedded C++20 Library", year: "2026",
+        body: "Header-only C++20 firmware library providing BSP and HAL-style building blocks: a lock-free SPSC ring buffer, packet framing with COBS encoding, Q-format fixed-point arithmetic for embedded DSP, and a heap-free memory pool allocator. Targets zero-heap, exception-free deployment on ARM Cortex-M4. Correctness is proven mechanically rather than claimed: unit tests run under ASan and UBSan on both GCC 13 and Clang 18, and a 21-million-execution libFuzzer campaign against the wire-facing parsers returned zero findings. Published cross-compiled code-size benchmarks show a full sensor telemetry pipeline fitting in 1.9 KB flash and 900 B RAM.",
+        proof: "Library-grade embedded C++, lock-free concurrency, wire-protocol hardening under fuzzing, and the discipline of publishing measured flash and RAM footprints instead of asserting efficiency",
+        tech: ["C++20", "CMake", "libFuzzer", "ASan/UBSan", "ARM Cortex-M4", "GitHub Actions"], url: LINKS.firmcore
+      },
+      {
+        tag: "AVR", title: "AVR Peripheral Control System", year: "2024",
+        body: "Three external interrupt service routines written in AVR assembly on an ATmega32A and STK500, with full SREG and stack preservation, interrupt vector table configuration, and priority validation across simultaneous trigger scenarios, all debugged through a JTAGICE MkII. Extended the system with Timer0 prescaler delays, matrix keypad scanning, ASCII lookup tables, and SRAM message storage, then added a C ADC loop that reads an LM34 temperature sensor and generates fast PWM to position a servo across seven calibrated angles with switch debouncing.",
+        proof: "Register-level assembly, interrupt architecture and priority handling, hardware debugging with a JTAG probe, and mixed assembly and C peripheral control on bare metal",
+        tech: ["AVR Assembly", "C", "ATmega32A", "STK500", "ADC", "PWM", "JTAG"]
+      },
       {
         tag: "FPGA", title: "UART Transmitter on FPGA", year: "2024",
         body: "Implemented a complete UART serial transmitter from scratch in VHDL on a Digilent Basys 3 (Artix-7 FPGA). Divides a 100 MHz FPGA clock to 9600 baud, constructs 10-bit frames (start + 8 data bits LSB-first + stop), and continuously streams ASCII through the USB-UART bridge. Every layer is hand-built: clock divider, baud strobe, FSM with IDLE/LOAD/SHIFT states, ASCII ROM, and output signal. No IP cores, no software serial libraries - digital logic implementing a communication protocol at the hardware level.",
@@ -477,7 +488,7 @@ export const SECTIONS = {
   skills: {
     layout: "skills",
     heading: "LOADOUT",
-    sub: "Programming languages, embedded hardware, ML and data tooling, and six spoken languages. Sorted by actual depth of experience.",
+    sub: "Computer architecture and digital design, embedded firmware, FPGA and RTL, validation and debug, systems tooling, edge AI, and software. Sorted by actual depth of experience.",
     categories: [
       { name: "PROGRAMMING LANGUAGES", items: [
         { n: "Python", yrs: 8, note: "research tooling, data workflows, firmware utilities" },
@@ -537,7 +548,7 @@ export const SECTIONS = {
   timeline: {
     layout: "timeline",
     heading: "TIMELINE",
-    sub: "From Doha to Madrid to St. Louis. Internships, research, publications, competitions, and everything in between.",
+    sub: "From Doha to Madrid to St. Louis to Fairfax. Internships, research, publications, competitions, and everything in between.",
     events: [
       { date: "APR 2026", tag: "AWARD", body: "SLU Launch Entrepreneurship Prize ($2,500) for QBC Blood Cell Counter redesign (CountKit) with Sam Ghaddar: low-cost clinical hematology instrument for low-resource and field settings." },
       { date: "APR 2026", tag: "QBC", body: "QBC Blood Cell Counter redesign completed: Nextion touchscreen, Arduino Nano, and 24-bit CLK/DATA iGaging caliper replace the fragile 1970s optical/motorized system. Cost dropped from ~$10k to under $300." },
@@ -584,12 +595,12 @@ export const SECTIONS = {
   personal: {
     layout: "personal",
     heading: "OFF-DUTY",
-    sub: "Four Countries, Six Languages, One Extremely Defended Steam Library.",
+    sub: "Four Countries, Four Languages, One Extremely Defended Steam Library.",
     geography: [
       { flag: "🇯🇴", country: "JORDAN", years: "2 YRS", note: "Amman. Born here.", c1: "#000", c2: "#ce1126" },
       { flag: "🇶🇦", country: "QATAR", years: "16 YRS", note: "Doha. Where I grew up.", c1: "#8d1b3d", c2: "#fff" },
       { flag: "🇪🇸", country: "SPAIN", years: "3 YRS", note: "Madrid. SLU Madrid plus nationality.", c1: "#aa151b", c2: "#f1bf00" },
-      { flag: "🇺🇸", country: "UNITED STATES", years: "2 YRS", note: "St. Louis. Currently based here.", c1: "#3c3b6e", c2: "#b22234" }
+      { flag: "🇺🇸", country: "UNITED STATES", years: "2 YRS", note: "St. Louis for the B.S., Fairfax now for the M.S.", c1: "#3c3b6e", c2: "#b22234" }
     ],
     gameranks: [
       { g: "OVERWATCH", r: "TOP 500", c: "#f59e0b" },
@@ -689,14 +700,14 @@ export const SECTIONS = {
   contact: {
     layout: "contact",
     heading: "CONTACT",
-    sub: "Open to software, firmware, embedded, hardware, and EE roles. Available now.",
+    sub: "Open to internships and co-ops in embedded, firmware, RTL, and validation.",
     lines: [
       { label: "Email", value: "hamzaabukat@gmail.com", href: "mailto:hamzaabukat@gmail.com" },
       { label: "Phone", value: "+1 571-663-7706", href: "tel:+15716637706" },
       { label: "LinkedIn", value: "linkedin.com/in/hakat", href: LINKS.linkedin },
       { label: "GitHub", value: "github.com/PreLabHomework", href: LINKS.github },
-      { label: "Location", value: "St. Louis, Missouri" },
-      { label: "Open To", value: "Software, Firmware, Embedded, Hardware, EE" }
+      { label: "Location", value: "Fairfax, Virginia" },
+      { label: "Open To", value: "Internships and Co-ops" }
     ],
     links: [
       { label: "Resume PDF", url: LINKS.resume },

@@ -39,10 +39,10 @@ const MEDALS = [
 ];
 
 const HIGHLIGHTS = [
-  "Dual-degree Computer and Electrical Engineering, minors in CS and Mathematics, Saint Louis University, May 2026",
+  "B.S. Computer and Electrical Engineering, minors in CS and Mathematics, Saint Louis University, May 2026. M.S. Computer Engineering in progress, George Mason University, CAES/DSYS concentration",
   "Three research labs in parallel: CHROME (clinical wearables), WNIS (radar ML), Musculoskeletal Biomechanics",
   "Industry rotation across four countries: Doha Bank, Corsair, Samsung, GSK",
-  "Spanish / EU citizen based in St. Louis, authorized to work in the US on OPT"
+  "Spanish / EU citizen based in Fairfax, Virginia, authorized to work in the US on OPT"
 ];
 
 function injectStyles() {
@@ -269,8 +269,8 @@ function render() {
         <div class="cp-level"><div class="inner">26</div></div>
         <div class="cp-id">
           <h1>HAMZA ABU KHALAF AL TAKROURI</h1>
-          <div class="cp-title-bar">COMPUTER &amp; ELECTRICAL ENGINEER / SAINT LOUIS UNIVERSITY / CLASS OF MAY 2026</div>
-          <div class="cp-sub">Dual identity roster: ABU (embedded firmware) and AKAT (software, AI, ML). St. Louis based, Spanish / EU citizen.</div>
+          <div class="cp-title-bar">COMPUTER ENGINEER / M.S. IN PROGRESS, GEORGE MASON / B.S. SLU 2026</div>
+          <div class="cp-sub">Embedded firmware, digital systems, and hardware-software co-design. Fairfax, Virginia. Spanish / EU citizen.</div>
         </div>
         <div class="cp-endorse">
           <span class="k">Status</span>

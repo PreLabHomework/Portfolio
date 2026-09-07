@@ -1892,4 +1892,4 @@ a.cv-contact-value:hover { color: var(--sec-acc, var(--acc)); }
   .cv-persona-label, .cv-persona-resume { color: #222 !important; }
 }
 
-/* resume-picker-btn triggers the full-screen OW-style modal (js/resume-picker.js) */
+/* resume CTA styling (picker removed in v9, single resume link) */

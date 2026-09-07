@@ -4,7 +4,6 @@
 // ============================================================
 
 import { ROSTER, SECTIONS } from './js/data.js';
-import { initResumePickers } from './js/resume-picker.js';
 
 const navOrder = [
   'home', 'labs', 'experience', 'capstone', 'projects', 'research',
@@ -83,17 +82,10 @@ function renderHome() {
   const c = ROSTER.find(r => r.id === 'home');
   const s = SECTIONS.home;
   const cvHome = {
-    sub: 'Two focused engineering tracks. Rare depth across firmware to ML without being a generalist.',
-    intro: 'Computer and Electrical Engineer from Saint Louis University, graduated May 2026. Genuine depth across embedded C/C++ firmware, PyTorch ML pipelines, full-stack mobile software, and analog hardware design. Open to firmware, embedded, software, ML, and data engineering roles.'
+    sub: 'Embedded firmware, digital systems, and hardware-software co-design.',
+    intro: 'Computer and Electrical Engineering graduate specializing in embedded firmware, digital systems, and hardware-software co-design, with growing depth in computer architecture, FPGA/RTL design, and accelerator-oriented computing through an in-progress M.S. in Computer Engineering at George Mason University. Open to internships and co-ops.'
   };
-  const personaBlocks = (s.personas || []).map(p => `
-    <div class="cv-persona" data-persona="${esc(p.id)}">
-      <div class="cv-persona-label">${esc(p.label)}</div>
-      <div class="cv-persona-target">${esc(p.target)}</div>
-      <p class="cv-persona-summary">${esc(p.summary)}</p>
-      ${p.resumeUrl ? `<a class="cv-persona-resume" href="${esc(p.resumeUrl)}" target="_blank" rel="noopener">&#8595; Download ${esc(p.id === 'abu' ? 'Abu (Firmware) Resume' : 'Akat (Software / AI) Resume')}</a>` : ''}
-    </div>
-  `).join('');
+  const personaBlocks = '';
   return `
     <section class="cv-sec" id="home" data-sec="home" style="--sec-acc:${c.accent};--sec-acc2:${c.accent2};">
       ${header('home', c)}
@@ -646,7 +638,6 @@ function setupAmbientBg() {
 
 // ─── init ──────────────────────────────────────────────────
 renderAll();
-initResumePickers(document.body);
 setupScrollSpy();
 setupAmbientBg();
 

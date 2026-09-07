@@ -2777,7 +2777,7 @@ a {
 .detail-body .comms-cta-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 900px) { .detail-body .comms-body { grid-template-columns: 1fr; } .detail-body .comms-line { grid-template-columns: 26px 72px 1fr 12px; gap: 8px; } }
 
-/* resume-picker-btn triggers the full-screen OW-style modal (js/resume-picker.js) */
+/* resume CTA styling (picker removed in v9, single resume link) */
 
 /* ============================================================
    V6 MAIN MENU RESTRUCTURE (authoritative, keep last)
