@@ -177,6 +177,30 @@ export const SECTIONS = {
     layout: "home",
     heading: "HAMZA'S HOUSE",
     sub: "Portfolio Mode: Hover A Character, Preview The Story, Select To Enter.",
+    difficulty: null,
+    abilities: [
+      {
+        slot: "LMB", icon: "firmware",
+        name: "Embedded Firmware in C and C++20",
+        desc: "Bare-metal and FreeRTOS across ESP32-S3, ATmega32A, ATmega328P, and ARM Cortex-A."
+      },
+      {
+        slot: "SHIFT", icon: "vhdl",
+        name: "Digital Design in VHDL",
+        desc: "FSM-based RTL synthesized and validated on a Basys 3 Artix-7."
+      },
+      {
+        slot: "E", icon: "circuit",
+        name: "Hardware Bring-Up and Validation",
+        desc: "JTAG, oscilloscope, logic analyzer, serial protocol analysis, root-cause tracing."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "process",
+        name: "Hardware-Software Co-Design",
+        desc: "Full path ownership from register and sensor up through inference and interface.",
+        stat: "3 research labs · 5 industry environments"
+      }
+    ],
     intro: "Welcome to my portfolio. I styled it after a character-select screen because most portfolios look the same. Each hero represents a part of my work, projects, research, skills, or personal story. Hover to preview, select to enter, and use Back or ESC to return to the roster.",
     bio: [
       "I'm Hamza Abu Khalaf Al Takrouri, a Computer and Electrical Engineering graduate from Saint Louis University, now an M.S. Computer Engineering student at George Mason University on the CAES/DSYS concentration. My work is embedded firmware, digital systems, and hardware-software co-design, with growing depth in computer architecture, FPGA and RTL design, and accelerator-oriented computing.",
@@ -195,6 +219,30 @@ export const SECTIONS = {
     layout: "labs",
     heading: "RESEARCH LABS",
     sub: "Three research tracks at Saint Louis University across two years: clinical wearable firmware, mmWave radar authentication, and medical device modernization.",
+    difficulty: 3,
+    abilities: [
+      {
+        slot: "LMB", icon: "deploy",
+        name: "PT KIDS Firmware Deployment Tool",
+        desc: "Python and Tkinter, AVRdude flashing over Bluetooth serial for ATmega328P and RN4870 clinical wearables.",
+        stat: "Deployed across 3+ sites"
+      },
+      {
+        slot: "SHIFT", icon: "serial",
+        name: "Host-Side Serial Device Management",
+        desc: "Auto COM port detection, configurable baud initialization, and a real-time validation pipeline that let non-engineering clinical staff run firmware updates independently."
+      },
+      {
+        slot: "E", icon: "circuit",
+        name: "QBC Replacement System Bring-Up",
+        desc: "Ground-up ESP32 platform with Nextion touchscreen, ULN2003 motor driver, 465nm LED strips, photodiode acquisition, and a buck converter power stage, validated against legacy specs by scope."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "recovery",
+        name: "Intel D8749H EPROM Reconstruction",
+        desc: "Recreated the MCS-48 verify sequence from datasheet timing diagrams on an Arduino Mega, read firmware byte by byte, and reconstructed the memory map and I/O architecture of an otherwise inaccessible platform."
+      }
+    ],
     labs: [
       {
         key: "chrome",
@@ -358,6 +406,30 @@ export const SECTIONS = {
     layout: "capstone",
     heading: "TREMOR TRACKERS",
     sub: "Sold to an active Parkinson's research lab post-development. ESP32-S3 firmware + React Native app for continuous tremor detection, BLE telemetry, and clinical session monitoring.",
+    difficulty: 3,
+    abilities: [
+      {
+        slot: "LMB", icon: "imu",
+        name: "Interrupt-Driven IMU Acquisition",
+        desc: "DMA-assisted sensor reads under FreeRTOS multi-task scheduling on ESP32-S3 Xtensa LX7."
+      },
+      {
+        slot: "SHIFT", icon: "ble",
+        name: "Custom BLE GATT Service",
+        desc: "Packet encoding for low-latency mobile streaming.",
+        stat: "5-byte packets"
+      },
+      {
+        slot: "E", icon: "circuit",
+        name: "Closed-Loop Actuator Feedback",
+        desc: "Drives the stabilizer from live tremor state."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "fft",
+        name: "FFT Tremor Detection",
+        desc: "Real-time frequency-domain detection with the full data path from sensor through BLE packet formatting to SQLite session persistence and Firebase sync, validated across patient, clinician, and researcher workflows."
+      }
+    ],
     team: "4-member senior design team",
     deadline: "MAY 2026",
     clinical: {
@@ -396,6 +468,30 @@ export const SECTIONS = {
     layout: "gallery",
     heading: "PROJECTS",
     sub: "Embedded C++ libraries, FPGA logic, register-level AVR work, WiFi infrastructure analysis, and research tooling. Most are open source.",
+    difficulty: 3,
+    abilities: [
+      {
+        slot: "LMB", icon: "embedded",
+        name: "Lock-Free SPSC Ring Buffer",
+        desc: "Firmcore, zero-heap and exception-free on ARM Cortex-M4."
+      },
+      {
+        slot: "SHIFT", icon: "packet",
+        name: "COBS Packet Framing and Q-Format Fixed-Point",
+        desc: "Wire protocol and embedded DSP primitives, plus a heap-free memory pool allocator."
+      },
+      {
+        slot: "E", icon: "uart",
+        name: "FSM UART Transmitter in VHDL",
+        desc: "9600 baud derived from a 100 MHz clock, 10-bit frames with ROM-controlled framing, validated through an external RS-232 transceiver."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "protect",
+        name: "21-Million-Execution Fuzz Campaign, Zero Findings",
+        desc: "Plus published cross-compiled code-size benchmarks showing a full sensor telemetry pipeline in 1.9 KB flash and 900 B RAM.",
+        stat: "1.9 KB flash · 900 B RAM"
+      }
+    ],
     items: [
       {
         tag: "EMBEDDED", title: "Firmcore Embedded C++20 Library", year: "2026",
@@ -469,6 +565,30 @@ export const SECTIONS = {
     layout: "archive",
     heading: "PAPERS & PATENTS",
     sub: "Active research tracks: manuscript under review at IEEE INFOCOM 2027, one submitted paper, one published paper, and continuing education from MIT, CMU, and Samsung.",
+    difficulty: 3,
+    abilities: [
+      {
+        slot: "LMB", icon: "radar",
+        name: "mmWave Radar Point-Cloud Pipeline",
+        desc: "TI IWR6843, raw ingestion, spherical-grid preprocessing, temporal feature extraction, edge inference."
+      },
+      {
+        slot: "SHIFT", icon: "analysis",
+        name: "High-Throughput Validation Automation",
+        desc: "Radar data with automated end-to-end validation and structured regression testing.",
+        stat: "20 fps · 5 drivers · 25 sessions"
+      },
+      {
+        slot: "E", icon: "authentication",
+        name: "Two-Stage Authentication Architecture",
+        desc: "GAN-based behavioral registration paired with a real-time trust-pool scoring module, failure modes isolated between stages through log analysis."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "publication",
+        name: "100% Unauthorized-Driver Detection",
+        desc: "Manuscript under review at IEEE INFOCOM 2027."
+      }
+    ],
     papers: [
       { status: "UNDER REVIEW", statusTone: "ok", title: "GUARD: GAN-Based Driver Authentication via mmWave Radar", venue: "IEEE INFOCOM 2027", year: "Under Review", blurb: "Multi-author research. mmWave radar continuous driver authentication: GAN behavioral registration, ACA trust-pool verification, no cameras, no stored biometrics. 100% unauthorized detection, 90% true acceptance, 100% mimicry rejection within 4 minutes across a 5-driver 25-session dataset.", url: LINKS.guard },
       { status: "ACTIVE", statusTone: "ok", title: "QBC Hematology Diagnostic Modernization", venue: "Musculoskeletal Biomechanics Lab", year: "2025 - Present", blurb: "Modernized 1970s QBC instrument: Nextion touchscreen, Arduino Nano, iGaging digital calipers, clinical value conversion. Cost: ~$10k to under $300." },
@@ -489,6 +609,29 @@ export const SECTIONS = {
     layout: "skills",
     heading: "LOADOUT",
     sub: "Computer architecture and digital design, embedded firmware, FPGA and RTL, validation and debug, systems tooling, edge AI, and software. Sorted by actual depth of experience.",
+    difficulty: null,
+    abilities: [
+      {
+        slot: "LMB", icon: "firmware",
+        name: "Embedded Firmware and Low-Level Software",
+        desc: "C, C++20, AVR assembly, FreeRTOS, BSP and HAL development, drivers, interrupts, DMA, ADC, PWM, GPIO."
+      },
+      {
+        slot: "SHIFT", icon: "fpga",
+        name: "FPGA, RTL and Hardware Interfaces",
+        desc: "VHDL on Artix-7, I2C, SPI, UART, RS-232, CAN, BLE, IWR6843 mmWave radar."
+      },
+      {
+        slot: "E", icon: "analysis",
+        name: "Validation, Verification and Debug",
+        desc: "JTAG, oscilloscope, logic analyzer, hardware bring-up, structured test plans, regression testing, libFuzzer, sanitizers."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "semiconductor",
+        name: "Computer Architecture and Digital Design",
+        desc: "M.S. coursework in computer architecture, digital system design with VHDL, microprocessors, electronic circuit design, GPU architecture, and real-time embedded systems."
+      }
+    ],
     categories: [
       { name: "PROGRAMMING LANGUAGES", items: [
         { n: "Python", yrs: 8, note: "research tooling, data workflows, firmware utilities" },
@@ -549,6 +692,29 @@ export const SECTIONS = {
     layout: "timeline",
     heading: "TIMELINE",
     sub: "From Doha to Madrid to St. Louis to Fairfax. Internships, research, publications, competitions, and everything in between.",
+    difficulty: null,
+    abilities: [
+      {
+        slot: "LMB", icon: "data",
+        name: "Power International Holding",
+        desc: "Data and AI Intern, Summer 2026. ETL pipeline for Epic clinical-system events and a predictive-monitoring model flagging outage risk, plus an LLM-based incident-triage assistant."
+      },
+      {
+        slot: "SHIFT", icon: "workflow",
+        name: "Doha Bank",
+        desc: "Data Engineering Intern, Summer 2025. Cross-functional rotation across data engineering, database administration, and Linux systems under regulated financial compliance."
+      },
+      {
+        slot: "E", icon: "firmware",
+        name: "Corsair Firmware Externship",
+        desc: "Spring 2023. Low-level C++ peripheral firmware on ARM Cortex-A, I2C and SPI macro-execution logic, key-remapping engines, register-level debugging."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "nano",
+        name: "MIT.nano Cleanroom",
+        desc: "Hands-on exposure to photolithography, thin-film deposition, and wafer processing in MIT's shared nanofabrication facility, the process-level constraints behind everything else on this list."
+      }
+    ],
     events: [
       { date: "APR 2026", tag: "AWARD", body: "SLU Launch Entrepreneurship Prize ($2,500) for QBC Blood Cell Counter redesign (CountKit) with Sam Ghaddar: low-cost clinical hematology instrument for low-resource and field settings." },
       { date: "APR 2026", tag: "QBC", body: "QBC Blood Cell Counter redesign completed: Nextion touchscreen, Arduino Nano, and 24-bit CLK/DATA iGaging caliper replace the fragile 1970s optical/motorized system. Cost dropped from ~$10k to under $300." },
@@ -596,6 +762,29 @@ export const SECTIONS = {
     layout: "personal",
     heading: "OFF-DUTY",
     sub: "Four Countries, Four Languages, One Extremely Defended Steam Library.",
+    difficulty: null,
+    abilities: [
+      {
+        slot: "LMB", icon: "country",
+        name: "Four Countries",
+        desc: "Jordan, Qatar, Spain, United States."
+      },
+      {
+        slot: "SHIFT", icon: "spoken",
+        name: "Four Languages",
+        desc: "English, Arabic, and Spanish native, Italian A1."
+      },
+      {
+        slot: "E", icon: "trophy",
+        name: "Top 500 in Two Shooters",
+        desc: "Overwatch and Call of Duty."
+      },
+      {
+        slot: "Q", ultimate: true, icon: "team",
+        name: "World Scholar's Cup, Top 5% Team Debate",
+        desc: "Global Round, 2020."
+      }
+    ],
     geography: [
       { flag: "🇯🇴", country: "JORDAN", years: "2 YRS", note: "Amman. Born here.", c1: "#000", c2: "#ce1126" },
       { flag: "🇶🇦", country: "QATAR", years: "16 YRS", note: "Doha. Where I grew up.", c1: "#8d1b3d", c2: "#fff" },

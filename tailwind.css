@@ -7,7 +7,10 @@
    utilities only keeps every unconverted component rendering untouched.
    ============================================================ */
 
-@layer theme, base, components, utilities;
+/* Layer order is declared explicitly so it never depends on <link> order.
+   legacy sits lowest: styles.css and cv.css open with @layer legacy, so
+   Tailwind utilities can now override them. */
+@layer legacy, theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
@@ -25,8 +28,8 @@
   /* Per-hero accents stay owned by js/data.js and arrive at runtime as
      --sec-acc / --sec-acc2 on the section element. These bridge tokens let
      Tailwind utilities consume that value instead of duplicating the pairs. */
-  --color-hero: var(--sec-acc, #f9a826);
-  --color-hero2: var(--sec-acc2, #25c7f7);
+  --color-hero: var(--screen-acc, var(--sec-acc, #f9a826));
+  --color-hero2: var(--screen-acc2, var(--sec-acc2, #25c7f7));
 
   /* ── navy atmosphere ramp ───────────────────────────────── */
   --color-bg: #080d14;
@@ -44,7 +47,6 @@
 
   /* ── type stacks ────────────────────────────────────────── */
   --font-display: "Oswald", "Bahnschrift Condensed", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
-  --font-bebas: "Bebas Neue", "Oswald", "Bahnschrift Condensed", Impact, sans-serif;
   --font-ui: "Inter Tight", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", Consolas, monospace;
 

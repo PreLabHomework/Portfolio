@@ -1,3 +1,7 @@
+/* Wrapped in @layer legacy (v10) so Tailwind utilities can override these
+   rules. Layer order is set in tailwind.css; unlayered CSS would otherwise
+   outrank every layered utility regardless of specificity. */
+@layer legacy {
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -1804,70 +1808,6 @@ a {
   margin-top: 22px;
 }
 
-.ability-list {
-  display: grid;
-  gap: 14px;
-}
-
-.ability-row {
-  display: grid;
-  grid-template-columns: 68px minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
-  padding: 4px 0;
-}
-
-.ability-icon {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 8px;
-  background: rgba(248, 251, 255, 0.94);
-  color: #07101a;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), 0 0 18px color-mix(in srgb, var(--sa) 22%, transparent);
-}
-
-.ability-icon svg {
-  width: 38px;
-  height: 38px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.ability-icon svg path:first-child,
-.ability-icon svg circle,
-.ability-icon svg ellipse,
-.ability-icon svg rect {
-  vector-effect: non-scaling-stroke;
-}
-
-.ability-name {
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.ability-meta {
-  margin-top: 2px;
-  color: var(--sa);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-}
-
-.ability-copy p {
-  margin: 5px 0 0;
-  color: var(--muted);
-  line-height: 1.48;
-}
-
 .perk-panel {
   padding: 18px 0 18px 22px;
   border-left: 2px solid var(--sa);
@@ -1951,11 +1891,6 @@ a {
   padding: 0;
   text-align: right;
   max-width: 260px;
-}
-
-.lab-ability-list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 24px;
 }
 
 .layout-experience {
@@ -2073,18 +2008,8 @@ a {
 
 @media (max-width: 900px) {
   .hero-info-layout,
-  .lab-ability-list,
   .ast-pillars {
     grid-template-columns: 1fr;
-  }
-
-  .ability-row {
-    grid-template-columns: 56px minmax(0, 1fr);
-  }
-
-  .ability-icon {
-    width: 48px;
-    height: 48px;
   }
 }
 
@@ -2986,3 +2911,4 @@ a {
 /* ---- 9. flatten leftover heavy rounding inside detail views ---- */
 .detail-body .hi-panel-cols .hi-group,
 .detail-body .perk-panel { border-radius: 0; }
+}
