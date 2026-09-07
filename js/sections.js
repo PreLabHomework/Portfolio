@@ -80,149 +80,133 @@ function group(title, rowsHtml, cls = '') {
 }
 
 // OW ability-icon style: bold white-silhouette SVGs, literal to content.
-// Each type has a distinct shape — no two categories share a glyph.
+// Each type has a distinct shape - no two categories share a glyph.
 function glyph(key = '') {
   const k = String(key).toLowerCase();
-  const I = (d, fill = false) => {
-    const attrs = fill
-      ? `fill="currentColor" stroke="none"`
-      : `fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"`;
-    return `<svg viewBox="0 0 48 48" ${attrs} aria-hidden="true">${d}</svg>`;
-  };
+  const I = d => `<svg viewBox="0 0 48 48" fill="currentColor" stroke="none" aria-hidden="true">${d}</svg>`;
+
   // IMU / sensor / wearable / caliper / PPG / measurement
   if (/sense|imu|sensor|ppg|wearable|motion|caliper|measurement/.test(k))
-    return I('<rect x="9" y="18" width="30" height="12" rx="3"/><path d="M9 24h30M17 18v-5a7 7 0 0 1 14 0v5M17 30v5a7 7 0 0 0 14 0v-5"/><circle cx="24" cy="24" r="2.5" fill="currentColor"/>');
+    return I('<path d="M17 3h14l-2 9H19L17 3Zm0 42h14l-2-9H19l-2 9Z"/><path fill-rule="evenodd" d="M13 12h22a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5Zm11 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z"/><circle cx="24" cy="24" r="3"/>');
 
   // FFT / signal / radar / waveform / tremor / frequency
   if (/detect|fft|radar|signal|frequency|waveform|tremor/.test(k))
-    return I('<path d="M4 24h5l4-14 5 28 4-18 4 10 4-6 4 6h10"/><path d="M4 38h40" opacity=".4"/>');
+    return I('<path d="M2 26h7l4-14 7 27 5-18 4 8h17v5H26l-2-4-6 20-7-28-3 9H2v-5Z"/>');
 
   // ML / GAN / neural / AI / behavioral auth
   if (/ml|gan|model|train|neural|ai|authentication|auth/.test(k))
-    return I('<circle cx="10" cy="16" r="4"/><circle cx="10" cy="32" r="4"/><circle cx="38" cy="10" r="4"/><circle cx="38" cy="38" r="4"/><circle cx="24" cy="24" r="5"/><path d="M14 17.5 20 22M14 30.5 20 26M34 13 28 21M34 35 28 27"/>');
+    return I('<path d="m12 16 8 6-2 3-8-6 2-3Zm0 16 8-6-2-3-8 6 2 3Zm24-20-8 9-2.6-2.4 8-9L36 12Zm0 24-8-9-2.6 2.4 8 9L36 36Z"/><circle cx="9" cy="14" r="5"/><circle cx="9" cy="34" r="5"/><circle cx="39" cy="9" r="5"/><circle cx="39" cy="39" r="5"/><circle cx="24" cy="24" r="7"/>');
 
   // NLP / whisper / dialect / subtitle / speech / transcription
   if (/\bnlp\b|whisper|dialect|subtitle|natural.?language|transcri|speech.to/.test(k))
-    return I('<path d="M7 9h24a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H19l-7 7v-7H7a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3Z"/><path d="M13 17h18M13 22h13"/><path d="M27 30h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-3l-4 4v-4h-3a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3Z"/>');
+    return I('<path fill-rule="evenodd" d="M8 4h24a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H21l-9 8v-8H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5Zm5 10a2.6 2.6 0 1 0 0 5.2A2.6 2.6 0 0 0 13 14Zm8 0a2.6 2.6 0 1 0 0 5.2A2.6 2.6 0 0 0 21 14Zm8 0a2.6 2.6 0 1 0 0 5.2A2.6 2.6 0 0 0 29 14Z"/><path d="M32 30h9a4 4 0 0 1 4 4v5a4 4 0 0 1-4 4h-2l-5 4v-4h-2a4 4 0 0 1-4-4v-5a4 4 0 0 1 4-4Z"/>');
 
   // BLE / bluetooth / wireless / OTA / stream / serial / connect / comms
   if (/stream|ble|bluetooth|ota|link|packet|wireless|comm|serial|connect|network/.test(k))
-    return I('<path d="M24 8v32M24 8l10 10-10 10M24 8l-10 10 10 10M14 34l10 6 10-6"/><circle cx="24" cy="8" r="3"/><circle cx="24" cy="40" r="3"/>');
+    return I('<path fill-rule="evenodd" d="M21.5 3.5 34 13l-8.4 7L34 27l-12.5 9.5V25l-7 5.6-3-3.8L20.7 20 11.5 13.2l3-3.8 7 5.6V3.5Zm4.5 9.4-2-1.6v4l2-2.4Zm0 14.2-2 2.4v4l2-1.6-.01-2.4.01-2.4Z"/>');
 
   // Database / SQLite / SQL / storage / session / records / governance
   if (/record|sqlite|data|database|session|storage|\bsql\b|governance/.test(k))
-    return I('<ellipse cx="24" cy="12" rx="14" ry="5.5"/><path d="M10 12v10c0 3 6.3 5.5 14 5.5S38 25 38 22V12"/><path d="M10 22v10c0 3 6.3 5.5 14 5.5S38 35 38 32V22"/><path d="M18 12v10M18 22v10" opacity=".4"/>');
+    return I('<ellipse cx="24" cy="10" rx="16" ry="6.5"/><path d="M8 15.5c2.8 3 9 4.8 16 4.8s13.2-1.8 16-4.8V22c0 3.6-7.2 6.5-16 6.5S8 25.6 8 22v-6.5Z"/><path d="M8 26.5c2.8 3 9 4.8 16 4.8s13.2-1.8 16-4.8V33c0 3.6-7.2 6.5-16 6.5S8 36.6 8 33v-6.5Z"/>');
 
   // Chart / report / dashboard / CSV / export / shiny / stats / analysis
   if (/report|chart|csv|export|dashboard|shiny|analysis|stats/.test(k))
-    return I('<path d="M8 38V8M8 38h32"/><path d="M8 38l10-12 7 7 9-15 6 4"/><rect x="14" y="31" width="5" height="7" rx="1" fill="currentColor" stroke="none"/><rect x="22" y="26" width="5" height="12" rx="1" fill="currentColor" stroke="none"/><rect x="30" y="20" width="5" height="18" rx="1" fill="currentColor" stroke="none"/>');
+    return I('<path d="M7 28h7v14H7V28Zm10-8h7v22h-7V20Zm10 5h7v17h-7V25Z"/><path d="M28 5h15v15l-5.4-5.4L30 22.2 25.8 18l7.6-7.6L28 5Z"/>');
 
   // Publication / paper / patent / archive / document
   if (/paper|publication|patent|archive/.test(k))
-    return I('<path d="M13 5h18l10 10v28H13Z"/><path d="M31 5v11h11M19 22h14M19 28h14M19 34h9"/><path d="M31 11l10 9" opacity=".3"/>');
+    return I('<path fill-rule="evenodd" d="M11 3h19l11 11v31H11V3Zm18 4H15v34h22V16H29V7Zm-12 15h16v4H17v-4Zm0 8h16v4H17v-4Z"/>');
 
   // Shield / guard / security / cyber / protect
   if (/shield|guard|security|cyber|trust|defensive|protect/.test(k))
-    return I('<path d="M24 4 41 11.5v13C41 35 33.8 41.5 24 45c-9.8-3.5-17-10-17-20.5v-13Z"/><path d="m16 25 6 6 11-13"/>');
+    return I('<path fill-rule="evenodd" d="M24 2.5 41.5 10v12.5C41.5 33.7 34 40.8 24 45 14 40.8 6.5 33.7 6.5 22.5V10L24 2.5ZM15 23.4l3.2-3.2 4.6 4.6 9-9 3.2 3.2-12.2 12.2L15 23.4Z"/>');
 
   // Chip / firmware / microcontroller / C++ / register / MCU / recovery
   if (/firmware|c\+\+|register|embedded|mcu|microcontroller|recovery/.test(k))
-    return I('<rect x="16" y="16" width="16" height="16" rx="2"/><path d="M20 16V9m4 7V9m4 7V9M20 39v-7m4 7v-7m4 7v-7M16 20H9m0 4h7m0 4H9M39 20h-7m7 4h-7m7 4h-7"/><circle cx="24" cy="24" r="3.5" fill="currentColor" stroke="none"/>');
+    return I('<path d="M15 2h4v8h-4V2Zm7 0h4v8h-4V2Zm7 0h4v8h-4V2ZM15 38h4v8h-4v-8Zm7 0h4v8h-4v-8Zm7 0h4v8h-4v-8ZM2 15h8v4H2v-4Zm0 7h8v4H2v-4Zm0 7h8v4H2v-4Zm36-14h8v4h-8v-4Zm0 7h8v4h-8v-4Zm0 7h8v4h-8v-4Z"/><path fill-rule="evenodd" d="M12 12h24v24H12V12Zm6 6v12h12V18H18Z"/>');
 
   // FPGA / VHDL / HDMI / FSM / UART / digital logic / timing
   if (/fpga|vhdl|hdmi|logic|fsm|uart|digital|timing/.test(k))
-    return I('<rect x="10" y="10" width="28" height="28" rx="2"/><rect x="18" y="18" width="5" height="5" fill="currentColor" stroke="none"/><rect x="25" y="18" width="5" height="5" fill="currentColor" stroke="none"/><rect x="18" y="25" width="5" height="5" fill="currentColor" stroke="none"/><rect x="25" y="25" width="5" height="5" fill="currentColor" stroke="none"/><path d="M10 19H5m5 5H5m5 5H5M43 19h-5m5 5h-5m5 5h-5M19 10V5m5 5V5m5 5V5M19 43v-5m5 5v-5m5 5v-5"/>');
+    return I('<path d="M4 32V10h13v14h5V10h13v14h9v6H30V16h-5v22H12V32H4Zm4-4h4V14H8v14Z" fill-rule="evenodd"/>');
 
   // Award / prize / launch / trophy
   if (/award|prize|trophy|win/.test(k))
-    return I('<path d="M14 6h20v16c0 7-4.5 12-10 14-5.5-2-10-7-10-14Z"/><path d="M14 12H7a5 5 0 0 0 5 5M34 12h7a5 5 0 0 1-5 5"/><path d="M24 36v7M17 43h14"/>');
+    return I('<path fill-rule="evenodd" d="M13 4h22v3h8v5c0 6-4 10-9.3 11A12 12 0 0 1 26 29v5h7v5l3 6H12l3-6v-5h7v-5a12 12 0 0 1-7.7-6C9 22 5 18 5 12V7h8V4Zm-4 8c0 3.4 1.8 5.8 4.3 6.7A19 19 0 0 1 13 12v-1H9v1Zm30 0v-1h-4v1c0 2.4-.5 4.7-1.3 6.7C36.2 17.8 39 15.4 39 12Z"/>');
 
   // Cost / budget / reduce / price
   if (/cost|reduce|cheap|price|budget/.test(k))
-    return I('<path d="M24 6c-10 0-17 7-17 18s7 18 17 18 17-7 17-18S34 6 24 6Z" opacity=".3"/><path d="M24 6c-10 0-17 7-17 18s7 18 17 18 17-7 17-18S34 6 24 6Z"/><path d="M24 13v22M29 17h-8a4 4 0 0 0 0 8h6a4 4 0 0 1 0 8h-9"/>');
+    return I('<path fill-rule="evenodd" d="M22 4h16a6 6 0 0 1 6 6v16L27.6 42.4a6 6 0 0 1-8.5 0L4.6 27.9a6 6 0 0 1 0-8.5L22 4Zm12 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>');
 
   // Mobile / app / React Native / phone / screen
   if (/app|mobile|react|native|expo|phone/.test(k))
-    return I('<rect x="14" y="5" width="20" height="38" rx="4"/><path d="M21 11h6"/><circle cx="24" cy="36.5" r="2" fill="currentColor" stroke="none"/><rect x="17" y="14" width="14" height="18" rx="2" opacity=".4"/>');
+    return I('<path fill-rule="evenodd" d="M16 2h16a5 5 0 0 1 5 5v34a5 5 0 0 1-5 5H16a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm4 3.5a1.5 1.5 0 0 0 0 3h8a1.5 1.5 0 0 0 0-3h-8ZM15 11h18v26H15V11Z"/>');
 
   // Tool / pipeline / workflow / deploy / process / wrench
   if (/build|tool|program|workflow|deploy|pipeline|process/.test(k))
-    return I('<path d="M33 8a7 7 0 0 0-9.2 9.2L8 33l7 7 15.8-15.8A7 7 0 0 0 40 15l-5 5-4-4Z"/><circle cx="10" cy="39" r="2.5" fill="currentColor" stroke="none"/>');
+    return I('<path d="M43 13.6A11.5 11.5 0 0 1 28.2 27L15 40.2a5.6 5.6 0 0 1-8-8L20.3 19A11.5 11.5 0 0 1 33.7 4.4l-6.5 6.5 1.6 6 6 1.6L41.3 12c.8 0 1.5.7 1.7 1.6Z"/>');
 
   // Entropy / Astakeria / lore / echo / world / eye
   if (/entropy|astakeria|lore|mirror|echo|world/.test(k))
-    return I('<ellipse cx="24" cy="24" rx="18" ry="10"/><ellipse cx="24" cy="24" rx="18" ry="10" transform="rotate(60,24,24)" opacity=".5"/><ellipse cx="24" cy="24" rx="18" ry="10" transform="rotate(120,24,24)" opacity=".5"/><circle cx="24" cy="24" r="5" fill="currentColor" stroke="none"/>');
+    return I('<path fill-rule="evenodd" d="M24 10c10.8 0 19 8.6 21.5 14C43 29.4 34.8 38 24 38S5 29.4 2.5 24C5 18.6 13.2 10 24 10Zm0 5.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17Zm0 4.7a3.8 3.8 0 1 1 0 7.6 3.8 3.8 0 0 1 0-7.6Z"/>');
 
   // Language / spoken / Arabic / Spanish / dialect / translation
   if (/\blang\b|spoken|arabic|spanish|english|dialect|translat/.test(k))
-    return I('<path d="M8 10h20v15H16l-5 5v-5H8Z"/><path d="M24 22v3c0 2 1.5 3 3 3h8l5 5v-5h1a3 3 0 0 0 3-3V20a3 3 0 0 0-3-3H27"/><path d="M14 17h8M14 21.5h5"/>');
+    return I('<path fill-rule="evenodd" d="M24 3a21 21 0 1 1 0 42 21 21 0 0 1 0-42Zm0 4c-2.5 0-5.7 5-6.6 13h13.2C29.7 12 26.5 7 24 7Zm-6.6 24C18.3 39 21.5 43 24 43s5.7-4 6.6-12H17.4ZM7.3 20A17 17 0 0 0 7.3 28h6c-.2-1.3-.3-2.6-.3-4s.1-2.7.3-4h-6Zm27.4 0c.2 1.3.3 2.6.3 4s-.1 2.7-.3 4h6a17 17 0 0 0 0-8h-6Z"/>');
 
   // Circuit / analog / electrical / semiconductor / EE
   if (/circuit|analog|electrical|materials|semiconductor|nano/.test(k))
-    return I('<circle cx="24" cy="24" r="5"/><path d="M24 8v11M24 29v11M8 24h11M29 24h11"/><path d="M12.7 12.7l7.8 7.8M27.5 27.5l7.8 7.8M12.7 35.3l7.8-7.8M27.5 20.5l7.8-7.8"/><circle cx="24" cy="8" r="2.5" fill="currentColor" stroke="none"/><circle cx="24" cy="40" r="2.5" fill="currentColor" stroke="none"/><circle cx="8" cy="24" r="2.5" fill="currentColor" stroke="none"/><circle cx="40" cy="24" r="2.5" fill="currentColor" stroke="none"/>');
+    return I('<path d="M20 4h4v10.3l10 10V32h10v4H30v-9.7l-10-10V4h-4Z" transform="translate(2 0)"/><path d="M8 12h4v10l8 8v14h-4V31.7l-8-8V12Z"/><rect x="18" y="2" width="8" height="8"/><rect x="6" y="10" width="8" height="8"/><rect x="36" y="30" width="8" height="8"/><rect x="14" y="38" width="8" height="8"/>');
 
   // Location / country / geo / map / where
   if (/place|location|country|geo|map|where/.test(k))
-    return I('<path d="M24 5C16.3 5 10 11 10 19c0 11.6 14 24 14 24S38 30.6 38 19C38 11 31.7 5 24 5Z"/><circle cx="24" cy="19" r="6"/>');
+    return I('<path fill-rule="evenodd" d="M24 3c8.6 0 15 6.4 15 14.6C39 28.6 24 45 24 45S9 28.6 9 17.6C9 9.4 15.4 3 24 3Zm0 9a5.6 5.6 0 1 0 0 11.2A5.6 5.6 0 0 0 24 12Z"/>');
 
   // People / team / leadership / council / volunteer
   if (/people|team|council|leadership|volunteer|story/.test(k))
-    return I('<circle cx="17" cy="16" r="5"/><circle cx="31" cy="16" r="5"/><path d="M6 38c0-7 5-11 11-11h14c6 0 11 4 11 11"/><path d="M24 27v-6M20 24h8" opacity=".5"/>');
+    return I('<circle cx="33" cy="15" r="5.5"/><path d="M24.5 40c0-7.8 4-12 8.5-12s8.5 4.2 8.5 12h-17Z"/><circle cx="17" cy="13" r="7"/><path d="M4 40c0-9.4 6-15 13-15s13 5.6 13 15H4Z"/>');
 
   // Audio / sound / synth / music
   if (/audio|sound|synth|tone|music|sonic/.test(k))
-    return I('<path d="M8 18v12h8l11 8V10L16 18Z"/><path d="M31 18a9 9 0 0 1 0 12"/><path d="M35 13a17 17 0 0 1 0 22"/>');
+    return I('<path d="M5 17h9l11-9v32l-11-9H5V17Z"/><path d="M30.8 15.5c2.7 1.9 4.4 5 4.4 8.5s-1.7 6.6-4.4 8.5l-2.3-3.4c1.7-1.1 2.7-3 2.7-5.1s-1-4-2.7-5.1l2.3-3.4Z"/><path d="M36.6 9.4C41.2 12.5 44 17.9 44 24s-2.8 11.5-7.4 14.6l-2.3-3.5c3.5-2.3 5.7-6.4 5.7-11.1s-2.2-8.8-5.7-11.1l2.3-3.5Z"/>');
 
   // Web / browser / HTML / CSS / website
   if (/\bweb\b|website|html|css|frontend|browser|pages|responsive/.test(k))
-    return I('<rect x="6" y="9" width="36" height="30" rx="3"/><path d="M6 17h36"/><circle cx="12" cy="13" r="1.8" fill="currentColor" stroke="none"/><circle cx="18" cy="13" r="1.8" fill="currentColor" stroke="none"/><circle cx="24" cy="13" r="1.8" fill="currentColor" stroke="none"/><path d="M12 24h24M12 29h18"/>');
+    return I('<path fill-rule="evenodd" d="M6 6h36a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Zm1 10v22h34V16H7Zm4 4h12v14H11V20Zm16 0h10v4H27v-4Zm0 7h10v4H27v-4Z"/>');
 
   // Vision / camera / forensic / OpenCV / glasses / optical
   if (/vision|camera|forensic|glasses|opencv|sift|flann|crime|optical/.test(k))
-    return I('<path d="M4 24C9 14 16 9 24 9s15 5 20 15c-5 10-12 15-20 15S9 34 4 24Z"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="3" fill="currentColor" stroke="none"/><path d="M20 11 17 6M28 11l3-6" opacity=".5"/>');
+    return I('<path fill-rule="evenodd" d="M17 8h14l3 5h7a4 4 0 0 1 4 4v19a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V17a4 4 0 0 1 4-4h7l3-5Zm7 9a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 4.8a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Z"/>');
 
   // WiFi / handover / wireless network / Raspberry Pi / 802.11 / RSSI
   if (/wifi|handover|rssi|802|raspberry|pi|scan|beacon|coverage/.test(k))
-    return I('<path d="M5 19a27 27 0 0 1 38 0"/><path d="M11 25a19 19 0 0 1 26 0"/><path d="M17 31a11 11 0 0 1 14 0"/><circle cx="24" cy="39" r="3.5" fill="currentColor" stroke="none"/>');
+    return I('<circle cx="24" cy="38" r="4.5"/><path d="M16.2 29.8A11 11 0 0 1 24 26.6c3 0 5.8 1.2 7.8 3.2l-3.7 3.7A5.8 5.8 0 0 0 24 31.8c-1.6 0-3 .6-4.1 1.7l-3.7-3.7Z"/><path d="M9.1 22.7A21 21 0 0 1 24 16.5c5.8 0 11.1 2.4 14.9 6.2l-3.7 3.7A15.8 15.8 0 0 0 24 21.7c-4.4 0-8.3 1.8-11.2 4.7l-3.7-3.7Z"/><path d="M2 15.6A31 31 0 0 1 24 6.5c8.6 0 16.4 3.5 22 9.1l-3.7 3.7A25.8 25.8 0 0 0 24 11.7c-7.2 0-13.6 2.9-18.3 7.6L2 15.6Z"/>');
 
   // Research / academic / thesis / grad cap
   if (/research|academic|thesis|study|publication/.test(k))
-    return I('<path d="M7 20 24 10l17 10-17 10Z"/><path d="M13 23.5v10c0 3.5 5 6 11 6s11-2.5 11-6v-10"/><path d="M39 20v9"/><circle cx="39" cy="31" r="2.5" fill="currentColor" stroke="none"/>');
+    return I('<path d="M24 6 47 17 24 28 1 17 24 6Z"/><path d="M11 23.8V32c0 3.9 5.8 7 13 7s13-3.1 13-7v-8.2l-13 6.2-13-6.2Z"/><path d="M43 20h3v11h-3V20Z"/>');
 
   // Rocket / launch / speed / startup
   if (/rocket|launch|startup|speed/.test(k))
-    return I('<path d="M24 6c0 0 10 6 12 20H12C14 12 24 6 24 6Z"/><path d="M17 26v8c0 0 3 5 7 5s7-5 7-5v-8"/><path d="M12 26s-5 3-5 8M36 26s5 3 5 8"/><circle cx="24" cy="18" r="3" fill="currentColor" stroke="none"/>');
+    return I('<path fill-rule="evenodd" d="M24 2c6.5 5.2 10 12.6 10 20.3 0 4.2-1.1 8.3-3.1 11.7H17.1A22.4 22.4 0 0 1 14 22.3C14 14.6 17.5 7.2 24 2Zm0 12a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z"/><path d="M15 31.5 8 41l9.5-2.6L15 31.5Zm18 0 7 9.5-9.5-2.6L33 31.5ZM21 37h6l-3 9-3-9Z"/>');
 
   // Email / contact
   if (/email|mail|message/.test(k))
-    return I('<rect x="6" y="11" width="36" height="26" rx="3"/><path d="M6 14l18 14L42 14"/>');
+    return I('<path fill-rule="evenodd" d="M6 9h36a3 3 0 0 1 3 3v24a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3Zm1.8 4L24 25.4 40.2 13H7.8ZM41 17.3 24 30.6 7 17.3V35h34V17.3Z"/>');
 
   // LinkedIn / phone / social
   if (/phone|linkedin|connect/.test(k))
-    return I('<rect x="14" y="5" width="20" height="38" rx="4"/><circle cx="24" cy="36.5" r="2" fill="currentColor" stroke="none"/><path d="M21 11h6"/>');
+    return I('<path d="M10.2 4.6c1.9-1.9 5-1.7 6.7.4l4.3 5.6c1.5 2 1.2 4.8-.7 6.4l-2.4 2c1.9 4.3 5.6 8 9.9 9.9l2-2.4c1.6-1.9 4.4-2.2 6.4-.7l5.6 4.3c2.1 1.7 2.3 4.8.4 6.7l-2.9 2.9c-2 2-5 2.7-7.7 1.7C20.4 37.1 10.9 27.6 6.6 16.2c-1-2.7-.3-5.7 1.7-7.7l1.9-1.9Z"/>');
 
   // GitHub / code / repo
   if (/github|code|repo|git/.test(k))
-    return I('<path d="M24 5C14 5 6 13 6 23c0 8 5.2 14.8 12.4 17.2.9.2 1.2-.4 1.2-.9v-3.2c-5 1.1-6-2.4-6-2.4-.8-2.1-2-2.6-2-2.6-1.6-1.1.1-1.1.1-1.1 1.8.1 2.7 1.8 2.7 1.8 1.6 2.7 4.1 1.9 5.1 1.5.2-1.1.6-1.9 1.1-2.3-3.9-.4-8-2-8-8.8 0-1.9.7-3.5 1.8-4.8-.2-.5-.8-2.3.2-4.7 0 0 1.5-.5 4.8 1.8a16.8 16.8 0 0 1 8.8 0c3.3-2.3 4.8-1.8 4.8-1.8 1 2.4.4 4.2.2 4.7 1.1 1.3 1.8 2.9 1.8 4.8 0 6.8-4.1 8.4-8 8.8.6.5 1.2 1.6 1.2 3.2v4.8c0 .5.3 1.1 1.2.9C36.8 37.8 42 31 42 23 42 13 34 5 24 5Z" fill="currentColor" stroke="none"/>');
+    return I('<path d="M15.5 9 3 24l12.5 15 4.6-3.8L10.5 24l9.6-11.2L15.5 9Zm17 0-4.6 3.8L37.5 24l-9.6 11.2 4.6 3.8L45 24 32.5 9Z"/><path d="M26.3 5h5.2L21.7 43h-5.2L26.3 5Z"/>');
 
   // Open source / link / external
   if (/open|link|external/.test(k))
-    return I('<path d="M20 10H10a3 3 0 0 0-3 3v25a3 3 0 0 0 3 3h25a3 3 0 0 0 3-3V28"/><path d="M27 7h14v14M27 21 41 7"/>');
+    return I('<path d="M6 11h17v5H11v21h21V26h5v16H6V11Z"/><path d="M27 3h18v18l-6.4-6.4L28.2 25 23 19.8l10.4-10.4L27 3Z"/>');
 
-  // Sport / game / rank / controller
-  if (/game|rank|sport|play|controller|overwatch|valorant|cod/.test(k))
-    return I('<rect x="7" y="16" width="34" height="20" rx="8"/><path d="M16 22v8M12 26h8"/><circle cx="32" cy="24" r="2" fill="currentColor" stroke="none"/><circle cx="37" cy="28" r="2" fill="currentColor" stroke="none"/>');
-
-  // Calendar / timeline / date / history
-  if (/date|calendar|history|origin|born|timeline/.test(k))
-    return I('<rect x="7" y="9" width="34" height="32" rx="3"/><path d="M7 19h34M16 6v6M32 6v6"/><rect x="13" y="24" width="5" height="5" rx="1" fill="currentColor" stroke="none"/><rect x="22" y="24" width="5" height="5" rx="1" fill="currentColor" stroke="none"/><rect x="31" y="24" width="5" height="5" rx="1" fill="currentColor" stroke="none"/>');
-
-  // Certification / degree / education
-  if (/cert|certif|degree|edu|mit|cmu|samsung|program/.test(k))
-    return I('<path d="M7 20 24 10l17 10-17 10Z" fill="currentColor" stroke="none" opacity=".3"/><path d="M7 20 24 10l17 10-17 10Z"/><path d="M13 23.5v10c0 3.5 5 6 11 6s11-2.5 11-6v-10"/><path d="M39 20v9"/><circle cx="39" cy="31" r="2.5" fill="currentColor" stroke="none"/>');
-
-  // Unknown / default — crosshair
-  return I('<circle cx="24" cy="24" r="15"/><path d="M24 6v10M24 32v10M6 24h10M32 24h10"/><circle cx="24" cy="24" r="4" fill="currentColor" stroke="none"/>');
+  // fallback: OW-style emblem badge
+  return I('<path fill-rule="evenodd" d="M24 2.5 42 12v24L24 45.5 6 36V12L24 2.5Zm0 10.7L13.5 21l4.3 5.5L24 21.6l6.2 4.9L34.5 21 24 13.2Zm-8 17.3h16v5H16v-5Z"/>');
 }
 
 // ---- per-section renderers ---------------------------------
@@ -493,7 +477,7 @@ function renderTimeline(s) {
 function renderWall(s) {
   const GROUPS = [
     { label: 'Academic', keys: ['MIT', 'CARNEGIE MELLON', 'SAINT LOUIS U.'] },
-    { label: 'Industry', keys: ['SAMSUNG', 'CORSAIR', 'GLAXOSMITHKLINE (GSK)', 'DOHA BANK', 'GSK'] },
+    { label: 'Industry', keys: ['SAMSUNG', 'CORSAIR', 'GSK', 'DOHA BANK'] },
     { label: 'Publications & Orgs', keys: ['IEEE', 'RED CROSS · RED CRESCENT', 'THE STEM SPECTRUM', 'PARK HOUSE ENGLISH SCHOOL'] }
   ];
 

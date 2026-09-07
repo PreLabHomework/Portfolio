@@ -24,7 +24,7 @@ export const LINKS = {
 export const ROSTER = [
   {
     id: "home", codename: "HMZA-01", title: "HAMZA", subtitle: "ABU KHALAF",
-    tagline: "START HERE", accent: "#ffd166", accent2: "#ef476f", role: "MAIN", figure: "protagonist",
+    tagline: "START HERE", accent: "#ffd166", accent2: "#ef476f", role: "MAIN", figure: "protagonist", model: "assets/models/home.glb",
     preview: {
       headline: "HAMZA'S HOUSE",
       sub: "PORTFOLIO MODE",
@@ -35,7 +35,7 @@ export const ROSTER = [
   },
   {
     id: "labs", codename: "LAB-02", title: "LABS", subtitle: "RESEARCH DOSSIERS",
-    tagline: "WEARABLES · RADAR ML · CLINICAL HARDWARE", accent: "#4ade80", accent2: "#22d3ee", role: "RESEARCH", figure: "scientist",
+    tagline: "WEARABLES · RADAR ML · CLINICAL HARDWARE", accent: "#4ade80", accent2: "#22d3ee", role: "RESEARCH", figure: "scientist", model: "assets/models/labs.glb",
     preview: {
       headline: "RESEARCH DOSSIERS",
       sub: "CHROME · WNIS · BIOMECHANICS",
@@ -46,7 +46,7 @@ export const ROSTER = [
   },
   {
     id: "experience", codename: "EXP-03", title: "EXPERIENCE", subtitle: "INDUSTRY ROTATION",
-    tagline: "BANKING · FIRMWARE · AI · PHARMA", accent: "#38bdf8", accent2: "#818cf8", role: "WORK", figure: "operator",
+    tagline: "BANKING · FIRMWARE · AI · PHARMA", accent: "#38bdf8", accent2: "#818cf8", role: "WORK", figure: "operator", model: "assets/models/experience.glb",
     menu: true,
     preview: {
       headline: "WORK HISTORY",
@@ -58,7 +58,7 @@ export const ROSTER = [
   },
   {
     id: "capstone", codename: "CAP-04", title: "CAPSTONE", subtitle: "TREMOR STABILIZER",
-    tagline: "PARKINSON'S TREMOR MONITORING", accent: "#ef4444", accent2: "#f87171", role: "FINAL YEAR", figure: "engineer",
+    tagline: "PARKINSON'S TREMOR MONITORING", accent: "#ef4444", accent2: "#f87171", role: "FINAL YEAR", figure: "engineer", model: "assets/models/capstone.glb",
     preview: {
       headline: "TREMORMONITOR",
       sub: "REACT NATIVE · BLE · SQLITE · ESP32-S3",
@@ -69,7 +69,7 @@ export const ROSTER = [
   },
   {
     id: "projects", codename: "PRJ-05", title: "PROJECTS", subtitle: "SHOWCASE",
-    tagline: "STANDALONE · COURSEWORK · SHIPPED", accent: "#f59e0b", accent2: "#fbbf24", role: "BUILDER", figure: "builder",
+    tagline: "STANDALONE · COURSEWORK · SHIPPED", accent: "#f59e0b", accent2: "#fbbf24", role: "BUILDER", figure: "builder", model: "assets/models/projects.glb",
     preview: {
       headline: "PROJECT SHOWCASE",
       sub: "BUILDS OUTSIDE THE MAIN LAB PIPELINE",
@@ -80,7 +80,7 @@ export const ROSTER = [
   },
   {
     id: "research", codename: "PUB-06", title: "RESEARCH", subtitle: "PAPERS · PATENTS",
-    tagline: "ARCHIVE · CERTIFICATIONS · PUBLICATIONS", accent: "#a78bfa", accent2: "#c4b5fd", role: "AUTHOR", figure: "author",
+    tagline: "ARCHIVE · CERTIFICATIONS · PUBLICATIONS", accent: "#a78bfa", accent2: "#c4b5fd", role: "AUTHOR", figure: "author", model: "assets/models/research.glb",
     preview: {
       headline: "PAPERS & PATENTS",
       sub: "ACTIVE AND HISTORICAL RECORDS",
@@ -91,7 +91,7 @@ export const ROSTER = [
   },
   {
     id: "skills", codename: "SKL-07", title: "LOADOUT", subtitle: "TECHNICAL KIT",
-    tagline: "LANGUAGES · HARDWARE · TOOLS", accent: "#22d3ee", accent2: "#67e8f9", role: "SKILLS", figure: "technician",
+    tagline: "LANGUAGES · HARDWARE · TOOLS", accent: "#22d3ee", accent2: "#67e8f9", role: "SKILLS", figure: "technician", model: "assets/models/skills.glb",
     preview: {
       headline: "LOADOUT",
       sub: "PRACTICAL ENGINEERING STACK",
@@ -102,7 +102,7 @@ export const ROSTER = [
   },
   {
     id: "timeline", codename: "TLN-08", title: "TIMELINE", subtitle: "SCROLL",
-    tagline: "AMMAN · DOHA · MADRID · ST. LOUIS", accent: "#f472b6", accent2: "#f9a8d4", role: "HISTORY", figure: "archivist",
+    tagline: "AMMAN · DOHA · MADRID · ST. LOUIS", accent: "#f472b6", accent2: "#f9a8d4", role: "HISTORY", figure: "archivist", model: "assets/models/timeline.glb",
     preview: {
       headline: "TIMELINE",
       sub: "CHRONOLOGICAL PATH",
@@ -113,7 +113,7 @@ export const ROSTER = [
   },
   {
     id: "affiliations", codename: "AFF-09", title: "AFFILIATIONS", subtitle: "WALL",
-    tagline: "MIT · SLU · CMU · SAMSUNG", accent: "#e5e7eb", accent2: "#60a5fa", role: "NETWORK", figure: "network",
+    tagline: "MIT · SLU · CMU · SAMSUNG", accent: "#e5e7eb", accent2: "#60a5fa", role: "NETWORK", figure: "network", model: "assets/models/affiliations.glb",
     preview: {
       headline: "AFFILIATIONS",
       sub: "INSTITUTIONS · COMPANIES · PROGRAMS",
@@ -124,7 +124,7 @@ export const ROSTER = [
   },
   {
     id: "astakeria", codename: "AST-10", title: "ASTAKERIA", subtitle: "ECHOES OF THE OVERWRITTEN",
-    tagline: "THE GAME THAT WATCHES YOU BACK", accent: "#fb7185", accent2: "#fda4af", role: "LEGEND", figure: "astakeria",
+    tagline: "THE GAME THAT WATCHES YOU BACK", accent: "#fb7185", accent2: "#fda4af", role: "LEGEND", figure: "astakeria", model: "assets/models/astakeria.glb",
     preview: {
       headline: "ASTAKERIA",
       sub: "ECHOES OF THE OVERWRITTEN",
@@ -135,7 +135,7 @@ export const ROSTER = [
   },
   {
     id: "personal", codename: "PSN-11", title: "PERSONAL", subtitle: "OFF-DUTY",
-    tagline: "FOUR COUNTRIES · SIX LANGUAGES", accent: "#fb923c", accent2: "#fdba74", role: "CIVILIAN", figure: "civilian",
+    tagline: "FOUR COUNTRIES · SIX LANGUAGES", accent: "#fb923c", accent2: "#fdba74", role: "CIVILIAN", figure: "civilian", model: "assets/models/personal.glb",
     preview: {
       headline: "OFF-DUTY",
       sub: "GAMING · SPORTS · STORIES",
@@ -146,7 +146,7 @@ export const ROSTER = [
   },
   {
     id: "contact", codename: "COM-12", title: "CONTACT", subtitle: "JOIN TEAM CHAT",
-    tagline: "EMAIL · PHONE · LINKEDIN · GITHUB", accent: "#34d399", accent2: "#22d3ee", role: "COMMS", figure: "comms",
+    tagline: "EMAIL · PHONE · LINKEDIN · GITHUB", accent: "#34d399", accent2: "#22d3ee", role: "COMMS", figure: "comms", model: "assets/models/contact.glb",
     preview: {
       headline: "READY TO TALK",
       sub: "OPEN TO ROLES / AVAILABLE NOW",

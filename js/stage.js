@@ -5,6 +5,9 @@
 // ============================================================
 
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+import { applyToonPipeline } from "./toon.js";
 
 export function createStage(canvas) {
   const renderer = new THREE.WebGLRenderer({
@@ -21,7 +24,7 @@ export function createStage(canvas) {
   camera.lookAt(0, 0.6, 0);
 
   // ─── three-point cinematic lighting, tinted per character ───
-  // v4.8.0 — calmer than v4.7.6, no longer trying to grab eye attention.
+  // v4.8.0 - calmer than v4.7.6, no longer trying to grab eye attention.
   const ambient = new THREE.AmbientLight(0xffffff, 0.22);
   scene.add(ambient);
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.7);
@@ -286,38 +289,48 @@ export function createStage(canvas) {
 
   function makeTorso({ accent, accent2, color = 0x1a2233, height = 1.0, glowStrip = true, collar = true }) {
     const g = new THREE.Group();
-    const body = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.3, 0.42, height, 12),
-      mat(color, { roughness: 0.5, metalness: 0.25 })
-    );
-    body.position.y = -height / 2;
-    g.add(body);
+    const bodyMat = mat(color, { roughness: 0.5, metalness: 0.25 });
+
+    // V-taper: broad chest tapering into a real waist, compressed depth
+    const chest = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.235, height * 0.52, 12), bodyMat);
+    chest.scale.z = 0.66;
+    chest.position.y = -height * 0.26;
+    g.add(chest);
+
+    const waist = new THREE.Mesh(new THREE.CylinderGeometry(0.205, 0.255, height * 0.46, 12), bodyMat);
+    waist.scale.z = 0.68;
+    waist.position.y = -height * 0.72;
+    g.add(waist);
+
+    // pectoral plate, angled like a carapace
+    const pecs = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.1), mat(color, { roughness: 0.42, metalness: 0.4 }));
+    pecs.position.set(0, -height * 0.16, 0.2);
+    pecs.rotation.x = -0.22;
+    g.add(pecs);
 
     if (collar) {
       const collarRing = new THREE.Mesh(
-        new THREE.TorusGeometry(0.2, 0.04, 8, 22),
+        new THREE.TorusGeometry(0.19, 0.035, 8, 22),
         glowMat(accent2, 0.85)
       );
       collarRing.position.y = 0.04;
       collarRing.rotation.x = Math.PI / 2;
       g.add(collarRing);
       [-1, 1].forEach(s => {
-        const wedge = new THREE.Mesh(
-          new THREE.BoxGeometry(0.08, 0.42, 0.04),
-          glowMat(accent, 0.95)
-        );
-        wedge.position.set(s * 0.13, -0.18, 0.3);
-        wedge.rotation.z = s * 0.18;
-        g.add(wedge);
+        const lapel = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.34, 0.045), glowMat(accent, 0.9));
+        lapel.position.set(s * 0.14, -0.2, 0.245);
+        lapel.rotation.z = s * 0.3;
+        lapel.rotation.x = -0.12;
+        g.add(lapel);
       });
     }
 
     if (glowStrip) {
       const strip = new THREE.Mesh(
-        new THREE.BoxGeometry(0.05, height * 0.35, 0.04),
+        new THREE.BoxGeometry(0.035, height * 0.34, 0.03),
         glowMat(accent2, 0.9)
       );
-      strip.position.set(0, -height * 0.28, 0.34);
+      strip.position.set(0, -height * 0.52, 0.21);
       g.add(strip);
     }
     return g;
@@ -327,54 +340,80 @@ export function createStage(canvas) {
     const g = new THREE.Group();
     const frameMat = mat(coatColor, { roughness: 0.42, metalness: 0.35 });
     const darkMat = mat(0x07101a, { roughness: 0.55, metalness: 0.45 });
+    const wide = heavy ? 1.14 : 1;
 
-    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 0.24, 12), darkMat);
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.125, 0.24, 12), darkMat);
     neck.position.y = 1.38;
     g.add(neck);
 
-    const shoulderBar = new THREE.Mesh(
-      new THREE.BoxGeometry(heavy ? 1.08 : 0.92, 0.12, 0.28),
-      frameMat
-    );
-    shoulderBar.position.set(0, 1.22, 0.02);
-    g.add(shoulderBar);
+    // trapezius slopes from neck out to the shoulders, not a flat bar
+    [-1, 1].forEach(s => {
+      const trap = new THREE.Mesh(new THREE.BoxGeometry(0.4 * wide, 0.13, 0.24), frameMat);
+      trap.position.set(s * 0.24 * wide, 1.26, 0.02);
+      trap.rotation.z = -s * 0.28;
+      g.add(trap);
+    });
 
-    const chest = new THREE.Mesh(
-      new THREE.BoxGeometry(heavy ? 0.62 : 0.5, 0.5, 0.08),
-      glowMat(accent, 0.42)
-    );
-    chest.position.set(0, 0.82, 0.37);
-    g.add(chest);
+    // chest carapace: broad, tapering, compressed depth
+    const ribcage = new THREE.Mesh(new THREE.CylinderGeometry(0.44 * wide, 0.24, 0.56, 10), frameMat);
+    ribcage.scale.z = 0.62;
+    ribcage.position.y = 0.94;
+    g.add(ribcage);
 
-    const core = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.28, 0.34, 0.36, 6),
-      mat(0x0b1320, { roughness: 0.5, metalness: 0.45 })
-    );
-    core.position.y = 0.36;
-    g.add(core);
+    // angled chest plate with a glowing core seam
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(0.52 * wide, 0.34, 0.09), mat(coatColor, { roughness: 0.36, metalness: 0.45 }));
+    plate.position.set(0, 1.02, 0.24);
+    plate.rotation.x = -0.18;
+    g.add(plate);
+    const coreSeam = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.24, 0.04), glowMat(accent, 0.9));
+    coreSeam.position.set(0, 1.0, 0.3);
+    coreSeam.rotation.x = -0.18;
+    g.add(coreSeam);
+    [-1, 1].forEach(s => {
+      const clavicle = new THREE.Mesh(new THREE.BoxGeometry(0.2 * wide, 0.09, 0.07), darkMat);
+      clavicle.position.set(s * 0.2 * wide, 1.2, 0.2);
+      clavicle.rotation.z = -s * 0.3;
+      g.add(clavicle);
+    });
 
-    const belt = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.1, 0.22), glowMat(accent2, 0.5));
-    belt.position.set(0, 0.31, 0.08);
+    // real waist
+    const waist = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.245, 0.34, 12), darkMat);
+    waist.scale.z = 0.7;
+    waist.position.y = 0.52;
+    g.add(waist);
+    [0.6, 0.47].forEach((y, i) => {
+      const ab = new THREE.Mesh(new THREE.BoxGeometry(0.24 - i * 0.03, 0.08, 0.05), frameMat);
+      ab.position.set(0, y, 0.15);
+      g.add(ab);
+    });
+
+    // belt with a glowing buckle, not a glow slab
+    const belt = new THREE.Mesh(new THREE.BoxGeometry(0.56 * wide, 0.09, 0.32), darkMat);
+    belt.position.set(0, 0.31, 0.02);
     g.add(belt);
+    const buckle = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.07, 0.04), glowMat(accent2, 0.9));
+    buckle.position.set(0, 0.31, 0.18);
+    g.add(buckle);
 
-    const hips = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.22, 0.3), frameMat);
-    hips.position.y = 0.18;
-    g.add(hips);
+    // pelvis armor: two angled fauld plates forming a V
+    [-1, 1].forEach(s => {
+      const fauld = new THREE.Mesh(new THREE.BoxGeometry(0.3 * wide, 0.18, 0.24), frameMat);
+      fauld.position.set(s * 0.17 * wide, 0.17, 0.02);
+      fauld.rotation.z = s * 0.3;
+      g.add(fauld);
+    });
 
-    const pack = new THREE.Mesh(
-      new THREE.BoxGeometry(0.42, 0.62, 0.16),
-      mat(0x0b1320, { roughness: 0.5, metalness: 0.5 })
-    );
-    pack.position.set(0, 0.75, -0.34);
+    const pack = new THREE.Mesh(new THREE.BoxGeometry(0.36 * wide, 0.5, 0.14), mat(0x0b1320, { roughness: 0.5, metalness: 0.5 }));
+    pack.position.set(0, 0.82, -0.3);
     g.add(pack);
 
     if (cloak) {
-      const mantle = new THREE.Mesh(
-        new THREE.BoxGeometry(0.92, 0.12, 0.12),
-        mat(0x0a0e16, { roughness: 0.8, metalness: 0.1 })
-      );
-      mantle.position.set(0, 1.12, -0.18);
-      g.add(mantle);
+      [-1, 1].forEach(s => {
+        const mantle = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.1, 0.12), mat(0x0a0e16, { roughness: 0.8, metalness: 0.1 }));
+        mantle.position.set(s * 0.26, 1.16, -0.16);
+        mantle.rotation.z = -s * 0.22;
+        g.add(mantle);
+      });
     }
 
     return g;
@@ -382,67 +421,80 @@ export function createStage(canvas) {
 
   function makePauldron(side, accent, color = 0x1a2233) {
     const g = new THREE.Group();
-    const cap = new THREE.Mesh(
-      new THREE.SphereGeometry(0.16, 14, 10, 0, Math.PI * 2, 0, Math.PI / 2),
-      mat(color, { roughness: 0.45, metalness: 0.35 })
-    );
-    cap.scale.set(1, 0.72, 1);
-    g.add(cap);
-    const rim = new THREE.Mesh(
-      new THREE.TorusGeometry(0.13, 0.018, 6, 20, Math.PI),
-      glowMat(accent, 1.0)
-    );
-    rim.rotation.x = Math.PI / 2;
-    g.add(rim);
-    g.position.set(side * 0.45, 1.34, 0);
+    const plateMat = mat(color, { roughness: 0.4, metalness: 0.42 });
+    // layered angular plates sloping outward, OW style
+    const upper = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.1, 0.28), plateMat);
+    upper.rotation.z = side * 0.34;
+    g.add(upper);
+    const lower = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.08, 0.24), plateMat);
+    lower.position.set(side * 0.07, -0.1, 0);
+    lower.rotation.z = side * 0.5;
+    g.add(lower);
+    const trim = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.02, 0.03), glowMat(accent, 1.0));
+    trim.position.set(0, 0.055, 0.13);
+    trim.rotation.z = side * 0.34;
+    g.add(trim);
+    g.position.set(side * 0.46, 1.32, 0);
     return g;
   }
 
   function makeArm(side, { coatColor = 0x1a2233, accent, glove, length = 1 } = {}) {
     const g = new THREE.Group();
-    const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.11, 14, 12), mat(coatColor, { roughness: 0.45, metalness: 0.35 }));
-    shoulder.position.set(side * 0.48, 1.19, 0.04);
-    g.add(shoulder);
+    const armMat = mat(coatColor, { roughness: 0.5 });
+
+    // deltoid bulge instead of a pea shoulder
+    const delt = new THREE.Mesh(new THREE.SphereGeometry(0.135, 14, 12), mat(coatColor, { roughness: 0.45, metalness: 0.35 }));
+    delt.scale.set(1.05, 0.88, 1);
+    delt.position.set(side * 0.48, 1.18, 0.04);
+    g.add(delt);
 
     const upper = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.095, 0.08, 0.44 * length, 10),
-      mat(coatColor, { roughness: 0.5 })
+      new THREE.CylinderGeometry(0.105, 0.085, 0.44 * length, 10),
+      armMat
     );
-    upper.position.set(side * 0.48, 1.12, 0.04);
+    upper.position.set(side * 0.48, 1.1, 0.05);
     upper.rotation.x = 0.35;
     upper.rotation.z = side * 0.08;
     g.add(upper);
 
-    const elbow = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 12), glowMat(accent, 0.85));
-    elbow.position.set(side * 0.5, 0.86, 0.18);
-    g.add(elbow);
+    // angular elbow pad with a thin accent seam, not a glow ball
+    const elbowPad = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.1, 0.12), mat(0x0a101c, { roughness: 0.5, metalness: 0.4 }));
+    elbowPad.position.set(side * 0.5, 0.86, 0.18);
+    elbowPad.rotation.x = 0.5;
+    g.add(elbowPad);
+    const elbowSeam = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.015, 0.02), glowMat(accent, 0.8));
+    elbowSeam.position.set(side * 0.5, 0.87, 0.245);
+    elbowSeam.rotation.x = 0.5;
+    g.add(elbowSeam);
 
+    // forearm gauntlet that flares toward the wrist
     const lower = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.08, 0.065, 0.42 * length, 10),
-      mat(coatColor, { roughness: 0.5 })
+      new THREE.CylinderGeometry(0.07, 0.105, 0.42 * length, 10),
+      armMat
     );
     lower.position.set(side * 0.5, 0.68, 0.22);
     lower.rotation.x = 0.7;
     lower.rotation.z = side * 0.05;
     g.add(lower);
+    const cuff = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.12, 0.07, 10), mat(0x0a101c, { roughness: 0.45, metalness: 0.45 }));
+    cuff.position.set(side * 0.5, 0.575, 0.29);
+    cuff.rotation.x = 0.7;
+    g.add(cuff);
 
     if (glove !== false) {
       const gloveColor = (typeof glove === 'number') ? glove : accent;
-      const gloveMesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.09, 14, 10),
-        mat(gloveColor, { roughness: 0.56, metalness: gloveColor === accent ? 0.18 : 0.02 })
-      );
-      gloveMesh.scale.set(1.1, 0.82, 0.9);
-      gloveMesh.position.set(side * 0.5, 0.5, 0.32);
-      g.add(gloveMesh);
-
-      const wrist = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.08, 10), mat(coatColor, { roughness: 0.5 }));
-      wrist.position.set(side * 0.5, 0.56, 0.26);
-      wrist.rotation.x = 0.7;
-      g.add(wrist);
+      const gloveMat = mat(gloveColor, { roughness: 0.56, metalness: gloveColor === accent ? 0.18 : 0.02 });
+      // blocky hand with a thumb, reads as a fist at range
+      const palm = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.13, 0.15), gloveMat);
+      palm.position.set(side * 0.5, 0.49, 0.34);
+      palm.rotation.x = 0.5;
+      g.add(palm);
+      const thumb = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.05, 0.07), gloveMat);
+      thumb.position.set(side * 0.455, 0.52, 0.36);
+      g.add(thumb);
 
       if (gloveColor === accent) {
-        const knuckle = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.025, 0.05), glowMat(accent, 0.75));
+        const knuckle = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.02, 0.04), glowMat(accent, 0.75));
         knuckle.position.set(side * 0.5, 0.52, 0.41);
         g.add(knuckle);
       }
@@ -452,37 +504,59 @@ export function createStage(canvas) {
 
   function makeLegs({ coatColor = 0x1a2233, accent, stance = 1 } = {}) {
     const g = new THREE.Group();
+    const legMat = mat(coatColor, { roughness: 0.5 });
+    const darkMat = mat(0x0a0e16, { roughness: 0.7, metalness: 0.3 });
     [-1, 1].forEach(s => {
+      // thigh with actual quad mass
       const upper = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.115, 0.095, 0.5, 10),
-        mat(coatColor, { roughness: 0.5 })
+        new THREE.CylinderGeometry(0.15, 0.105, 0.52, 10),
+        legMat
       );
-      upper.position.set(s * 0.19 * stance, 0.12, 0);
-      upper.rotation.z = s * 0.06;
+      upper.position.set(s * 0.18 * stance, 0.1, 0.01);
+      upper.rotation.z = s * 0.05;
       g.add(upper);
+      const quad = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.2, 0.08), mat(coatColor, { roughness: 0.42, metalness: 0.35 }));
+      quad.position.set(s * 0.18 * stance, 0.1, 0.13);
+      quad.rotation.x = -0.15;
+      g.add(quad);
 
-      const knee = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), glowMat(accent, 0.7));
-      knee.position.set(s * 0.21 * stance, -0.13, 0.02);
-      g.add(knee);
+      // angular knee pad with an accent seam
+      const kneePad = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.11, 0.11), darkMat);
+      kneePad.position.set(s * 0.21 * stance, -0.14, 0.05);
+      kneePad.rotation.x = 0.3;
+      g.add(kneePad);
+      const kneeSeam = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.015, 0.02), glowMat(accent, 0.7));
+      kneeSeam.position.set(s * 0.21 * stance, -0.12, 0.11);
+      g.add(kneeSeam);
 
+      // calf with a flare at the top, tapering to the ankle
       const lower = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.09, 0.075, 0.44, 10),
-        mat(coatColor, { roughness: 0.5 })
+        new THREE.CylinderGeometry(0.105, 0.07, 0.44, 10),
+        legMat
       );
       lower.position.set(s * 0.23 * stance, -0.37, 0.02);
       lower.rotation.z = -s * 0.04;
       g.add(lower);
 
-      const boot = new THREE.Mesh(
-        new THREE.BoxGeometry(0.22, 0.17, 0.34),
-        mat(0x0a0e16, { roughness: 0.7, metalness: 0.3 })
-      );
-      boot.position.set(s * 0.25 * stance, -0.62, 0.1);
-      g.add(boot);
+      // shin guard plate in coat color with an accent edge line
+      const shinGuard = new THREE.Mesh(new THREE.BoxGeometry(0.125, 0.3, 0.05), mat(coatColor, { roughness: 0.4, metalness: 0.4 }));
+      shinGuard.position.set(s * 0.23 * stance, -0.36, 0.12);
+      shinGuard.rotation.x = -0.06;
+      g.add(shinGuard);
+      const shinEdge = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.28, 0.015), glowMat(accent, 0.65));
+      shinEdge.position.set(s * 0.23 * stance, -0.36, 0.15);
+      g.add(shinEdge);
 
-      const shin = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.26, 0.045), glowMat(accent, 0.7));
-      shin.position.set(s * 0.23 * stance, -0.36, 0.12);
-      g.add(shin);
+      // two-part armored boot: ankle cuff + foot with a toe cap
+      const ankle = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.12, 0.22), darkMat);
+      ankle.position.set(s * 0.24 * stance, -0.58, 0.04);
+      g.add(ankle);
+      const foot = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.11, 0.36), darkMat);
+      foot.position.set(s * 0.25 * stance, -0.645, 0.12);
+      g.add(foot);
+      const toeCap = new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.09, 0.1), mat(coatColor, { roughness: 0.4, metalness: 0.45 }));
+      toeCap.position.set(s * 0.25 * stance, -0.65, 0.28);
+      g.add(toeCap);
     });
     return g;
   }
@@ -1513,7 +1587,7 @@ export function createStage(canvas) {
   }
 
   // ============================================================
-  //  CHARACTER BUILDERS — 11 total
+  //  CHARACTER BUILDERS - 11 total
   // ============================================================
 
   function commonBase(accent, accent2, options = {}) {
@@ -1578,7 +1652,7 @@ export function createStage(canvas) {
       medical: options.medical
     }));
     g.add(makeGroundRing(accent));
-    // v4.8.0 — particle field removed for calmer look
+    // v4.8.0 - particle field removed for calmer look
 
     g.userData.accent = accent;
     g.userData.accent2 = accent2;
@@ -2061,22 +2135,13 @@ export function createStage(canvas) {
   //  or a load failure, leaves the primitive figure in place.
   //  Drop sculpted GLBs in assets/models/ and set hero.model.
   // ============================================================
-  const GLTF_LOADER_URL = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js';
-  let loaderPromise = null;
   let loadToken = 0;
-
-  function getLoader() {
-    if (!loaderPromise) {
-      loaderPromise = import(/* @vite-ignore */ GLTF_LOADER_URL)
-        .then(m => new m.GLTFLoader())
-        .catch(err => { console.warn('[stage] GLTFLoader unavailable, using primitives', err); return null; });
-    }
-    return loaderPromise;
-  }
+  const gltfLoader = new GLTFLoader();
 
   function disposeFigure() {
     if (!currentFigure) return;
     scene.remove(currentFigure);
+    if (currentFigure.userData.cached) { currentFigure = null; return; }
     currentFigure.traverse(o => {
       if (o.geometry) o.geometry.dispose();
       if (o.material) {
@@ -2090,6 +2155,8 @@ export function createStage(canvas) {
   // install a group as the active figure with the hero stance + entrance
   function mountFigure(group) {
     disposeFigure();
+    try { applyToonPipeline(group); }
+    catch (err) { console.warn('[stage] toon pipeline skipped', err); }
     currentFigure = group;
     const layout = getFigureLayout();
     currentFigure.position.set(layout.x, layout.y, 0);
@@ -2113,7 +2180,7 @@ export function createStage(canvas) {
     const box = new THREE.Box3().setFromObject(root);
     const size = new THREE.Vector3(); box.getSize(size);
     const center = new THREE.Vector3(); box.getCenter(center);
-    const targetH = 1.9;
+    const targetH = 2.25;
     const s = size.y > 0.0001 ? targetH / size.y : 1;
     root.scale.multiplyScalar(s);
     root.position.x -= center.x * s;
@@ -2121,14 +2188,60 @@ export function createStage(canvas) {
     root.position.y -= box.min.y * s + 0.65;
   }
 
-  async function loadModel(url) {
+  // Sculpted GLBs share one base rig (same skeleton across every hero), so
+  // the signature prop + rig that makes each primitive figure read as
+  // distinct also gets grafted onto the loaded model. Primitive figures
+  // are authored ~2.6 units tall (feet at -0.65, head top ~1.96); every
+  // normalized GLB is a fixed 2.25 tall from that same -0.65 ground, so
+  // the decoration bundle is rescaled around the ground point to land on
+  // the (shorter) model instead of floating above its head.
+  const PRIMITIVE_REF_HEIGHT = 2.6;
+  const GLB_HEIGHT = 2.25;
+  const GLB_GROUND_Y = -0.65;
+  const FIGURE_DECOR = {
+    protagonist: { prop: propKeycapOrbit, rig: 'protagonist' },
+    scientist:   { prop: propMolecule,    rig: 'scientist' },
+    engineer:    { prop: propTremorSensor, rig: 'engineer' },
+    builder:     { prop: propSolder,      rig: 'builder' },
+    author:      { prop: propPapers,      rig: 'author' },
+    technician:  { prop: propToolOrbit,   rig: 'technician' },
+    archivist:   { prop: propScroll,      rig: 'archivist' },
+    diplomat:    { prop: propCrest,       rig: 'diplomat' },
+    operator:    { prop: propDataDeck,    rig: 'operator' },
+    network:     { prop: propCrest,       rig: 'network' },
+    comms:       { prop: propSignalBurst, rig: 'comms' },
+    civilian:    { prop: propCoffeeBook,  rig: 'civilian' },
+    astakeria:   { prop: propMirror,      rig: null, propPos: [0.58, 1.02, 0.42] },
+    unknown:     { prop: propGlitchHex,   rig: 'unknown' }
+  };
+
+  function decorateModel(group, figureKey, accent, accent2) {
+    const decor = FIGURE_DECOR[figureKey];
+    if (!decor) return;
+    const decorGroup = new THREE.Group();
+    const prop = decor.prop(accent, accent2);
+    if (decor.propPos) prop.position.set(...decor.propPos);
+    decorGroup.add(prop);
+    if (decor.rig) addSignatureRig(decorGroup, decor.rig, accent, accent2);
+
+    const factor = GLB_HEIGHT / PRIMITIVE_REF_HEIGHT;
+    decorGroup.scale.setScalar(factor);
+    decorGroup.position.y = GLB_GROUND_Y * (1 - factor);
+
+    group.add(decorGroup);
+    group.userData.prop = prop;
+  }
+
+  const modelCache = new Map();
+
+  async function loadModel(url, figureKey, accent, accent2) {
+    if (modelCache.has(url)) return modelCache.get(url);
     try {
-      const loader = await getLoader();
-      if (!loader) return null;
-      const gltf = await loader.loadAsync(url);
+      const gltf = await gltfLoader.loadAsync(url);
       const root = gltf.scene || (gltf.scenes && gltf.scenes[0]);
       if (!root) return null;
       const wrap = new THREE.Group();
+      wrap.userData.cached = true;
       wrap.add(root);
       normalizeModel(root);
       // play a rigged idle clip if the model ships with one
@@ -2137,6 +2250,8 @@ export function createStage(canvas) {
         mixer.clipAction(gltf.animations[0]).play();
         wrap.userData.mixer = mixer;
       }
+      decorateModel(wrap, figureKey, accent, accent2);
+      modelCache.set(url, wrap);
       return wrap;
     } catch (err) {
       console.warn('[stage] model load failed:', url, err);
@@ -2153,22 +2268,25 @@ export function createStage(canvas) {
     fillLight.color.setHex(accent2);
 
     const token = ++loadToken;
-
-    // baseline: primitive figure shows instantly
     const builder = BUILDERS[figureKey] || BUILDERS.protagonist;
-    mountFigure(builder(accent, accent2));
 
-    // upgrade to a sculpted GLB if the hero provides one
     if (modelUrl) {
-      loadModel(modelUrl).then(model => {
-        if (!model || token !== loadToken) return; // failed, or hero already switched
-        mountFigure(model);
+      const cached = modelCache.get(modelUrl);
+      if (cached) { mountFigure(cached); return; }
+      disposeFigure();
+      loadModel(modelUrl, figureKey, accent, accent2).then(model => {
+        if (token !== loadToken) return;
+        if (model) mountFigure(model);
+        else mountFigure(builder(accent, accent2));
       });
+      return;
     }
+
+    mountFigure(builder(accent, accent2));
   }
 
   // ============================================================
-  //  tick loop (v4.8.0 — calm. no mouse follow, no particles)
+  //  tick loop (v4.8.0 - calm. no mouse follow, no particles)
   // ============================================================
   let t = 0;
   function tick(dt) {
@@ -2211,7 +2329,7 @@ export function createStage(canvas) {
   }
 
   function animateProp(prop, t, _dt) {
-    // v4.8.0 — calm. Every prop drifts together at the same slow tempo.
+    // v4.8.0 - calm. Every prop drifts together at the same slow tempo.
     // Identity comes from the prop's *form*, not its motion.
     prop.position.y = 0.85 + Math.sin(t * 0.85) * 0.035;
     prop.rotation.y = t * 0.16;
@@ -2234,7 +2352,7 @@ export function createStage(canvas) {
         break;
 
       case 'spin':
-        // Molecule turns slowly — sells "research" identity quietly.
+        // Molecule turns slowly - sells "research" identity quietly.
         prop.rotation.y = t * 0.65;
         break;
 

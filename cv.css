@@ -1,5 +1,5 @@
 /* ============================================================
-   CV MODE — Resume version of Hamza's House
+   CV MODE - Resume version of Hamza's House
    Same design language as the main site. Calmer. Built for
    fast recruiter scanning with sticky-rail navigation.
    ============================================================ */
@@ -408,7 +408,7 @@ a { color: var(--acc); text-decoration: none; }
 .cvc-icn { font-size: 0.85rem; }
 
 /* ============================================================
-   SECTIONS — common
+   SECTIONS - common
    ============================================================ */
 
 .cv-sec {
@@ -1412,7 +1412,7 @@ a { color: var(--acc); text-decoration: none; }
   .cv-sec-cta { width: 100%; justify-content: center; }
 }
 
-/* print stylesheet — recruiter shortcut */
+/* print stylesheet - recruiter shortcut */
 @media print {
   body.cv-body { background: #fff; color: #000; }
   #cv-bg, .cv-topbar, .cv-rail, .cv-foot, .cv-mode-toggle, .cv-ast-cta { display: none !important; }

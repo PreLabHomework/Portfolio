@@ -1,5 +1,5 @@
 // ============================================================
-//  CV MODE — flat resume renderers + sticky-rail nav
+//  CV MODE - flat resume renderers + sticky-rail nav
 //  Imports data.js for content sync with the main site.
 // ============================================================
 
@@ -424,7 +424,7 @@ function renderPersonal() {
   `;
 }
 
-// ─── ASTAKERIA (kept short for resume mode — recruiters can click into the main site) ─
+// ─── ASTAKERIA (kept short for resume mode - recruiters can click into the main site) ─
 function renderAstakeria() {
   const c = ROSTER.find(r => r.id === 'astakeria');
   const s = SECTIONS.astakeria;

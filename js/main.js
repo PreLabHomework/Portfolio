@@ -3,6 +3,9 @@ import { renderSection, postRender } from "./sections.js";
 import { createShader } from "./shader.js";
 import * as audio from "./audio.js";
 import { initResumePickers } from "./resume-picker.js";
+import { initTransitions, wipe } from "./transitions.js";
+import { initTraining, openTraining, isTrainingOpen } from "./training.js";
+import { initCareer, openCareer, isCareerOpen } from "./career.js";
 
 const app = document.getElementById("app");
 const boot = document.getElementById("boot");
@@ -34,6 +37,9 @@ let muted = true;
 let lastFrame = performance.now();
 
 audio.setMuted(true);
+initTransitions();
+initTraining({ onExit: () => audio.back() });
+initCareer({ onExit: () => audio.back() });
 renderRoster();
 renderMenu();
 updateClock();
@@ -43,9 +49,13 @@ requestAnimationFrame(frame);
 const initialHash = currentHash();
 const directIndex = hashIndex(initialHash);
 if (directIndex >= 0) {
-  startApp().then(() => openDetail(directIndex, { replace: true }));
+  startApp({ instant: true }).then(() => openDetail(directIndex, { replace: true, instant: true }));
 } else if (initialHash === "interactive" || initialHash === "arena") {
-  startApp();
+  startApp({ instant: true });
+} else if (initialHash === "training") {
+  startApp({ instant: true }).then(() => openTraining());
+} else if (initialHash === "career") {
+  startApp({ instant: true }).then(() => openCareer());
 }
 
 bootStart?.addEventListener("click", () => startApp());
@@ -64,6 +74,7 @@ window.addEventListener("resize", () => {
 
 window.addEventListener("keydown", event => {
   if (!started) return;
+  if (isTrainingOpen() || isCareerOpen()) return; // those screens own their keys
   if (detailEl.classList.contains("live")) {
     if (event.key === "Escape" || event.key === "Backspace") {
       event.preventDefault();
@@ -87,14 +98,18 @@ window.addEventListener("keydown", event => {
   }
 });
 
-async function startApp() {
+async function startApp({ instant = false } = {}) {
   if (started) return;
   started = true;
   audio.unlock();
   audio.start();
-  boot?.classList.add("hide");
-  app?.classList.add("live");
-  app?.setAttribute("aria-hidden", "false");
+  const swap = () => {
+    boot?.classList.add("hide");
+    app?.classList.add("live");
+    app?.setAttribute("aria-hidden", "false");
+  };
+  if (instant) swap();
+  else await wipe(swap);
   stage = await loadStage();
   setActive(directIndex >= 0 ? directIndex : 0, false);
 }
@@ -136,13 +151,39 @@ function renderMenu() {
   const menuItems = ROSTER
     .map((hero, index) => ({ hero, index }))
     .filter(({ hero }) => hero.menu || hero.id === "soon");
-  menuEl.innerHTML = menuItems.map(({ hero, index }) => `
-    <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.id === "soon" ? "COMING SOON" : hero.title}</button>
-  `).join("");
-  menuEl.querySelectorAll("button").forEach(button => {
+
+  menuEl.innerHTML = `
+    <div class="menu-group menu-heroes">
+      ${menuItems.map(({ hero, index }) => `
+        <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.id === "soon" ? "COMING SOON" : hero.title}</button>
+      `).join("")}
+    </div>
+    <div class="menu-divider" aria-hidden="true"></div>
+    <div class="menu-group menu-system">
+      <button type="button" data-action="training">TRAINING</button>
+      <button type="button" data-action="career">CAREER PROFILE</button>
+      <a href="cv.html" data-action="pro">PRO MODE</a>
+    </div>
+  `;
+
+  menuEl.querySelectorAll("button[data-index]").forEach(button => {
     const index = Number(button.dataset.index);
     button.addEventListener("mouseenter", () => setActive(index, true));
     button.addEventListener("click", () => openDetail(index));
+  });
+
+  menuEl.querySelector('[data-action="training"]')?.addEventListener("click", () => {
+    audio.select();
+    wipe(() => openTraining());
+    writeHash("training");
+  });
+  menuEl.querySelector('[data-action="career"]')?.addEventListener("click", () => {
+    audio.select();
+    wipe(() => openCareer());
+    writeHash("career");
+  });
+  menuEl.querySelectorAll(".menu-system button, .menu-system a").forEach(item => {
+    item.addEventListener("mouseenter", () => audio.hover());
   });
 }
 
@@ -161,7 +202,7 @@ function setActive(index, speak = false) {
     slot.classList.toggle("is-active", active);
     slot.setAttribute("aria-selected", active ? "true" : "false");
   });
-  menuEl?.querySelectorAll("button").forEach(button => {
+  menuEl?.querySelectorAll("button[data-index]").forEach(button => {
     button.classList.toggle("is-active", Number(button.dataset.index) === index);
   });
   updatePreview(hero);
@@ -183,12 +224,7 @@ function updatePreview(hero) {
   `).join("");
 }
 
-function openDetail(index, options = {}) {
-  if (!started) return;
-  const hero = ROSTER[index];
-  setActive(index, false);
-  audio.select();
-  audio.whoosh();
+function buildDetail(hero) {
   detailEl.innerHTML = `
     <article class="detail-screen" style="--screen-acc:${hero.accent};--screen-acc2:${hero.accent2};">
       <header class="detail-titlebar">
@@ -215,6 +251,17 @@ function openDetail(index, options = {}) {
   detailEl.querySelectorAll("[data-close-detail]").forEach(button => {
     button.addEventListener("click", closeDetail);
   });
+}
+
+function openDetail(index, options = {}) {
+  if (!started) return;
+  const hero = ROSTER[index];
+  setActive(index, false);
+  audio.select();
+  audio.whoosh();
+  const alreadyInDetail = detailEl.classList.contains("live");
+  if (options.instant || alreadyInDetail) buildDetail(hero);
+  else wipe(() => buildDetail(hero));
   writeHash(hero.id, options.replace);
 }
 

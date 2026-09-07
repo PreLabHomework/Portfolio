@@ -9,9 +9,3 @@ dist/
 
 # Blender source files for hero models (GLBs ship, blends stay local)
 assets/models-src/
-
-# C++ build artifacts
-*.exe
-*.obj
-*.pdb
-*.ilk

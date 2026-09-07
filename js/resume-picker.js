@@ -35,7 +35,7 @@ function injectStyles() {
       width: min(760px, calc(100vw - 40px));
       padding: 34px 38px;
       border: 1px solid rgba(255,255,255,0.22);
-      border-left: 5px solid #f9a826;
+      box-shadow: inset 0 2px 0 #f9a826;
       background: linear-gradient(135deg, rgba(7,12,19,0.95), rgba(7,12,19,0.72));
       box-shadow: 0 30px 90px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
       clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
@@ -108,12 +108,15 @@ function injectStyles() {
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 18px 46px rgba(0,0,0,0.3);
       transition: transform 160ms ease, border-color 160ms ease;
     }
+    .rp-option-card {
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      border-radius: 0;
+    }
     .rp-option-card::before {
       content: '';
-      position: absolute; left:0; top:16px; bottom:16px;
-      width: 4px;
-      background: var(--rp-acc, #f9a826);
-      border-radius: 0 4px 4px 0;
+      position: absolute; left: 0; right: 0; top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rp-acc, #f9a826), transparent 70%);
     }
     .rp-option-card:hover {
       transform: translateY(-4px);

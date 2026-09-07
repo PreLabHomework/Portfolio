@@ -2658,7 +2658,7 @@ a {
 }
 
 /* ============================================================
-   CAPSTONE — D.Va Hero-Info style layout
+   CAPSTONE - D.Va Hero-Info style layout
    ============================================================ */
 .detail-body .cap-dva { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; margin-top: 4px; }
 .detail-body .cap-dva-left { display: grid; gap: 14px; }
@@ -2685,7 +2685,7 @@ a {
 @media (max-width: 900px) { .detail-body .cap-dva { grid-template-columns: 1fr; } }
 
 /* ============================================================
-   SPACING TIGHTENING — reduce unnecessary scroll everywhere
+   SPACING TIGHTENING - reduce unnecessary scroll everywhere
    ============================================================ */
 .detail-body .hi-head { margin: 0 0 12px; }
 .detail-body .hi-heading { font-size: clamp(2.2rem, 4vw, 3.4rem); }
@@ -2698,7 +2698,7 @@ a {
 .detail-body .xp-rec-stack { color: var(--hi-dim); font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: .07em; text-transform: uppercase; margin-top: 8px; }
 
 /* ============================================================
-   SKILLS — languages prominently at top, then two-column grid
+   SKILLS - languages prominently at top, then two-column grid
    ============================================================ */
 .detail-body .skl-lang-top { margin-bottom: 16px; }
 .detail-body .skl-lang-top .hi-group-title { margin-bottom: 8px; }
@@ -2723,7 +2723,7 @@ a {
 @media (max-width: 900px) { .detail-body .skl-layout { grid-template-columns: 1fr; } }
 
 /* ============================================================
-   TIMELINE — 2-column card grid
+   TIMELINE - 2-column card grid
    ============================================================ */
 .detail-body .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
 .detail-body .tl-card { padding: 12px 14px; border-radius: 3px; border: 1px solid var(--hi-line); background: rgba(255,255,255,0.025); clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
@@ -2737,7 +2737,7 @@ a {
 @media (max-width: 900px) { .detail-body .tl-grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
-   AFFILIATIONS WALL — grouped by category
+   AFFILIATIONS WALL - grouped by category
    ============================================================ */
 .detail-body .wall-layout { display: grid; gap: 22px; margin-top: 4px; }
 .detail-body .wall-group-label { color: var(--hi-acc); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--hi-line); }
@@ -2748,7 +2748,7 @@ a {
 .detail-body .wall-tile-role { color: var(--hi-mut); font-size: 0.77rem; margin-top: 4px; line-height: 1.4; }
 
 /* ============================================================
-   CONTACT — OW comms panel
+   CONTACT - OW comms panel
    ============================================================ */
 .detail-body .comms-panel { display: grid; gap: 16px; }
 .detail-body .comms-header { display: flex; flex-direction: column; gap: 4px; padding: 12px 16px; border-radius: 4px; border: 1px solid var(--hi-line); background: rgba(255,255,255,0.03); border-left: 3px solid var(--hi-acc); }
@@ -2778,3 +2778,220 @@ a {
 @media (max-width: 900px) { .detail-body .comms-body { grid-template-columns: 1fr; } .detail-body .comms-line { grid-template-columns: 26px 72px 1fr 12px; gap: 8px; } }
 
 /* resume-picker-btn triggers the full-screen OW-style modal (js/resume-picker.js) */
+
+/* ============================================================
+   V6 MAIN MENU RESTRUCTURE (authoritative, keep last)
+   Hero list stays under PLAY; a divider separates the system
+   group: TRAINING / CAREER PROFILE / PRO MODE, OW2 style.
+   ============================================================ */
+.main-menu .menu-group { display: grid; gap: 2px; }
+
+.main-menu .menu-divider {
+  width: 118px;
+  height: 2px;
+  margin: 16px 0 14px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 75%, #fff), transparent);
+  opacity: 0.55;
+}
+
+.main-menu .menu-system button,
+.main-menu .menu-system a {
+  display: block;
+  width: 100%;
+  padding: 3px 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.02;
+  text-align: left;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 120ms ease, transform 120ms ease;
+}
+
+.main-menu .menu-system button:hover,
+.main-menu .menu-system a:hover {
+  color: #fff;
+  transform: translateX(8px);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--acc) 58%, #e3924e), 0 3px 14px rgba(58, 20, 10, 0.7);
+}
+
+@media (max-width: 900px) {
+  .main-menu .menu-system button,
+  .main-menu .menu-system a { font-size: 1.15rem; }
+  .main-menu .menu-divider { margin: 10px 0 8px; }
+}
+
+/* ============================================================
+   V7 OW PLATE LANGUAGE (authoritative, keep last)
+   Kills accent side-bars and boxy panels. Angled plates, sliced
+   corners, skewed title tabs, staggered row entrances, filled
+   silhouette icons, upgraded select screen.
+   ============================================================ */
+
+/* ---- 1. remove every side-bar ---- */
+.perk-panel,
+.project-detail-panel,
+.ast-hero,
+.ast-ex,
+.detail-body .hi-signal {
+  border-left: 0;
+}
+
+/* ---- 2. panels become angled plates ---- */
+.perk-panel,
+.project-detail-panel,
+.ast-hero,
+.ast-ex {
+  padding: 18px 22px;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.016) 0 18px, transparent 18px 36px),
+    linear-gradient(120deg, color-mix(in srgb, var(--sa) 9%, rgba(10,16,26,0.55)), rgba(9,15,24,0.35) 70%);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+.detail-body .hi-signal {
+  padding: 12px 20px;
+  border-radius: 0;
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--hi-acc) 14%, transparent), transparent 78%);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.detail-body .hi-group {
+  border: 0;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.014) 0 20px, transparent 20px 40px),
+    linear-gradient(125deg, rgba(13,20,32,0.66), rgba(8,13,22,0.42));
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* ---- 3. group titles become skewed OW tabs ---- */
+.detail-body .hi-group-title {
+  position: relative;
+  display: inline-block;
+  padding: 5px 22px 5px 14px;
+  margin: -2px 0 12px -4px;
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--screen-acc, var(--acc)) 82%, #000),
+    color-mix(in srgb, var(--screen-acc, var(--acc)) 45%, #000));
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  color: #fff;
+  border: 0;
+  border-radius: 0;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+}
+
+/* ---- 4. rows: stagger in, shear on hover, icons come alive ---- */
+@keyframes v7RowIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.detail-body .hi-row {
+  animation: v7RowIn 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transition: background 140ms ease, transform 140ms ease;
+}
+.detail-body .hi-row:nth-child(1)  { animation-delay: 40ms; }
+.detail-body .hi-row:nth-child(2)  { animation-delay: 90ms; }
+.detail-body .hi-row:nth-child(3)  { animation-delay: 140ms; }
+.detail-body .hi-row:nth-child(4)  { animation-delay: 190ms; }
+.detail-body .hi-row:nth-child(5)  { animation-delay: 240ms; }
+.detail-body .hi-row:nth-child(6)  { animation-delay: 290ms; }
+.detail-body .hi-row:nth-child(7)  { animation-delay: 340ms; }
+.detail-body .hi-row:nth-child(8)  { animation-delay: 390ms; }
+.detail-body .hi-row:nth-child(n+9){ animation-delay: 440ms; }
+
+.detail-body .hi-row:hover {
+  background: linear-gradient(100deg, color-mix(in srgb, var(--screen-acc, var(--acc)) 10%, transparent), transparent 70%);
+  transform: translateX(6px);
+}
+.detail-body .hi-row-icon { transition: color 140ms ease, transform 140ms ease; }
+.detail-body .hi-row:hover .hi-row-icon {
+  color: var(--screen-acc, var(--acc));
+  transform: scale(1.12);
+}
+.detail-body .hi-row-icon svg { width: 100%; height: 100%; }
+
+/* ---- 5. detail titlebar gets the slash treatment ---- */
+.detail-titlebar {
+  position: relative;
+}
+.detail-titlebar::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--screen-acc, var(--acc)) 0 38%,
+    rgba(255,255,255,0.12) 38.5% 100%);
+  clip-path: polygon(0 0, 37% 0, 39% 100%, 0 100%, 0 0, 100% 0, 100% 100%, 41% 100%, 39% 0);
+}
+
+/* ---- 6. select screen: preview plate + angled stat chips ---- */
+.pv-code {
+  display: inline-block;
+  padding: 4px 18px 4px 12px;
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--acc) 85%, #000),
+    color-mix(in srgb, var(--acc) 40%, #000));
+  clip-path: polygon(0 0, 100% 0, calc(100% - 11px) 100%, 0 100%);
+  color: #fff;
+}
+.pv-stats .pv-stat {
+  border: 0;
+  border-radius: 0;
+  padding: 5px 16px;
+  background: linear-gradient(120deg, rgba(13,20,32,0.8), rgba(8,13,22,0.5));
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform 140ms ease;
+}
+.pv-stats .pv-stat:hover { transform: translateY(-3px); }
+.pv-tagline {
+  display: inline-block;
+  padding: 3px 14px;
+  background: rgba(8, 13, 22, 0.72);
+  clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+}
+
+/* ---- 7. roster slots: slanted silhouettes, OW select feel ---- */
+.select-bar .slot {
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  transition: transform 130ms ease, filter 130ms ease;
+}
+.select-bar .slot:hover { transform: translateY(-6px); }
+.select-bar .slot.is-active {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--acc) 35%, transparent));
+}
+.select-bar .slot.is-active::after {
+  content: "";
+  position: absolute;
+  left: 12%; right: 12%; bottom: 3px;
+  height: 3px;
+  background: var(--acc);
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+}
+
+/* ---- 8. boot cards: sliced corners instead of rounded boxes ---- */
+.experience-card {
+  border-radius: 0;
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+}
+
+/* ---- 9. flatten leftover heavy rounding inside detail views ---- */
+.detail-body .hi-panel-cols .hi-group,
+.detail-body .perk-panel { border-radius: 0; }

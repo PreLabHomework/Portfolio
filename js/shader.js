@@ -1,4 +1,4 @@
-// OW2 character-select atmosphere — dark industrial environment with
+// OW2 character-select atmosphere - dark industrial environment with
 // bokeh defocused lights, architectural columns, haze, hero spotlight, dust, vignette.
 export function createShader(canvas) {
   const ctx = canvas.getContext("2d", { alpha: true });
@@ -7,7 +7,7 @@ export function createShader(canvas) {
   let accent  = [56, 189, 248];   // cool teal default
   let accent2 = [251, 191, 36];   // warm gold default
 
-  // Bokeh light sources — fixed world-space fractions, mix of warm/cool
+  // Bokeh light sources - fixed world-space fractions, mix of warm/cool
   const BOKEH = [
     { x: 0.10, y: 0.12, r: 0.28, warm: false, phase: 0.0,  a: 0.055 },
     { x: 0.30, y: 0.06, r: 0.18, warm: true,  phase: 1.40, a: 0.050 },
@@ -59,7 +59,7 @@ export function createShader(canvas) {
   // ---- layers ------------------------------------------------
 
   function paintBase(w, h) {
-    // Near-black charcoal/navy base — the forge darkness
+    // Near-black charcoal/navy base - the forge darkness
     const bg = ctx.createLinearGradient(0, 0, 0, h);
     bg.addColorStop(0,   `rgba(7, 12, 20, 1)`);
     bg.addColorStop(0.5, `rgba(5,  9, 16, 1)`);
@@ -101,7 +101,7 @@ export function createShader(canvas) {
       const cw   = w * 0.026;
       const side = i < COLS.length / 2 ? 1 : -1;  // which edge catches rim light
 
-      // Column silhouette — slightly darker than base
+      // Column silhouette - slightly darker than base
       const sg = ctx.createLinearGradient(x - cw, 0, x + cw, 0);
       sg.addColorStop(0,    `rgba(0,0,0,0)`);
       sg.addColorStop(0.22, `rgba(2,5,10, 0.50)`);
@@ -111,7 +111,7 @@ export function createShader(canvas) {
       ctx.fillStyle = sg;
       ctx.fillRect(x - cw, 0, cw * 2, h * 0.88);
 
-      // Rim-light edge — hero's cool accent colour catches the column edge
+      // Rim-light edge - hero's cool accent colour catches the column edge
       if (i > 0 && i < COLS.length - 1) {
         const ex = x + side * cw * 0.55;
         const eg = ctx.createLinearGradient(ex - 4, 0, ex + 4, 0);
@@ -125,7 +125,7 @@ export function createShader(canvas) {
   }
 
   function paintHaze(w, h) {
-    // Mid-ground atmospheric band — simulates in-world depth fog
+    // Mid-ground atmospheric band - simulates in-world depth fog
     const haze = ctx.createLinearGradient(0, h * 0.30, 0, h * 0.68);
     haze.addColorStop(0,   `rgba(0,0,0,0)`);
     haze.addColorStop(0.5, `rgba(${accent[0]},${accent[1]},${accent[2]}, 0.022)`);
@@ -142,7 +142,7 @@ export function createShader(canvas) {
   }
 
   function paintSpotlight(w, h) {
-    // Warm hero spotlight — radiates from below the frame centre
+    // Warm hero spotlight - radiates from below the frame centre
     const sx = w * 0.52;
     const sy = h * 1.08;
     const sr = Math.min(w, h) * 0.82;

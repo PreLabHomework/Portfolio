@@ -200,3 +200,70 @@ export function speak(text, opts = {}) {
 
   try { speechSynthesis.speak(u); } catch { /* ignore */ }
 }
+
+// ─── TRAINING RANGE SFX (v6) ───
+export function hit() {
+  if (!ensure() || muted) return;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'square';
+  osc.frequency.setValueAtTime(880, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(520, ctx.currentTime + 0.05);
+  env(g, 0.05, 0.001, 0.06);
+  osc.connect(g).connect(master);
+  osc.start();
+  osc.stop(ctx.currentTime + 0.08);
+}
+
+export function crit() {
+  if (!ensure() || muted) return;
+  [1240, 1660].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.03);
+    env(g, 0.05, 0.001, 0.09);
+    osc.connect(g).connect(master);
+    osc.start(ctx.currentTime + i * 0.03);
+    osc.stop(ctx.currentTime + i * 0.03 + 0.11);
+  });
+}
+
+export function miss() {
+  if (!ensure() || muted) return;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(180, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.07);
+  env(g, 0.025, 0.001, 0.07);
+  osc.connect(g).connect(master);
+  osc.start();
+  osc.stop(ctx.currentTime + 0.1);
+}
+
+export function countdown(final = false) {
+  if (!ensure() || muted) return;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = final ? 1180 : 740;
+  env(g, final ? 0.12 : 0.07, 0.003, final ? 0.4 : 0.14);
+  osc.connect(g).connect(master);
+  osc.start();
+  osc.stop(ctx.currentTime + (final ? 0.45 : 0.18));
+}
+
+export function roundEnd() {
+  if (!ensure() || muted) return;
+  [392, 494, 587, 784].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.value = f;
+    env(g, 0.08, 0.004, 0.5);
+    osc.connect(g).connect(master);
+    osc.start(ctx.currentTime + i * 0.09);
+    osc.stop(ctx.currentTime + i * 0.09 + 0.55);
+  });
+}
