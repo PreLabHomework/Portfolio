@@ -1,0 +1,113 @@
+/* ============================================================
+   TAILWIND V4 FOUNDATION (v10-W1)
+   Preflight is deliberately not imported. styles.css and cv.css are
+   unlayered legacy CSS, and unlayered rules outrank every layered rule
+   regardless of specificity, so a preflight reset here could only change
+   elements the legacy sheets do not already claim. Importing theme and
+   utilities only keeps every unconverted component rendering untouched.
+   ============================================================ */
+
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "./index.html";
+@source "./cv.html";
+@source "./cv.js";
+@source "./js/**/*.js";
+
+@theme {
+  /* ── identity ───────────────────────────────────────────── */
+  --color-acc: #f9a826;
+  --color-acc2: #25c7f7;
+  --color-ink: #08101a;
+
+  /* Per-hero accents stay owned by js/data.js and arrive at runtime as
+     --sec-acc / --sec-acc2 on the section element. These bridge tokens let
+     Tailwind utilities consume that value instead of duplicating the pairs. */
+  --color-hero: var(--sec-acc, #f9a826);
+  --color-hero2: var(--sec-acc2, #25c7f7);
+
+  /* ── navy atmosphere ramp ───────────────────────────────── */
+  --color-bg: #080d14;
+  --color-panel: rgba(9, 15, 24, 0.72);
+  --color-panel-strong: rgba(12, 19, 31, 0.92);
+  --color-line: rgba(255, 255, 255, 0.16);
+  --color-line-soft: rgba(255, 255, 255, 0.08);
+  --color-text: #f5f8fd;
+  --color-muted: #b9c3d1;
+  --color-dim: #788497;
+  --color-danger: #ff4b58;
+  --color-ok: #22c55e;
+  --color-petra-line: rgba(227, 146, 78, 0.28);
+  --color-petra-glow: rgba(236, 129, 60, 0.24);
+
+  /* ── type stacks ────────────────────────────────────────── */
+  --font-display: "Oswald", "Bahnschrift Condensed", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --font-bebas: "Bebas Neue", "Oswald", "Bahnschrift Condensed", Impact, sans-serif;
+  --font-ui: "Inter Tight", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+
+  /* ── OW label tracking ──────────────────────────────────── */
+  --tracking-tab: 0.04em;
+  --tracking-label: 0.18em;
+  --tracking-kicker: 0.32em;
+  --tracking-lock: 0.4em;
+
+  /* ── motion, values taken from the shipped build ────────── */
+  --ease-ow: cubic-bezier(0.2, 0.9, 0.18, 1);
+  --ease-wipe-in: cubic-bezier(0.6, 0, 0.2, 1);
+  --ease-wipe-out: cubic-bezier(0.8, 0, 0.55, 1);
+  --motion-tap: 120ms;
+  --motion-hover: 150ms;
+  --motion-plate: 160ms;
+  --motion-swap: 220ms;
+  --motion-preview: 260ms;
+  --motion-lock: 320ms;
+  --motion-arrive: 420ms;
+  --motion-flash: 520ms;
+  --motion-rise: 560ms;
+
+  /* ── cut geometry, one dialect ──────────────────────────── */
+  --plate-cut-4: 4px;
+  --plate-cut-7: 7px;
+  --plate-cut-8: 8px;
+  --plate-cut-9: 9px;
+  --plate-cut-10: 10px;
+  --plate-cut-12: 12px;
+  --plate-cut-14: 14px;
+  --notch-cut-10: 10px;
+  --notch-cut-14: 14px;
+  --notch-cut-16: 16px;
+  --notch-cut-18: 18px;
+  --notch-cut-28: 28px;
+  --skew-ow: -14deg;
+}
+
+/* Parallelogram plate: top-left and bottom-right corners sheared. */
+@utility plate-cut-* {
+  --plate-cut-size: --value(--plate-cut-*);
+  clip-path: polygon(
+    var(--plate-cut-size) 0,
+    100% 0,
+    calc(100% - var(--plate-cut-size)) 100%,
+    0 100%
+  );
+}
+
+/* Notched plate: top-right and bottom-left corners chamfered. */
+@utility notch-cut-* {
+  --notch-cut-size: --value(--notch-cut-*);
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--notch-cut-size)) 0,
+    100% var(--notch-cut-size),
+    100% 100%,
+    var(--notch-cut-size) 100%,
+    0 calc(100% - var(--notch-cut-size))
+  );
+}
+
+@utility skew-ow {
+  transform: skewX(var(--skew-ow));
+}

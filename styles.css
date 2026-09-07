@@ -345,15 +345,6 @@ a {
 .pro-card { --card-acc: #ffd16d; }
 .arena-card { --card-acc: #ff4b86; }
 
-.boot-last {
-  margin-top: 16px;
-  color: rgba(120, 132, 151, 0.76);
-  font: 0.66rem var(--font-mono);
-  letter-spacing: 0.32em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .arena-app {
   position: fixed;
   inset: 0;
