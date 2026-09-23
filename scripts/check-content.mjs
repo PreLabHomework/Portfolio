@@ -1,13 +1,15 @@
 import { ROSTER, SECTIONS, LINKS } from '../js/data.js';
-import { readFileSync } from 'node:fs';
-import { URL } from 'node:url';
+import { HERO_INFO } from '../js/heroinfo-data.js';
+import { ICON_SPRITE } from '../js/icons.js';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join, extname } from 'node:path';
+import { URL, fileURLToPath } from 'node:url';
 
 let failed = false;
 const fail = (msg) => { console.error(`ERROR: ${msg}`); failed = true; };
 const warn = (msg) => console.warn(`WARN: ${msg}`);
 
 const textBlob = JSON.stringify({ ROSTER, SECTIONS, LINKS });
-if (textBlob.includes('\u2014')) fail('Visible content contains an em dash character. Use a comma, colon, or middle dot instead.');
 if (/[\u00c2\u00e2\ufffd]/.test(textBlob)) fail('Visible content contains mojibake artifacts.');
 
 for (const [name, url] of Object.entries(LINKS)) {
@@ -52,6 +54,41 @@ for (const title of projectTitles) {
   if (seenProjects.has(title)) fail(`Duplicate project title: ${title}`);
   seenProjects.add(title);
 }
+
+// ---- dash gate: no em or en dashes anywhere (Node, so Unicode is exact) ----
+const SKIP = new Set(['node_modules', '.git', 'dist', '.vscode']);
+const EXTS = new Set(['.js', '.mjs', '.html', '.css', '.md']);
+function walk(dir) {
+  for (const name of readdirSync(dir)) {
+    if (SKIP.has(name)) continue;
+    const path = join(dir, name);
+    if (statSync(path).isDirectory()) { walk(path); continue; }
+    if (!EXTS.has(extname(name))) continue;
+    readFileSync(path, 'utf8').split('\n').forEach((line, i) => {
+      if (line.includes('\u2014')) fail(`${path}:${i + 1} contains an em dash.`);
+      if (line.includes('\u2013')) fail(`${path}:${i + 1} contains an en dash.`);
+    });
+  }
+}
+walk(fileURLToPath(new URL('..', import.meta.url)));
+
+// ---- Hero Info: every hero complete, one ultimate, real icons ----
+const KEYS = new Set(['LMB', 'RMB', 'LSHIFT', 'E']);
+for (const hero of ROSTER) {
+  const info = HERO_INFO[hero.id];
+  if (!info) { fail(`Hero ${hero.id} has no HERO_INFO entry.`); continue; }
+  if (!info.title || !['support', 'tank', 'damage'].includes(info.role)) fail(`Hero ${hero.id} needs a title and a valid role.`);
+  if (!info.weapon || !info.ultimate) fail(`Hero ${hero.id} needs a weapon and an ultimate.`);
+  for (const a of [info.weapon, ...(info.abilities || [])].filter(Boolean)) {
+    if (!KEYS.has(a.key)) fail(`Hero ${hero.id} ability ${a.name} has invalid key ${a.key}.`);
+  }
+  const icons = JSON.stringify(info).match(/"(?:icon|portrait)":"([a-z0-9-]+)"/g) || [];
+  for (const m of icons) {
+    const name = m.split(':')[1].replace(/"/g, '');
+    if (!ICON_SPRITE.includes(`id="gi-${name}"`)) fail(`Hero ${hero.id} uses icon ${name}, which is not in js/icons.js.`);
+  }
+}
+for (const id of Object.keys(HERO_INFO)) if (!ROSTER.some(h => h.id === id)) warn(`HERO_INFO.${id} has no roster hero.`);
 
 if (failed) process.exit(1);
 console.log('Content check passed.');

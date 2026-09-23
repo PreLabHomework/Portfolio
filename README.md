@@ -1,6 +1,6 @@
 # Hamza's House
 
-Portfolio site built as an Overwatch 2 arena character-select screen. Each section is a hero with stats, lore, and a full detail view. Dual mode: Arena (full experience) and Pro (recruiter-friendly CV). Vite + vanilla JS + WebGL canvas.
+Portfolio site built as an Overwatch arena character-select screen. Each section is a hero with an Overwatch-style Hero Info page: weapon, abilities, ultimate, passive, and perks, with the full story in a Debrief tab. Dual mode: Arena (full experience) and Pro (recruiter-friendly CV). Vite, vanilla JS, Tailwind v4, Three.js.
 
 Hover to preview. Select to enter. ESC to go back.
 
@@ -10,7 +10,7 @@ Hover to preview. Select to enter. ESC to go back.
 
 ## Two modes
 
-**Arena Mode** (`index.html`) is for everyone. Character roster, per-hero 3D figures, a reactive OW2-style atmospheric background, audio cues, and full detail screens for each section.
+**Arena Mode** (`index.html`) is for everyone. Character roster, per-hero 3D figures, a reactive Overwatch-style atmospheric background, audio cues, and full detail screens for each section.
 
 **Pro Mode** (`cv.html`) is for recruiters. Sticky left rail, scrollable right pane, clean layout, print-friendly. Dual-persona system: ABU (Firmware / Embedded) and AKAT (Software / AI / ML) summaries always visible. Direct link: `/cv.html`.
 
@@ -95,6 +95,8 @@ Designed for desktop. Wide screen gets the full experience.
 
 ## About
 
-Built by [Hamza Abu Khalaf Al Takrouri](https://www.linkedin.com/in/hakat/) — Computer and Electrical Engineer, Saint Louis University, graduated May 2026.
+Built by [Hamza Abu Khalaf Al Takrouri](https://www.linkedin.com/in/hakat/). M.S. Computer Engineering student at George Mason University (CAES/DSYS), B.S. Computer and Electrical Engineering from Saint Louis University. Open to internships and co-ops in embedded, firmware, RTL, and validation.
+
+Icons: [game-icons.net](https://game-icons.net), CC BY 3.0. See [CREDITS.md](CREDITS.md).
 
 [LinkedIn](https://www.linkedin.com/in/hakat/) · [GitHub](https://github.com/PreLabHomework) · hamzaabukat@gmail.com

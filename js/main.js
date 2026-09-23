@@ -1,5 +1,7 @@
 import { ROSTER } from "./data.js";
-import { renderSection, postRender } from "./sections.js";
+import { postRender } from "./sections.js";
+import { renderHeroInfo, setupHeroInfo } from "./heroinfo.js";
+import { ICON_SPRITE } from "./icons.js";
 import { createShader } from "./shader.js";
 import * as audio from "./audio.js";
 import { initTransitions, wipe } from "./transitions.js";
@@ -149,12 +151,12 @@ function renderMenu() {
   if (!menuEl) return;
   const menuItems = ROSTER
     .map((hero, index) => ({ hero, index }))
-    .filter(({ hero }) => hero.menu || hero.id === "soon");
+    .filter(({ hero }) => hero.menu);
 
   menuEl.innerHTML = `
     <div class="menu-group menu-heroes">
       ${menuItems.map(({ hero, index }) => `
-        <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.id === "soon" ? "COMING SOON" : hero.title}</button>
+        <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.title}</button>
       `).join("")}
     </div>
     <div class="menu-divider" aria-hidden="true"></div>
@@ -224,26 +226,17 @@ function updatePreview(hero) {
 }
 
 function buildDetail(hero) {
-  detailEl.innerHTML = `
-    <article class="detail-screen" style="--screen-acc:${hero.accent};--screen-acc2:${hero.accent2};">
-      <header class="detail-titlebar">
-        <button class="detail-back" type="button" data-close-detail aria-label="Back to roster">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-          <span>BACK</span>
-        </button>
-        <span class="detail-code">${hero.codename} / ${hero.role}</span>
-        <div class="detail-actions">
-          ${hero.play_url ? `<a class="ow-action" href="${hero.play_url}" target="_blank" rel="noopener">${hero.play_label || "OPEN"}</a>` : ""}
-        </div>
-      </header>
-      <div class="detail-body">${renderSection(hero.id)}</div>
-    </article>
-  `;
+  if (!document.getElementById("gi-sprite")) {
+    document.body.insertAdjacentHTML("afterbegin", ICON_SPRITE.replace("<svg ", '<svg id="gi-sprite" '));
+  }
+  detailEl.classList.add("p-0");
+  detailEl.innerHTML = renderHeroInfo(hero);
   detailEl.classList.remove("entering");
   detailEl.classList.add("live", "entering");
   window.setTimeout(() => detailEl.classList.remove("entering"), 620);
   detailEl.scrollTop = 0;
   postRender(hero.id, detailEl);
+  setupHeroInfo(detailEl);
   detailEl.querySelectorAll("[data-close-detail]").forEach(button => {
     button.addEventListener("click", closeDetail);
   });

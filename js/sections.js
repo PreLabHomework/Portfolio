@@ -1,5 +1,6 @@
 // ============================================================
-//  SECTIONS - unified Hero-Info layout (v5.0)
+//  SECTIONS - DEBRIEF tab bodies (v11). The Hero Info screen
+//  itself is built in heroinfo.js; these are the long-form pages.
 //  Every section speaks one language: grouped columns of
 //  icon + label + sentence rows (the D.Va hero-info screen),
 //  over a dimmed hero backdrop. No chip walls, no dash rows.
@@ -22,7 +23,6 @@ export function renderSection(charId) {
     case 'wall':       return renderWall(s);
     case 'personal':   return renderPersonal(s);
     case 'astakeria':  return renderAstakeria(s);
-    case 'soon':       return renderSoon(s);
     case 'contact':    return renderContact(s);
     default:           return `<h2 class="hi-heading">${esc(s.heading || '')}</h2>`;
   }
@@ -40,66 +40,6 @@ function head(s, titleOverride) {
       <h2 class="hi-heading">${esc(titleOverride || s.heading)}</h2>
       ${s.sub || s.subtitle ? `<p class="hi-sub">${esc(s.sub || s.subtitle)}</p>` : ''}
     </header>
-    ${abilityRow(s)}
-  `;
-}
-
-// ---- ability row (v10-W2) ----------------------------------
-// Tailwind-only component. Nothing here is styled by the legacy layer, so it
-// never ends up dual-styled. Slots read LMB / SHIFT / E, with exactly one Q
-// ultimate per hero picked out in gold.
-
-function abilityRow(s) {
-  const abilities = Array.isArray(s.abilities) ? s.abilities : [];
-  if (!abilities.length) return '';
-
-  const cards = abilities.map((a, i) => abilityCard(a, i)).join('');
-  return `
-    <div class="ability-row mt-6 mb-7" data-ability-row>
-      <div class="flex items-center gap-3 mb-3">
-        <span class="font-mono text-[0.62rem] uppercase tracking-kicker text-dim">Abilities</span>
-        <span class="h-px flex-1 bg-line-soft"></span>
-      </div>
-      <div role="group" aria-label="Abilities" class="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        ${cards}
-      </div>
-    </div>
-  `;
-}
-
-function abilityCard(a, index) {
-  const ult = Boolean(a.ultimate);
-  // Gold for the ultimate, per-hero accent for everything else. The arena
-  // detail view sets --screen-acc (main.js) and Pro Mode sets --sec-acc
-  // (cv.js), so the component follows the active hero in both contexts.
-  const accent = ult
-    ? 'var(--color-acc)'
-    : 'var(--screen-acc, var(--sec-acc, var(--color-acc2)))';
-
-  const slotLabel = ult ? `${esc(a.slot)} <span class="opacity-70">ultimate</span>` : esc(a.slot);
-
-  return `
-    <button type="button"
-      data-ability
-      tabindex="${index === 0 ? '0' : '-1'}"
-      aria-pressed="false"
-      style="--ab-acc:${accent};"
-      class="group relative flex flex-col gap-2 text-left p-3 plate-cut-8
-             border border-line-soft bg-[rgba(255,255,255,0.025)]
-             hover:border-[var(--ab-acc)] hover:bg-[rgba(255,255,255,0.05)]
-             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ab-acc)]
-             aria-pressed:border-[var(--ab-acc)] aria-pressed:bg-[rgba(255,255,255,0.06)]
-             motion-safe:transition-colors motion-safe:duration-[var(--motion-hover)]
-             ${ult ? 'sm:col-span-2 xl:col-span-1' : ''}">
-      <span class="absolute left-0 top-0 h-full w-[3px] bg-[var(--ab-acc)] ${ult ? 'opacity-100' : 'opacity-70'}"></span>
-      <span class="flex items-center gap-2">
-        <span class="grid place-items-center w-7 h-7 text-[var(--ab-acc)] [&_svg]:w-5 [&_svg]:h-5">${glyph(a.icon || a.name)}</span>
-        <span class="font-mono text-[0.6rem] uppercase tracking-label px-1.5 py-0.5 border border-line-soft text-[var(--ab-acc)]">${slotLabel}</span>
-      </span>
-      <span class="font-display text-[1.02rem] leading-tight uppercase text-text">${esc(a.name)}</span>
-      ${a.desc ? `<span class="text-[0.8rem] leading-snug text-muted">${esc(a.desc)}</span>` : ''}
-      ${a.stat ? `<span class="font-mono text-[0.62rem] uppercase tracking-label text-[var(--ab-acc)]">${esc(a.stat)}</span>` : ''}
-    </button>
   `;
 }
 
@@ -696,16 +636,6 @@ function renderAstakeria(s) {
   `;
 }
 
-function renderSoon(s) {
-  return `
-    <div class="hi-soon">
-      <div class="hi-soon-glyph" aria-hidden="true">${glyph('unknown')}</div>
-      <div class="hi-soon-heading">${esc(s.heading)}</div>
-      <div class="hi-prose hi-soon-body">${s.body.map(p => `<p>${esc(p)}</p>`).join('')}</div>
-    </div>
-  `;
-}
-
 function renderContact(s) {
   const commsLines = s.lines.map(l => `
     <div class="comms-line">
@@ -766,56 +696,6 @@ function brandLogo(name = '') {
 
 export function postRender(charId, el) {
   if (charId === 'labs') setupTabs(el, 'lab', 'lab-panel');
-  setupAbilityRow(el);
-}
-
-// Roving tabindex: the row is one tab stop, arrows move within it, Enter and
-// Space toggle the focused ability. Home and End jump to the ends.
-function setupAbilityRow(container) {
-  const row = container.querySelector('[data-ability-row]');
-  if (!row) return;
-  const items = Array.from(row.querySelectorAll('[data-ability]'));
-  if (!items.length) return;
-
-  const focusAt = index => {
-    const next = (index + items.length) % items.length;
-    items.forEach((item, i) => item.setAttribute('tabindex', i === next ? '0' : '-1'));
-    items[next].focus();
-  };
-
-  items.forEach((item, i) => {
-    item.addEventListener('keydown', event => {
-      switch (event.key) {
-        case 'ArrowRight':
-        case 'ArrowDown':
-          event.preventDefault();
-          focusAt(i + 1);
-          break;
-        case 'ArrowLeft':
-        case 'ArrowUp':
-          event.preventDefault();
-          focusAt(i - 1);
-          break;
-        case 'Home':
-          event.preventDefault();
-          focusAt(0);
-          break;
-        case 'End':
-          event.preventDefault();
-          focusAt(items.length - 1);
-          break;
-        default:
-          break;
-      }
-    });
-
-    // Enter and Space already activate a button, so only the state is wired.
-    item.addEventListener('click', () => {
-      const pressed = item.getAttribute('aria-pressed') === 'true';
-      items.forEach(other => other.setAttribute('aria-pressed', 'false'));
-      item.setAttribute('aria-pressed', pressed ? 'false' : 'true');
-    });
-  });
 }
 
 function setupTabs(container, tabAttr, panelAttr) {

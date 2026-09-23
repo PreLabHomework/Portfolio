@@ -1,3 +1,4 @@
+@layer legacy {
 /* ============================================================
    CV MODE - Resume version of Hamza's House
    Same design language as the main site. Calmer. Built for
@@ -1893,3 +1894,4 @@ a.cv-contact-value:hover { color: var(--sec-acc, var(--acc)); }
 }
 
 /* resume CTA styling (picker removed in v9, single resume link) */
+}

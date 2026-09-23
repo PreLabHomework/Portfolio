@@ -20,6 +20,16 @@
 @source "./js/**/*.js";
 
 @theme {
+  /* ── v11 Hero Info (Doctrine) ───────────────────────────── */
+  --color-hi-name: #48d4f2;
+  --color-hi-result: #ff8f3a;
+  --color-hi-key: #f4c33d;
+  --color-hi-bone: #eef2f6;
+  --color-hi-dim: #a3aebd;
+  --color-hi-ink: #070d18;
+  --font-hi-head: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-hi-body: "Jost", "Futura", "Trebuchet MS", sans-serif;
+
   /* ── identity ───────────────────────────────────────────── */
   --color-acc: #f9a826;
   --color-acc2: #25c7f7;
@@ -112,4 +122,29 @@
 
 @utility skew-ow {
   transform: skewX(var(--skew-ow));
+}
+
+/* v11 Hero Info: two effects Tailwind utilities cannot express cleanly */
+@layer components {
+  .hi-head-fill {
+    background: linear-gradient(180deg, #ffffff 0%, #c9d2dc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hi-ult {
+    box-shadow: 0 0 0 3px rgb(255 255 255 / 0.9),
+      0 0 28px 8px color-mix(in srgb, var(--screen-acc, #f9a826) 55%, transparent),
+      0 0 70px 18px color-mix(in srgb, var(--screen-acc, #f9a826) 28%, transparent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hi-ult { animation: hi-breathe 3.2s ease-in-out infinite; }
+  }
+}
+@keyframes hi-breathe {
+  50% {
+    box-shadow: 0 0 0 3px rgb(255 255 255 / 0.9),
+      0 0 36px 12px color-mix(in srgb, var(--screen-acc, #f9a826) 70%, transparent),
+      0 0 90px 24px color-mix(in srgb, var(--screen-acc, #f9a826) 34%, transparent);
+  }
 }
