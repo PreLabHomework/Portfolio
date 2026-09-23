@@ -1,6 +1,6 @@
 import { ROSTER } from "./data.js";
 import { postRender } from "./sections.js";
-import { renderHeroInfo, setupHeroInfo } from "./heroinfo.js";
+import { renderHeroInfo, setupHeroInfo, closeHeroInfoPopup } from "./heroinfo.js";
 import { ICON_SPRITE } from "./icons.js";
 import { createShader } from "./shader.js";
 import * as audio from "./audio.js";
@@ -151,12 +151,12 @@ function renderMenu() {
   if (!menuEl) return;
   const menuItems = ROSTER
     .map((hero, index) => ({ hero, index }))
-    .filter(({ hero }) => hero.menu);
+    .filter(({ hero }) => hero.menu || hero.id === "soon");
 
   menuEl.innerHTML = `
     <div class="menu-group menu-heroes">
       ${menuItems.map(({ hero, index }) => `
-        <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.title}</button>
+        <button type="button" data-index="${index}"${hero.locked ? ' class="menu-soon"' : ""}>${hero.id === "soon" ? "COMING SOON" : hero.title}</button>
       `).join("")}
     </div>
     <div class="menu-divider" aria-hidden="true"></div>
@@ -255,6 +255,7 @@ function openDetail(index, options = {}) {
 }
 
 function closeDetail() {
+  closeHeroInfoPopup();
   audio.back();
   detailEl.classList.remove("live");
   detailEl.innerHTML = "";

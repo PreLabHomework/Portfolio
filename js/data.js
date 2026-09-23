@@ -156,6 +156,18 @@ export const ROSTER = [
       stats: [["EMAIL", "READY"], ["PHONE", "READY"], ["OPEN", "INTERNSHIPS · CO-OPS"], ["BASED", "FAIRFAX, VA"]]
     },
     play_url: LINKS.resume, play_label: "VIEW RESUME"
+  },
+  {
+    id: "soon", codename: "SOON-13", title: "???", subtitle: "TRANSMISSION INCOMING",
+    locked: true,
+    tagline: "SOMETHING IS BEING BUILT", accent: "#64748b", accent2: "#94a3b8", role: "UNKNOWN", figure: "unknown",
+    preview: {
+      headline: "COMING SOON",
+      sub: "TRANSMISSION INCOMING",
+      blurb: "A reserved slot for the next build. The site is designed to grow without breaking the character-select structure.",
+      stats: [["STATUS", "LOCKED"], ["ETA", "TBD"], ["SIGNAL", "WEAK"], ["TRUST", "UNVERIFIED"]]
+    },
+    play_url: LINKS.github, play_label: "CHECK GITHUB"
   }
 ];
 
@@ -474,6 +486,16 @@ export const SECTIONS = {
 
   skills: {
     layout: "skills",
+    // Resume categories (HamzaAkat_Resume). Used by Hero Info popups; Pro Mode moves to these next.
+    resume: [
+      { name: "COMPUTER ARCHITECTURE, FPGA / RTL AND HARDWARE INTERFACES", items: ["Computer Architecture", "RTL/Digital Logic Design", "GPU Architecture", "FPGA Design (Artix-7)", "VHDL", "I2C", "SPI", "UART", "RS-232", "BLE / BLE GATT", "TI IWR6843 mmWave Radar", "IMU Signal Processing", "SolidWorks"] },
+      { name: "EMBEDDED FIRMWARE AND LOW-LEVEL SOFTWARE", items: ["C", "C++20", "Python", "AVR Assembly", "FreeRTOS", "ESP32-S3 (Xtensa LX7)", "ATmega32A", "ATmega328P/RN4870 BLE", "ARM Cortex-A", "ARM Cortex-M4", "Hardware/Firmware Integration", "BSP/HAL Development", "Firmware Deployment/OTA", "Peripheral Drivers", "Interrupt Handling", "DMA", "ADC", "PWM", "GPIO", "Cross-Compilation", "AVRdude", "PySerial", "Packet Framing", "Lock-Free/Heap-Free Design"] },
+      { name: "VALIDATION, VERIFICATION AND DEBUG", items: ["Silicon/Hardware Validation", "JTAG", "Serial Protocol Analysis", "Oscilloscope-Based Signal Validation", "Logic Analyzer", "Hardware Bring-Up", "Root-Cause Analysis", "Structured Test Plans", "Regression Testing", "libFuzzer", "Sanitizers"] },
+      { name: "PERFORMANCE, SYSTEMS AND TOOLS", items: ["Linux", "Bash", "Git", "GitHub Actions", "Vivado", "Arduino IDE", "VS Code", "Tkinter", "PyInstaller", "CMake", "PowerShell"] },
+      { name: "EDGE AI AND SIGNAL PROCESSING", items: ["GANs", "PyTorch", "Edge AI / Edge Inference", "mmWave Radar Processing", "Feature Engineering", "FFT Signal Processing", "Digital Signal Processing (DSP)", "Fixed-Point Arithmetic"] },
+      { name: "SOFTWARE AND DATA", items: ["MATLAB", "SQL", "Point-Cloud Processing", "PyShark", "R Shiny", "JavaScript", "HTML/CSS", "GDScript"] },
+      { name: "SPOKEN LANGUAGES", items: ["English (Native)", "Arabic (Native)", "Spanish (Native)", "Italian (A1)"] }
+    ],
     heading: "LOADOUT",
     sub: "Computer architecture and digital design, embedded firmware, FPGA and RTL, validation and debug, systems tooling, edge AI, and software. Sorted by actual depth of experience.",
     categories: [
@@ -537,6 +559,9 @@ export const SECTIONS = {
     heading: "TIMELINE",
     sub: "From Doha to Madrid to St. Louis to Fairfax. Internships, research, publications, competitions, and everything in between.",
     events: [
+      { date: "AUG 2026", tag: "GMU", body: "Started the M.S. in Computer Engineering at George Mason University, CAES/DSYS concentration, expected May 2028." },
+      { date: "SUMMER 2026", tag: "INTERN", body: "Data and AI Intern at Power International Holding in Doha: ETL pipeline for Epic clinical-system events, a predictive outage-monitoring model, and an LLM-based incident-triage assistant." },
+      { date: "MAY 2026", tag: "SLU", body: "B.S. in Computer Engineering and Electrical Engineering conferred at Saint Louis University, minors in Computer Science and Mathematics." },
       { date: "APR 2026", tag: "AWARD", body: "SLU Launch Entrepreneurship Prize ($2,500) for QBC Blood Cell Counter redesign (CountKit) with Sam Ghaddar: low-cost clinical hematology instrument for low-resource and field settings." },
       { date: "APR 2026", tag: "QBC", body: "QBC Blood Cell Counter redesign completed: Nextion touchscreen, Arduino Nano, and 24-bit CLK/DATA iGaging caliper replace the fragile 1970s optical/motorized system. Cost dropped from ~$10k to under $300." },
       { date: "APR 2026", tag: "CAPSTONE", body: "TremorMonitor rehaul: BLE packet decoding, SQLite session storage, frequency charts, CSV export, medication mode, and severity thresholds." },
@@ -565,6 +590,7 @@ export const SECTIONS = {
     heading: "AFFILIATIONS",
     sub: "Institutions, Companies, Programs, Publications, And Organizations That Shaped The Work.",
     tiles: [
+      { n: "GEORGE MASON U.", r: "M.S. Computer Engineering, CAES/DSYS concentration", brand: "#006633", text: "#fff" },
       { n: "MIT", r: "MIT.nano Lab · MIT AI & CS Seminars · MIT Sloan AI Strategy", brand: "#A31F34", text: "#fff" },
       { n: "CARNEGIE MELLON", r: "MindCraft Robotics & AI · Director's Certificate (CMU Qatar)", brand: "#C41E3A", text: "#fff" },
       { n: "SAINT LOUIS U.", r: "Computer Engineering + Electrical Engineering · CHROME · WNIS · Biomechanics", brand: "#003DA5", text: "#fff" },
@@ -675,6 +701,13 @@ export const SECTIONS = {
       buildPhases: ["Phase 1: Combat prototype - one hero, one enemy type, readable combat, FSM working. DONE.", "Phase 2: Entropy spine - behavioral tracking, one reaction tier, world acknowledges player. DONE.", "Phase 3 (CURRENT): Alpha - 3+ heroes playable, Nemesis Intelligence, Entropy system, multiple regions. Bug testing and demos.", "Phase 4: Launch scope - full 5 tiers, all heroes tuned, 10-hour playthrough, polish pass."]
     },
     quote: "The world does not remember you. It writes you."
+  },
+
+  soon: {
+    layout: "soon",
+    heading: "COMING SOON",
+    sub: "transmission incoming. check back.",
+    body: ["Something is being built in this slot.", "If you can read this, the transmission has not fully come through yet."]
   },
 
   contact: {

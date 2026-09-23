@@ -148,3 +148,8 @@
       0 0 90px 24px color-mix(in srgb, var(--screen-acc, #f9a826) 34%, transparent);
   }
 }
+
+/* v12: columns only scroll as a last resort; keep the bar quiet */
+@layer components {
+  .hi-col { scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 0.25) transparent; }
+}

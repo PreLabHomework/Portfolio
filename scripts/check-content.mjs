@@ -1,6 +1,7 @@
 import { ROSTER, SECTIONS, LINKS } from '../js/data.js';
 import { HERO_INFO } from '../js/heroinfo-data.js';
 import { ICON_SPRITE } from '../js/icons.js';
+import { resolveMore } from '../js/heroinfo.js';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { URL, fileURLToPath } from 'node:url';
@@ -72,15 +73,18 @@ function walk(dir) {
 }
 walk(fileURLToPath(new URL('..', import.meta.url)));
 
-// ---- Hero Info: every hero complete, one ultimate, real icons ----
-const KEYS = new Set(['LMB', 'RMB', 'LSHIFT', 'E']);
+// ---- Hero Info: every hero laid out, icons real, every popup resolves ----
+const STYLES = new Set(['stats', 'weapon', 'tile', 'circle', 'ult', 'button']);
 for (const hero of ROSTER) {
   const info = HERO_INFO[hero.id];
   if (!info) { fail(`Hero ${hero.id} has no HERO_INFO entry.`); continue; }
   if (!info.title || !['support', 'tank', 'damage'].includes(info.role)) fail(`Hero ${hero.id} needs a title and a valid role.`);
-  if (!info.weapon || !info.ultimate) fail(`Hero ${hero.id} needs a weapon and an ultimate.`);
-  for (const a of [info.weapon, ...(info.abilities || [])].filter(Boolean)) {
-    if (!KEYS.has(a.key)) fail(`Hero ${hero.id} ability ${a.name} has invalid key ${a.key}.`);
+  if (!Array.isArray(info.cols) || info.cols.length !== 3) fail(`Hero ${hero.id} needs exactly 3 columns.`);
+  for (const block of (info.cols || []).flat()) {
+    if (!STYLES.has(block.style)) fail(`Hero ${hero.id} has a block with unknown style ${block.style}.`);
+    for (const item of block.items || []) {
+      if (item.more && !resolveMore(item.more)) fail(`Hero ${hero.id} item "${item.name}" has a popup that resolves to nothing.`);
+    }
   }
   const icons = JSON.stringify(info).match(/"(?:icon|portrait)":"([a-z0-9-]+)"/g) || [];
   for (const m of icons) {
