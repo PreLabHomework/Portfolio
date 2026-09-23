@@ -62,6 +62,7 @@ export const HERO_INFO = {
   labs: {
     title: "Labs", role: "support",
     tagline: "Three research labs at Saint Louis University, Fall 2025 to Spring 2026.",
+    action: { label: "GUARD repo", url: "https://github.com/PreLabHomework/GUARD" },
     cols: [
       [
         { h: "Overview", style: "stats", portrait: "test-tubes", stats: [
@@ -73,7 +74,7 @@ export const HERO_INFO = {
           { icon: "processor", name: "What the labs cover", desc: "Clinical wearable firmware, mmWave radar authentication, and medical device modernization." }
         ] },
         { h: "Ultimate", style: "ult", items: [
-          { icon: "magnifying-glass", name: "D8749H firmware recovery", desc: "Recreated the MCS-48 verify sequence from datasheet timing diagrams on an Arduino Mega and read the firmware out byte by byte.", more: { lab: "biomech" } }
+          { icon: "car-key", name: "GUARD at IEEE INFOCOM 2027", desc: "My co-authored paper: GAN-based driver authentication on mmWave radar with 100% unauthorized-driver detection. Under review.", more: { paper: "GUARD: GAN-Based Driver Authentication via mmWave Radar" } }
         ] }
       ],
       [
@@ -88,7 +89,7 @@ export const HERO_INFO = {
           { icon: "usb-key", name: "Clinical wearable OTA tool", desc: "Non-engineering staff run firmware updates on their own.", more: { lab: "chrome" } },
           { icon: "plug", name: "Bluetooth serial pipeline", desc: "Auto COM detection, configurable baud, and live validation.", more: { lab: "chrome" } },
           { icon: "brain", name: "GAN behavioral registration", desc: "Paired with a real-time trust-pool scoring module.", more: { lab: "wnis" } },
-          { icon: "treasure-map", name: "Memory map rebuild", desc: "Reconstructed the analyzer's memory map and I/O architecture.", more: { lab: "biomech" } }
+          { icon: "magnifying-glass", name: "D8749H firmware recovery", desc: "Read a 1970s EPROM byte by byte and rebuilt its memory map.", more: { lab: "biomech" } }
         ] }
       ]
     ]
@@ -97,6 +98,7 @@ export const HERO_INFO = {
   experience: {
     title: "Experience", role: "tank",
     tagline: "Seven organizations across Qatar, Spain, the United States, and remote.",
+    action: "resume",
     cols: [
       [
         { h: "Latest", style: "stats", portrait: "briefcase", stats: [
@@ -140,10 +142,10 @@ export const HERO_INFO = {
           { icon: "podium-winner", value: "Sold", label: "Status" }
         ] },
         { style: "weapon", items: [
-          { icon: "cpu", key: "LMB", name: "ESP32-S3 firmware", desc: "Real-time C++ on the Xtensa LX7 with FreeRTOS multi-task scheduling.", facts: ["Path: sense, detect, stream, log, report"], more: { cap: "architecture" } }
+          { icon: "cpu", key: "LMB", name: "ESP32-S3 firmware", desc: "Real-time C++ on the Xtensa LX7 with FreeRTOS multi-task scheduling.", facts: ["Path: sense, detect with FFT, stream, log, report"], more: { cap: "architecture" } }
         ] },
         { h: "Ultimate", style: "ult", items: [
-          { icon: "sound-waves", name: "FFT tremor detection", desc: "Frequency-domain detection on the device, streamed to the app for logging and clinical export.", more: { cap: "clinical" } }
+          { icon: "sound-waves", name: "End to end, shipped and sold", desc: "Sensor to on-device FFT tremor detection to BLE to a clinical app, built as the sole software developer and sold to a research lab.", more: { cap: "clinical" } }
         ] }
       ],
       [
@@ -210,6 +212,7 @@ export const HERO_INFO = {
   research: {
     title: "Research", role: "tank",
     tagline: "Radar authentication, clinical hardware, and wearable haptics.",
+    action: { label: "GUARD repo", url: "https://github.com/PreLabHomework/GUARD" },
     cols: [
       [
         { h: "GUARD", style: "stats", portrait: "radar-sweep", difficulty: 3, stats: [
@@ -247,6 +250,7 @@ export const HERO_INFO = {
   skills: {
     title: "Loadout", role: "tank",
     tagline: "What I build with, grouped the way my resume is.",
+    action: { label: "Pro Mode", url: "cv.html" },
     cols: [
       [
         { h: "Primary", style: "stats", portrait: "toolbox", stats: [
@@ -258,25 +262,28 @@ export const HERO_INFO = {
           { icon: "circuitry", key: "RMB", name: "VHDL", desc: "RTL on Artix-7 in Vivado." }
         ] },
         { h: "Ultimate", style: "ult", items: [
-          { icon: "gears", name: "Computer architecture", desc: "Current M.S. coursework: Computer Architecture, Digital System Design (VHDL), and ML for Embedded Systems." }
+          { icon: "gears", name: "Specialization: embedded and digital systems", desc: "Firmware, RTL, and hardware bring-up, now moving into computer architecture and GPU/accelerator design on the CAES/DSYS M.S. concentration." }
         ] }
       ],
       [
         { h: "Categories", style: "tile", items: [
-          { icon: "circuitry", name: "Architecture, FPGA and interfaces", desc: "RTL, GPU architecture, Artix-7, I2C, SPI, UART, BLE GATT, mmWave radar.", more: { skill: "COMPUTER ARCHITECTURE, FPGA / RTL AND HARDWARE INTERFACES" } },
-          { icon: "microchip", name: "Embedded firmware", desc: "FreeRTOS, BSP/HAL, drivers, interrupts, DMA, OTA, lock-free design.", more: { skill: "EMBEDDED FIRMWARE AND LOW-LEVEL SOFTWARE" } },
-          { icon: "magnifying-glass", name: "Validation and debug", desc: "JTAG, scope, logic analyzer, bring-up, libFuzzer, sanitizers.", more: { skill: "VALIDATION, VERIFICATION AND DEBUG" } },
-          { icon: "toolbox", name: "Systems and tools", desc: "Linux, Bash, Git, GitHub Actions, Vivado, CMake, PowerShell.", more: { skill: "PERFORMANCE, SYSTEMS AND TOOLS" } },
-          { icon: "brain", name: "Edge AI and DSP", desc: "PyTorch, GANs, edge inference, FFT, fixed-point arithmetic.", more: { skill: "EDGE AI AND SIGNAL PROCESSING" } },
+          { icon: "circuitry", name: "Architecture, FPGA and interfaces", desc: "RTL, GPU architecture, Artix-7, I2C, SPI, UART, BLE.", more: { skill: "COMPUTER ARCHITECTURE, FPGA / RTL AND HARDWARE INTERFACES" } },
+          { icon: "microchip", name: "Embedded firmware", desc: "FreeRTOS, BSP/HAL, drivers, interrupts, DMA, OTA.", more: { skill: "EMBEDDED FIRMWARE AND LOW-LEVEL SOFTWARE" } },
+          { icon: "magnifying-glass", name: "Validation and debug", desc: "JTAG, scope, logic analyzer, libFuzzer, sanitizers.", more: { skill: "VALIDATION, VERIFICATION AND DEBUG" } },
+          { icon: "toolbox", name: "Systems and tools", desc: "Linux, Bash, Git, GitHub Actions, Vivado, CMake.", more: { skill: "PERFORMANCE, SYSTEMS AND TOOLS" } },
+          { icon: "brain", name: "Edge AI and DSP", desc: "PyTorch, GANs, edge inference, FFT, fixed-point.", more: { skill: "EDGE AI AND SIGNAL PROCESSING" } },
           { icon: "stack", name: "Software and data", desc: "MATLAB, SQL, R Shiny, JavaScript, GDScript.", more: { skill: "SOFTWARE AND DATA" } }
         ] }
       ],
       [
-        { h: "Spoken", style: "circle", items: [
-          { icon: "conversation", name: "English", desc: "Native." },
-          { icon: "conversation", name: "Arabic", desc: "Native." },
-          { icon: "conversation", name: "Spanish", desc: "Native." },
-          { icon: "conversation", name: "Italian", desc: "A1." }
+        { h: "Minor", style: "circle", items: [
+          { icon: "conversation", name: "Four spoken languages", desc: "English, Arabic, and Spanish native, Italian A1." },
+          { icon: "magnifying-glass", name: "Debug kit", desc: "JTAG, oscilloscope, logic analyzer, serial protocol analysis." },
+          { icon: "bug-net", name: "Verification", desc: "libFuzzer, sanitizers, structured test plans, regression testing." }
+        ] },
+        { h: "Major", style: "circle", items: [
+          { icon: "processor", name: "Seven platforms", desc: "ESP32-S3, ATmega32A, ATmega328P, Cortex-A, Cortex-M4, Artix-7, TI IWR6843." },
+          { icon: "graduate-cap", name: "Coursework", desc: "Computer Architecture, Digital System Design, ML for Embedded Systems, Advanced Digital Design, Microprocessors." }
         ] }
       ]
     ]
@@ -285,37 +292,42 @@ export const HERO_INFO = {
   timeline: {
     title: "Timeline", role: "support",
     tagline: "2018 to 2028 across Jordan, Qatar, Spain, and the United States.",
+    action: { label: "Full timeline", more: { timeline: "all" } },
     cols: [
       [
-        { h: "Now", style: "stats", portrait: "hourglass", stats: [
-          { icon: "calendar", value: "2018 to 2028", label: "Span" },
-          { icon: "globe", value: "4 countries", label: "Countries" },
-          { icon: "position-marker", value: "5 cities", label: "Cities" }
+        { h: "Span", style: "stats", portrait: "hourglass", stats: [
+          { icon: "calendar", value: "2018 to 2028", label: "Years covered" },
+          { icon: "globe", value: "4", label: "Countries" },
+          { icon: "position-marker", value: "5", label: "Cities" },
+          { icon: "briefcase", value: "23", label: "Milestones" }
         ] },
         { style: "weapon", items: [
-          { icon: "graduate-cap", key: "LMB", name: "George Mason University", desc: "M.S. Computer Engineering, Aug 2026 to May 2028." },
-          { icon: "graduate-cap", key: "RMB", name: "Saint Louis University", desc: "B.S. Computer and Electrical Engineering, May 2026. St. Louis and Madrid campuses." }
+          { icon: "world", name: "Where it happened", desc: "Amman, Doha, Madrid, St. Louis, and Fairfax.", facts: ["Qatar: 16 years", "Spain and the US: the university years"] }
         ] },
         { h: "Ultimate", style: "ult", items: [
-          { icon: "trophy-cup", name: "SLU Launch Inventor Award", desc: "$2,500 in April 2026 for the QBC redesign.", more: { lab: "biomech" } }
+          { icon: "graduate-cap", name: "Dual B.S. to M.S.", desc: "Computer and Electrical Engineering at Saint Louis University across St. Louis and Madrid, then the M.S. in Computer Engineering at George Mason." }
         ] }
       ],
       [
-        { h: "2025 to 2026", style: "tile", items: [
-          { icon: "airplane", key: "LMB", name: "Power International", desc: "Data and AI Intern in Doha, Summer 2026.", more: { job: "POWER INTERNATIONAL HOLDING" } },
-          { icon: "radar-sweep", key: "RMB", name: "GUARD submitted", desc: "Manuscript under review at IEEE INFOCOM 2027.", more: { paper: "GUARD: GAN-Based Driver Authentication via mmWave Radar" } },
-          { icon: "hand", key: "LSHIFT", name: "TremorMonitor shipped", desc: "Sold to a research lab, symposium demo in April 2026.", more: { cap: "app" } },
-          { icon: "coins", key: "E", name: "Doha Bank", desc: "Data Engineering Intern, Summer 2025.", more: { job: "DOHA BANK" } }
+        { h: "2026", style: "tile", items: [
+          { icon: "graduate-cap", key: "LMB", name: "Aug: George Mason M.S.", desc: "Started Computer Engineering, CAES/DSYS concentration.", more: { event: "GMU" } },
+          { icon: "airplane", key: "RMB", name: "Summer: Power International", desc: "Data and AI Intern in Doha.", more: { job: "POWER INTERNATIONAL HOLDING" } },
+          { icon: "graduate-cap", key: "LSHIFT", name: "May: B.S. conferred", desc: "Computer and Electrical Engineering, SLU.", more: { event: "SLU", date: "MAY 2026" } },
+          { icon: "trophy-cup", key: "E", name: "Apr: Launch prize and QBC", desc: "$2,500 prize, analyzer cost down from about $10k to under $300.", more: { lab: "biomech" } },
+          { icon: "radar-sweep", key: "F", name: "Apr: GUARD and TremorMonitor", desc: "GUARD validated end to end, TremorMonitor rehauled and sold.", more: { event: "GUARD" } }
         ] }
       ],
       [
-        { h: "Earlier", style: "circle", items: [
-          { icon: "atom", name: "MIT.nano", desc: "Cleanroom volunteer, Winter 2024 to 2025.", more: { job: "MIT.NANO" } },
-          { icon: "keyboard", name: "Corsair", desc: "Firmware externship, Spring 2023.", more: { job: "CORSAIR" } },
-          { icon: "brain", name: "Samsung Innovation Campus", desc: "Winter 2023.", more: { job: "SAMSUNG GULF ELECTRONICS" } },
-          { icon: "laurels", name: "World Scholar's Cup", desc: "Top 5% team debate, Global Round, 2020.", more: { story: "WORLD SCHOLAR'S CUP" } }
-        ] },
-        { style: "button", items: [ { name: "Full timeline", more: { timeline: "all" } } ] }
+        { h: "2020 to 2025", style: "circle", items: [
+          { icon: "coins", name: "2025: Doha Bank", desc: "Data governance and engineering intern.", more: { job: "DOHA BANK" } },
+          { icon: "atom", name: "2025: MIT.nano", desc: "Volunteer lab technician.", more: { job: "MIT.NANO" } },
+          { icon: "hospital-cross", name: "2025: CHROME Lab", desc: "PT KIDS, R Shiny dashboard, Bluetooth stack.", more: { lab: "chrome" } },
+          { icon: "wifi-router", name: "2024: WiFi analyzer", desc: "194,000+ measurements across 952 locations.", more: { project: "WiFi Coverage & Handover Analyzer" } },
+          { icon: "circuitry", name: "2024: FPGA signal monitor", desc: "HDMI output on a Basys 3 in VHDL.", more: { event: "FPGA" } },
+          { icon: "keyboard", name: "2023: Corsair", desc: "Firmware programming.", more: { job: "CORSAIR" } },
+          { icon: "medicines", name: "2022: GSK Madrid", desc: "Technology research program.", more: { job: "GLAXOSMITHKLINE (GSK)" } },
+          { icon: "laurels", name: "2020: World Scholar's Cup", desc: "Top 5% team debate.", more: { story: "WORLD SCHOLAR'S CUP" } }
+        ] }
       ]
     ]
   },
@@ -323,6 +335,7 @@ export const HERO_INFO = {
   affiliations: {
     title: "Affiliations", role: "support",
     tagline: "Schools, programs, and organizations I've worked with.",
+    action: { label: "LinkedIn", url: "https://www.linkedin.com/in/hakat" },
     cols: [
       [
         { h: "Academic", style: "weapon", items: [
@@ -357,6 +370,7 @@ export const HERO_INFO = {
   personal: {
     title: "Personal", role: "damage",
     tagline: "Four countries, four languages, and one extremely defended Steam library.",
+    action: { label: "Connect on LinkedIn", url: "https://www.linkedin.com/in/hakat" },
     cols: [
       [
         { h: "Origins", style: "stats", portrait: "globe", stats: [
@@ -398,6 +412,7 @@ export const HERO_INFO = {
   astakeria: {
     title: "Astakeria", role: "damage",
     tagline: "The game that watches you back. A first-person action RPG in Godot 4.",
+    action: { label: "Design pillars", more: { pillars: true } },
     cols: [
       [
         { h: "The game", style: "weapon", items: [
@@ -406,7 +421,6 @@ export const HERO_INFO = {
         { h: "Ultimate", style: "ult", items: [
           { icon: "sands-of-time", name: "The Entropy system", desc: "A 0 to 100 behavioral score read from how you play: Dormant, Stirring, Active, Fracturing, Overwritten.", more: { ast: "entropy" } }
         ] },
-        { style: "button", items: [ { name: "Design pillars", more: { pillars: true } } ] }
       ],
       [
         { h: "Heroes", style: "tile", items: [
@@ -463,6 +477,7 @@ export const HERO_INFO = {
   soon: {
     title: "???", role: "damage",
     tagline: "Transmission incoming. Something is being built in this slot.",
+    action: { label: "Check GitHub", url: "https://github.com/prelabhomework" },
     cols: [
       [
         { h: "Signal", style: "stats", portrait: "padlock", stats: [
@@ -489,4 +504,12 @@ export const HERO_INFO = {
       ]
     ]
   }
+};
+
+// Roster portrait icons for the hero select bar.
+export const ROSTER_ICONS = {
+  home: { icon: "house" }, labs: { icon: "test-tubes" }, experience: { icon: "briefcase" },
+  capstone: { icon: "hand" }, projects: { icon: "hammer-nails" }, research: { icon: "radar-sweep" },
+  skills: { icon: "toolbox" }, timeline: { icon: "hourglass" }, affiliations: { icon: "laurel-crown" },
+  astakeria: { icon: "eyeball" }, personal: { icon: "globe" }, contact: { icon: "envelope" }, soon: { icon: "padlock" }
 };

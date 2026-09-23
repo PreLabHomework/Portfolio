@@ -14,14 +14,14 @@ const TIME_PLAYED = [
   { name: "EMBEDDED / FIRMWARE", detail: "C, C++, FreeRTOS, ESP32, ATmega, ARM", w: 100, color: "#ffd166" },
   { name: "SOFTWARE ENGINEERING", detail: "Python, React Native, SQL, tooling", w: 88, color: "#25c7f7" },
   { name: "ML / APPLIED AI", detail: "PyTorch, GANs, radar ML, pipelines", w: 72, color: "#b58fe8" },
-  { name: "HARDWARE / FPGA", detail: "Verilog, Basys-3, JTAG, bring-up", w: 60, color: "#4ade80" },
+  { name: "HARDWARE / FPGA", detail: "VHDL, Vivado, Basys 3 Artix-7, JTAG, bring-up", w: 60, color: "#4ade80" },
   { name: "CLINICAL DEVICES", detail: "PT KIDS, QBC, TremorMonitor", w: 55, color: "#ef476f" },
   { name: "RF / NETWORKING", detail: "mmWave radar, WiFi survey, BLE", w: 44, color: "#f59e0b" }
 ];
 
 const STAT_CARDS = [
   ["UNAUTHORIZED DRIVERS DETECTED", "100%", "GUARD, IEEE INFOCOM 2027 (under review)"],
-  ["DEVICE COST REDUCTION", "$10K → <$300", "QBC hematology redesign"],
+  ["DEVICE COST REDUCTION", "$10K to under $300", "QBC hematology redesign"],
   ["WIFI MEASUREMENTS LOGGED", "194K+", "952 survey locations, delivered to SLU IT"],
   ["CAPSTONE OUTCOME", "SOLD", "TremorMonitor, acquired by a research lab"],
   ["CLINICAL SITES SERVED", "3+", "PT KIDS pediatric therapy tool"],
@@ -41,8 +41,8 @@ const MEDALS = [
 const HIGHLIGHTS = [
   "B.S. Computer and Electrical Engineering, minors in CS and Mathematics, Saint Louis University, May 2026. M.S. Computer Engineering in progress, George Mason University, CAES/DSYS concentration",
   "Three research labs in parallel: CHROME (clinical wearables), WNIS (radar ML), Musculoskeletal Biomechanics",
-  "Industry rotation across four countries: Doha Bank, Corsair, Samsung, GSK",
-  "Spanish / EU citizen based in Fairfax, Virginia, authorized to work in the US on OPT"
+  "Industry work across Qatar, Spain, the US, and remote: Power International, Doha Bank, Corsair, Samsung, GSK",
+  "Spanish / EU citizen based in Fairfax, Virginia. Open to internships and co-ops"
 ];
 
 function injectStyles() {
@@ -57,7 +57,7 @@ function injectStyles() {
         radial-gradient(ellipse at 20% 0%, rgba(37,199,247,0.06), transparent 55%),
         radial-gradient(ellipse at 85% 100%, rgba(249,168,38,0.05), transparent 50%),
         #060a12;
-      font-family: 'Inter Tight', sans-serif;
+      font-family: 'Jost', 'Futura', sans-serif;
       color: rgba(230,238,248,0.92);
     }
     #${OVERLAY_ID}.open { display: block; }
@@ -71,15 +71,15 @@ function injectStyles() {
       cursor: pointer; background: none;
       border: 1px solid rgba(255,255,255,0.22);
       color: rgba(185,195,209,0.75);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      font-family: 'Jost', 'Futura', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.02em; text-transform: uppercase;
       padding: 8px 20px;
       transition: border-color .15s, color .15s;
     }
     .cp-back:hover { border-color: #fff; color: #fff; }
     .cp-topline .cp-crumb {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.36em; text-transform: uppercase;
+      font-family: 'Jost', 'Futura', sans-serif; font-size: 0.62rem;
+      letter-spacing: 0.02em; text-transform: uppercase;
       color: rgba(185,195,209,0.45);
     }
 
@@ -88,14 +88,14 @@ function injectStyles() {
       position: relative; overflow: hidden;
       display: flex; align-items: center; gap: 26px;
       padding: 30px 34px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: linear-gradient(120deg, rgba(14,22,34,0.92), rgba(8,14,22,0.7));
-      clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+      border: 0;
+      border-bottom: 2px solid #f9a826;
+      background: transparent;
       margin-bottom: 34px;
     }
     .cp-banner::after {
       content: ""; position: absolute; inset: 0;
-      background: repeating-linear-gradient(115deg, rgba(255,255,255,0.022) 0 26px, transparent 26px 52px);
+      background: none;
       pointer-events: none;
     }
     .cp-level {
@@ -110,18 +110,18 @@ function injectStyles() {
       display: grid; place-items: center;
       background: #0a121e;
       clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.7rem;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-weight: 700; font-size: 1.7rem;
       color: #ffd166;
     }
     .cp-id h1 {
       margin: 0;
-      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-weight: 700;
       font-size: clamp(2rem, 4.5vw, 3.2rem);
       line-height: 0.95; text-transform: uppercase; color: #fff;
     }
     .cp-id .cp-title-bar {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
-      letter-spacing: 0.3em; text-transform: uppercase;
+      font-family: 'Jost', 'Futura', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.02em; text-transform: uppercase;
       color: #ffd166; margin-top: 6px;
     }
     .cp-id .cp-sub {
@@ -129,19 +129,19 @@ function injectStyles() {
     }
     .cp-endorse {
       margin-left: auto; text-align: right; flex: 0 0 auto;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Jost', 'Futura', sans-serif;
       display: grid; gap: 6px;
     }
-    .cp-endorse .k { font-size: 0.6rem; letter-spacing: 0.32em; color: rgba(185,195,209,0.5); text-transform: uppercase; }
-    .cp-endorse .v { font-family: 'Oswald', sans-serif; font-size: 1.35rem; font-weight: 700; color: #4ade80; }
+    .cp-endorse .k { font-size: 0.6rem; letter-spacing: 0.02em; color: rgba(185,195,209,0.5); text-transform: uppercase; }
+    .cp-endorse .v { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-size: 1.35rem; font-weight: 700; color: #4ade80; }
 
     .cp-h {
       display: flex; align-items: center; gap: 16px;
       margin: 0 0 18px;
     }
-    .cp-h::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(249,168,38,0.6), transparent); }
+    .cp-h::after { content: ""; flex: none; width: 32px; height: 3px; background: #f9a826; transform: skewX(-20deg); }
     .cp-h span {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-weight: 700;
       font-size: 1.35rem; letter-spacing: 0.14em; text-transform: uppercase;
       color: #fff;
     }
@@ -153,7 +153,7 @@ function injectStyles() {
     .cp-bar { display: grid; grid-template-columns: 250px 1fr; gap: 16px; align-items: center; }
     .cp-bar .lbl { display: grid; gap: 1px; }
     .cp-bar .lbl strong {
-      font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-size: 0.95rem; font-weight: 600;
       letter-spacing: 0.08em; color: #fff;
     }
     .cp-bar .lbl span { font-size: 0.75rem; color: rgba(185,195,209,0.55); }
@@ -174,17 +174,15 @@ function injectStyles() {
     .cp-stat {
       padding: 18px 18px 16px;
       border: 0;
-      background:
-        repeating-linear-gradient(115deg, rgba(255,255,255,0.018) 0 18px, transparent 18px 36px),
-        linear-gradient(160deg, rgba(14,22,34,0.88), rgba(8,14,22,0.6));
-      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+      background: none;
+      clip-path: none;
+      box-shadow: none;
       display: grid; gap: 6px; align-content: start;
       transition: transform 150ms ease, box-shadow 150ms ease;
     }
     .cp-stat:hover {
       transform: translateY(-4px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 14px 30px rgba(0,0,0,0.4);
+      box-shadow: none;
     }
     @keyframes cpStatIn {
       from { opacity: 0; transform: translateY(14px); }
@@ -200,11 +198,11 @@ function injectStyles() {
     #cp-overlay.open .cp-stat:nth-child(7) { animation-delay: 420ms; }
     #cp-overlay.open .cp-stat:nth-child(8) { animation-delay: 480ms; }
     .cp-stat .k {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
-      letter-spacing: 0.24em; color: rgba(185,195,209,0.55);
+      font-family: 'Jost', 'Futura', sans-serif; font-size: 0.58rem;
+      letter-spacing: 0.02em; color: rgba(185,195,209,0.55);
     }
     .cp-stat .v {
-      font-family: 'Oswald', sans-serif; font-size: 1.9rem; font-weight: 700;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-size: 1.9rem; font-weight: 700;
       color: #fff; line-height: 1;
     }
     .cp-stat .n { font-size: 0.76rem; color: rgba(185,195,209,0.6); }
@@ -215,9 +213,9 @@ function injectStyles() {
       display: flex; gap: 16px; align-items: center;
       padding: 14px 18px;
       border: 0;
-      background: rgba(10, 16, 26, 0.78);
-      clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      background: none;
+      clip-path: none;
+      box-shadow: none;
       transition: transform 140ms ease;
     }
     .cp-medal:hover { transform: translateX(6px); }
@@ -225,14 +223,14 @@ function injectStyles() {
       flex: 0 0 auto; width: 44px; height: 44px;
       display: grid; place-items: center;
       border-radius: 50%;
-      font-family: 'Oswald', sans-serif; font-weight: 700; color: #08101a;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-weight: 700; color: #08101a;
     }
     .cp-medal.gold .coin   { background: radial-gradient(circle at 35% 30%, #ffe9ad, #f9c545 60%, #b8860b); }
     .cp-medal.silver .coin { background: radial-gradient(circle at 35% 30%, #f3f6fa, #bfc7d1 60%, #7d8794); }
     .cp-medal.bronze .coin { background: radial-gradient(circle at 35% 30%, #e8b98a, #a97142 60%, #6e4426); }
     .cp-medal .txt strong {
       display: block;
-      font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600;
+      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-style: italic; font-size: 0.95rem; font-weight: 600;
       letter-spacing: 0.06em; color: #fff;
     }
     .cp-medal .txt span { font-size: 0.78rem; color: rgba(185,195,209,0.6); }

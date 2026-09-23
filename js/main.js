@@ -1,12 +1,17 @@
 import { ROSTER } from "./data.js";
 import { postRender } from "./sections.js";
 import { renderHeroInfo, setupHeroInfo, closeHeroInfoPopup } from "./heroinfo.js";
+import { ROSTER_ICONS } from "./heroinfo-data.js";
 import { ICON_SPRITE } from "./icons.js";
 import { createShader } from "./shader.js";
 import * as audio from "./audio.js";
 import { initTransitions, wipe } from "./transitions.js";
 import { initTraining, openTraining, isTrainingOpen } from "./training.js";
 import { initCareer, openCareer, isCareerOpen } from "./career.js";
+
+// Game-icon sprite, available to the roster and every hero page from boot.
+if (!document.getElementById("gi-sprite")) document.body.insertAdjacentHTML("afterbegin", ICON_SPRITE.replace("<svg ", '<svg id="gi-sprite" '));
+const tidy = v => String(v ?? "").replace(/\s*·\s*/g, ", ");
 
 const app = document.getElementById("app");
 const boot = document.getElementById("boot");
@@ -134,7 +139,7 @@ function renderRoster() {
     <button class="slot${hero.locked ? " locked" : ""}" type="button" data-index="${index}" style="--slot-acc:${hero.accent};--slot-acc2:${hero.accent2};" aria-label="${hero.title}, ${hero.subtitle}">
       <span class="slot-code">${hero.codename}</span>
       <span class="slot-role">${hero.role}</span>
-      <span class="slot-portrait">${portraitIcon(hero.icon || hero.id || hero.figure)}</span>
+      <span class="slot-portrait"><span class="slot-hex"><svg class="slot-gi" aria-hidden="true"><use href="#gi-${(ROSTER_ICONS[hero.id] || { icon: "circuitry" }).icon}"/></svg></span></span>
       <span class="slot-name">${hero.title}</span>
     </button>
   `).join("");
@@ -216,12 +221,12 @@ function setActive(index, speak = false) {
 
 function updatePreview(hero) {
   preview.code.textContent = `${hero.codename} / ${hero.role}`;
-  preview.head.textContent = hero.preview.headline;
-  preview.sub.textContent = hero.preview.sub;
-  preview.blurb.textContent = hero.preview.blurb;
-  preview.tag.textContent = hero.tagline;
+  preview.head.textContent = tidy(hero.preview.headline);
+  preview.sub.textContent = tidy(hero.preview.sub);
+  preview.blurb.textContent = tidy(hero.preview.blurb);
+  preview.tag.textContent = tidy(hero.tagline);
   preview.stats.innerHTML = hero.preview.stats.map(([label, value]) => `
-    <div class="pv-stat"><span>${label}</span><strong>${value}</strong></div>
+    <div class="pv-stat"><span>${tidy(label)}</span><strong>${tidy(value)}</strong></div>
   `).join("");
 }
 
