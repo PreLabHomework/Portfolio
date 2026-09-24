@@ -2177,7 +2177,8 @@ export function createStage(canvas) {
 
   // center a loaded model and drop its feet onto the ground disk
   function normalizeModel(root) {
-    const box = new THREE.Box3().setFromObject(root);
+    // precise: measures skinned meshes in their current (animated) pose, vertex by vertex
+    const box = new THREE.Box3().setFromObject(root, true);
     const size = new THREE.Vector3(); box.getSize(size);
     const center = new THREE.Vector3(); box.getCenter(center);
     const targetH = 2.25;
@@ -2232,6 +2233,11 @@ export function createStage(canvas) {
     group.userData.prop = prop;
   }
 
+  // [x, y, z] in stage units, applied after normalizeModel. y: up, z: toward the camera.
+  const MODEL_NUDGE = {
+    'experience.glb': [0.04, -0.04, 0.56]
+  };
+
   const modelCache = new Map();
 
   async function loadModel(url, figureKey, accent, accent2) {
@@ -2243,13 +2249,20 @@ export function createStage(canvas) {
       const wrap = new THREE.Group();
       wrap.userData.cached = true;
       wrap.add(root);
-      normalizeModel(root);
-      // play a rigged idle clip if the model ships with one
+      // Start the idle BEFORE measuring: many rigs rest in a different place than
+      // their idle holds them (Astakeria rests 1m low, Coming Soon rests tiny and
+      // underground), so grounding the rest pose made them float or blow up.
       if (gltf.animations && gltf.animations.length) {
         const mixer = new THREE.AnimationMixer(root);
         mixer.clipAction(gltf.animations[0]).play();
+        mixer.update(0);
         wrap.userData.mixer = mixer;
       }
+      root.updateMatrixWorld(true);
+      normalizeModel(root);
+      // per-model correction after auto-centering: props (shields, weapons) skew the bounding box
+      const nudge = MODEL_NUDGE[url.split('/').pop()];
+      if (nudge) root.position.add(new THREE.Vector3(...nudge));
       // (v14 roster models are complete characters: no legacy props, halos, or floating decorations)
       modelCache.set(url, wrap);
       return wrap;
