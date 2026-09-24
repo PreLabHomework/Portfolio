@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: resolve(__dirname, "index.html"),
-        cv: resolve(__dirname, "cv.html")
+        index: resolve(import.meta.dirname, "index.html"),
+        cv: resolve(import.meta.dirname, "cv.html")
       }
     }
   }
