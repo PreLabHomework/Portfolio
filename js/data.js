@@ -160,7 +160,7 @@ export const ROSTER = [
   {
     id: "soon", codename: "SOON-13", title: "???", subtitle: "TRANSMISSION INCOMING",
     locked: true,
-    tagline: "SOMETHING IS BEING BUILT", accent: "#64748b", accent2: "#94a3b8", role: "UNKNOWN", figure: "unknown",
+    tagline: "SOMETHING IS BEING BUILT", accent: "#64748b", accent2: "#94a3b8", role: "UNKNOWN", figure: "unknown", model: "assets/models/soon.glb",
     preview: {
       headline: "COMING SOON",
       sub: "TRANSMISSION INCOMING",

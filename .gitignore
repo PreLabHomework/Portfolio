@@ -15,3 +15,8 @@ assets/models-src/
 *.obj
 *.pdb
 *.ilk
+
+# model sources: legacy backups live in git history; mixamo staging is scratch
+assets/models-src/legacy/
+assets/models-src/mixamo/
+assets/models-src/home_v2/

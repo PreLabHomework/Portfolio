@@ -2250,7 +2250,7 @@ export function createStage(canvas) {
         mixer.clipAction(gltf.animations[0]).play();
         wrap.userData.mixer = mixer;
       }
-      decorateModel(wrap, figureKey, accent, accent2);
+      // (v14 roster models are complete characters: no legacy props, halos, or floating decorations)
       modelCache.set(url, wrap);
       return wrap;
     } catch (err) {
@@ -2294,7 +2294,8 @@ export function createStage(canvas) {
 
     if (currentFigure) {
       currentFigure.userData?.mixer?.update(dt);
-      currentFigure.position.y = (currentFigure.userData.baseY ?? 0) + Math.sin(t * 1.05) * 0.035;
+      // GLB heroes stay planted; only the procedural fallback figures float
+      currentFigure.position.y = (currentFigure.userData.baseY ?? 0) + (currentFigure.userData.cached ? 0 : Math.sin(t * 1.05) * 0.035);
       currentFigure.rotation.y = (currentFigure.userData.restRotY ?? 0) + Math.sin(t * 0.42) * 0.11;
       currentFigure.rotation.z = Math.sin(t * 0.36) * 0.018;
 
