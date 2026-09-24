@@ -2235,7 +2235,12 @@ export function createStage(canvas) {
 
   // [x, y, z] in stage units, applied after normalizeModel. y: up, z: toward the camera.
   const MODEL_NUDGE = {
-    'experience.glb': [0.04, -0.04, 0.56]
+    'experience.glb': [-0.04, -0.04, -0.56]
+  };
+  // radians around the vertical axis, applied before measuring
+  const MODEL_TURN = {
+    'experience.glb': Math.PI,
+    'affiliations.glb': Math.PI
   };
 
   const modelCache = new Map();
@@ -2249,6 +2254,9 @@ export function createStage(canvas) {
       const wrap = new THREE.Group();
       wrap.userData.cached = true;
       wrap.add(root);
+      // a few source models were authored facing away from the camera
+      const turn = MODEL_TURN[url.split('/').pop()];
+      if (turn) root.rotation.y += turn;
       // Start the idle BEFORE measuring: many rigs rest in a different place than
       // their idle holds them (Astakeria rests 1m low, Coming Soon rests tiny and
       // underground), so grounding the rest pose made them float or blow up.
